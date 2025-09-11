@@ -1,0 +1,311 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\xampp\\htdocs\\SUGAR\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Secretaria\\PHP\\datosEstadisticos.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Secretaria\\PHP\\datosEstadisticos.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\PHP\\conexion.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PHP\\conexion.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\index.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\HTML\\index.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\JSON\\error.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\JSON\\error.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\JSON\\mensajes.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\JSON\\mensajes.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\registro.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\HTML\\registro.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\JS\\login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\JS\\login.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\recuperacion.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\HTML\\recuperacion.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\validar_sesion.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\PHP\\validar_sesion.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\login.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\PHP\\login.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\form.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Login\\PHP\\form.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\PHP\\header.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PHP\\header.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\PHP\\dashboard.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PHP\\dashboard.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Estudiante\\HTML\\dashboardE.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Estudiante\\HTML\\dashboardE.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Funcionario\\HTML\\dashboardF.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Funcionario\\HTML\\dashboardF.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Profesor\\HTML\\dashboardP.php||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Profesor\\HTML\\dashboardP.php||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\SUGAR\\Secretaria\\HTML\\dashboardS.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Secretaria\\HTML\\dashboardS.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "datosEstadisticos.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Secretaria\\PHP\\datosEstadisticos.php",
+              "RelativeDocumentMoniker": "Secretaria\\PHP\\datosEstadisticos.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Secretaria\\PHP\\datosEstadisticos.php",
+              "RelativeToolTip": "Secretaria\\PHP\\datosEstadisticos.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-08T21:57:32.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "conexion.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\PHP\\conexion.php",
+              "RelativeDocumentMoniker": "PHP\\conexion.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\PHP\\conexion.php",
+              "RelativeToolTip": "PHP\\conexion.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T20:58:58.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "error.json",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\JSON\\error.json",
+              "RelativeDocumentMoniker": "Login\\JSON\\error.json",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\JSON\\error.json",
+              "RelativeToolTip": "Login\\JSON\\error.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-05T19:41:22.172Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "mensajes.json",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\JSON\\mensajes.json",
+              "RelativeDocumentMoniker": "Login\\JSON\\mensajes.json",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\JSON\\mensajes.json",
+              "RelativeToolTip": "Login\\JSON\\mensajes.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-05T19:41:09.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "login.js",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\JS\\login.js",
+              "RelativeDocumentMoniker": "Login\\JS\\login.js",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\JS\\login.js",
+              "RelativeToolTip": "Login\\JS\\login.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-09-05T19:39:40.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "registro.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\registro.php",
+              "RelativeDocumentMoniker": "Login\\HTML\\registro.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\registro.php",
+              "RelativeToolTip": "Login\\HTML\\registro.php",
+              "ViewState": "AgIAACoAAAAAAAAAAAAkwDoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:37:38.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "recuperacion.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\recuperacion.php",
+              "RelativeDocumentMoniker": "Login\\HTML\\recuperacion.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\recuperacion.php",
+              "RelativeToolTip": "Login\\HTML\\recuperacion.php",
+              "ViewState": "AgIAABsAAAAAAAAAAAAkwCwAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:37:32.38Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "index.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\index.php",
+              "RelativeDocumentMoniker": "Login\\HTML\\index.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\HTML\\index.php",
+              "RelativeToolTip": "Login\\HTML\\index.php",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAAAYAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:37:17.444Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Css\\style.css",
+              "RelativeDocumentMoniker": "Css\\style.css",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Css\\style.css",
+              "RelativeToolTip": "Css\\style.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-09-05T19:35:35.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "validar_sesion.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\validar_sesion.php",
+              "RelativeDocumentMoniker": "Login\\PHP\\validar_sesion.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\validar_sesion.php",
+              "RelativeToolTip": "Login\\PHP\\validar_sesion.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:36:44.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "login.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\login.php",
+              "RelativeDocumentMoniker": "Login\\PHP\\login.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\login.php",
+              "RelativeToolTip": "Login\\PHP\\login.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:36:33.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "form.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\form.php",
+              "RelativeDocumentMoniker": "Login\\PHP\\form.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Login\\PHP\\form.php",
+              "RelativeToolTip": "Login\\PHP\\form.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:36:18.66Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "header.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\PHP\\header.php",
+              "RelativeDocumentMoniker": "PHP\\header.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\PHP\\header.php",
+              "RelativeToolTip": "PHP\\header.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:35:06.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "dashboard.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\PHP\\dashboard.php",
+              "RelativeDocumentMoniker": "PHP\\dashboard.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\PHP\\dashboard.php",
+              "RelativeToolTip": "PHP\\dashboard.php",
+              "ViewState": "AgIAACMAAAAAAAAAAAAkwDsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:33:56.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "dashboardE.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Estudiante\\HTML\\dashboardE.php",
+              "RelativeDocumentMoniker": "Estudiante\\HTML\\dashboardE.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Estudiante\\HTML\\dashboardE.php",
+              "RelativeToolTip": "Estudiante\\HTML\\dashboardE.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:33:29.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "dashboardF.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Funcionario\\HTML\\dashboardF.php",
+              "RelativeDocumentMoniker": "Funcionario\\HTML\\dashboardF.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Funcionario\\HTML\\dashboardF.php",
+              "RelativeToolTip": "Funcionario\\HTML\\dashboardF.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:33:24.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "dashboardP.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Profesor\\HTML\\dashboardP.php",
+              "RelativeDocumentMoniker": "Profesor\\HTML\\dashboardP.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Profesor\\HTML\\dashboardP.php",
+              "RelativeToolTip": "Profesor\\HTML\\dashboardP.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:32:57.961Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "dashboardS.php",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\SUGAR\\Secretaria\\HTML\\dashboardS.php",
+              "RelativeDocumentMoniker": "Secretaria\\HTML\\dashboardS.php",
+              "ToolTip": "C:\\xampp\\htdocs\\SUGAR\\Secretaria\\HTML\\dashboardS.php",
+              "RelativeToolTip": "Secretaria\\HTML\\dashboardS.php",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
+              "WhenOpened": "2025-09-05T19:32:41.686Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
