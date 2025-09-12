@@ -1,107 +1,127 @@
-<?php 
-// Inclusión del encabezado común que contiene configuraciones compartidas
-include '../../PHP/Header.php'; 
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>S.U.G.A.R.</title>
-    <link rel="stylesheet" href="/Css/style.css" />
-    <link rel="icon" href="/Images/Logo22-removebg-preview.png" />
-    <!-- Enlace a la librería de íconos Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <!-- Inclusión de la librería SweetAlert para mostrar alertas visuales -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Configuración de codificación de caracteres -->
+  <meta charset="UTF-8" />
+
+  <!-- Configuración para diseño responsivo en dispositivos móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Título de la pestaña del navegador -->
+  <title>S.U.G.A.R.</title>
+
+  <!-- Enlace al archivo de estilos principal del sistema -->
+  <link rel="stylesheet" href="/Css/style.css" />
+
+  <!-- Ícono que se muestra en la pestaña del navegador -->
+  <link rel="icon" href="/Images/Logo22-removebg-preview.png" />
+
+  <!-- Enlace a la librería de íconos Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Inclusión de la librería SweetAlert para mostrar alertas visuales -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Inclusión de Bootstrap para estilos y componentes interactivos -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
+<!-- Cuerpo principal de la página con clase específica para el login -->
 <body class="body-login">
-    <!-- Contenedor general que agrupa todo el contenido -->
-    <div class="contenedor-principal">
-        <!-- Área principal de contenido -->
-        <main class="contenido-principal">
-            <!-- Panel que contiene el formulario de registro -->
-            <section class="panel-formulario">
-                <!-- Grupo de pestañas para cambiar entre login y registro -->
-                <div class="grupo-pestanas">
-                    <a class="pestana-inactiva" href="/Login/HTML/index.php">Ingresar</a>
-                    <a class="pestana-activa" href="/Login/HTML/registro.php">Registrarse</a>
-                </div>
-                <!-- Formulario de registro de usuario -->
-                <form id="formulario-registro" method="post" action="/Login/PHP/form.php" class="formulario-registro">
-                    <!-- Fila con campos para nombre y apellido -->
-                    <div class="fila-doble">
-                        <div class="campo-con-icono">
-                            <input type="text" name="nombre" placeholder="Nombre" required>
-                        </div>
-                        <div class="campo-con-icono">
-                            <input type="text" name="apellido" placeholder="Apellido" required>
-                        </div>
-                    </div>
-                    <!-- Campo para ingresar la cédula del usuario -->
-                    <div class="campo-con-icono">
-                        <input type="text" name="cedula" placeholder="Cédula" maxlength="8" required>
-                    </div>
-                    <!-- Campo para ingresar el correo electrónico -->
-                    <div class="campo-con-icono">
-                        <input type="email" name="correo" placeholder="Correo" required>
-                    </div>
-                    <!-- Campo para ingresar la contraseña -->
-                    <div class="campo-con-icono">
-                        <input type="password" name="password" placeholder="Contraseña" required>
-                    </div>
-                    <!-- Campo para confirmar la contraseña -->
-                    <div class="campo-con-icono">
-                        <input type="password" name="confirmaPassword" placeholder="Confirmar contraseña" required>
-                    </div>
-                    <!-- Selector de horario preferido -->
-                    <div class="campo-con-icono">
-                        <select name="horario" required>
-                            <option value="">Seleccione horario</option>
-                            <option value="mañana">Mañana</option>
-                            <option value="tarde">Tarde</option>
-                            <option value="noche">Noche</option>
-                        </select>
-                    </div>
-                    <!-- Selector del tipo de usuario que se está registrando -->
-                    <div class="campo-con-icono">
-                        <select name="tipo_usuario" id="tipo_usuario" required>
-                            <option value="">Seleccione tipo de usuario</option>
-                            <option value="administrador">Administrador</option>
-                            <option value="adscripta">Adscripta</option>
-                            <option value="alumno">Alumno</option>
-                            <option value="profesor">Profesor</option>
-                            <option value="secretaria">Secretaria</option>
-                            <option value="direccion">Dirección</option>
-                            <option value="funcionario">Funcionario</option>
-                        </select>
-                    </div>
-                    <!-- Botón para enviar el formulario de registro -->
-                    <button type="submit" class="btn-primario">Registrarse</button>
-                </form>
-                <!-- Script que gestiona la validación de campos del formulario -->
-                <script src="/Login/JavaScript/registro_campos.js"></script>
-            </section>
-            <!-- Panel lateral que contiene el carrusel visual -->
-            <section class="panel-carrusel">
-                <div class="carrusel">
-                    <!-- Imagen institucional que se muestra en el carrusel -->
-                    <img src="../../Images/fondo.png" alt="Imagen institucional" class="imagen-carrusel" />
-                    <!-- Texto descriptivo del carrusel -->
-                    <div class="texto-carrusel">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde perspiciati.
-                    </div>
-                    <!-- Botones para navegar entre imágenes del carrusel -->
-                    <button class="flecha-carrusel izquierda"><</button>
-                    <button class="flecha-carrusel derecha">></button>
-                </div>
-            </section>
-        </main>
-    </div>
-    <!-- Script que gestiona el comportamiento del formulario de registro -->
-    <script src="/Login/JavaScript/registro.js"></script>
-    <!-- Script que muestra u oculta campos según el tipo de usuario seleccionado -->
-    <script src="/Login/JavaScript/mostrarCampos.js"></script>
+
+  <!-- Contenedor general que agrupa todo el contenido -->
+  <div class="contenedor-principal">
+
+    <!-- Inclusión del encabezado común del sistema -->
+    <?php include '../../PHP/Header.php'; ?>
+
+    <!-- Área principal de contenido -->
+    <main class="contenido-principal">
+
+      <!-- Panel que contiene el formulario de ingreso -->
+      <section class="panel-formulario">
+
+        <!-- Grupo de pestañas para alternar entre login y registro -->
+        <div class="grupo-pestanas">
+          <a class="pestana-activa" href="/Login/HTML/index.php">Ingresar</a>
+          <a class="pestana-inactiva" href="/Login/HTML/registro.php">Registrarse</a>
+        </div>
+
+        <!-- Formulario de ingreso al sistema -->
+        <form id="formulario-ingreso" class="formulario-registro" method="post" action="/Login/PHP/login.php">
+
+          <!-- Campo para ingresar cédula o correo -->
+          <div class="campo-con-icono">
+            <input type="text" placeholder="Cédula o correo" id="usuario" name="usuario" required />
+            <i class="fas fa-id-card"></i> <!-- Ícono decorativo -->
+          </div>
+
+          <!-- Campo para ingresar la contraseña -->
+          <div class="campo-con-icono">
+            <input type="password" placeholder="Contraseña" id="password" name="password" required />
+            <i class="fas fa-lock"></i> <!-- Ícono decorativo -->
+          </div>
+
+          <!-- Botón para enviar el formulario de ingreso -->
+          <button type="submit" class="btn-primario">Ingresar</button>
+
+          <!-- Enlace para recuperar la contraseña -->
+          <div class="recuperar-password">
+            <a href="/Login/HTML/Recuperacion.php">¿Olvidaste tu contraseña?</a>
+          </div>
+        </form>
+      </section>
+
+      <!-- Panel lateral que contiene el carrusel visual -->
+      <section class="panel-carrusel">
+        <div id="carruselBD" class="carousel slide carrusel" data-bs-ride="carousel">
+
+          <!-- Contenedor de las imágenes del carrusel -->
+          <div class="carousel-inner">
+            <?php
+            // Conexión a la base de datos
+            require_once '../../PHP/conexion.php';
+            $conn = conectar_bd();
+
+            // Consulta SQL para obtener las imágenes del carrusel
+            $sql = "SELECT url FROM imagen WHERE entidad='carrusel' ORDER BY fecha DESC";
+            $result = $conn->query($sql);
+
+            // Variable para marcar la primera imagen como activa
+            $primero = true;
+
+            // Iteración sobre los resultados de la consulta
+            while ($row = $result->fetch_assoc()) {
+              echo '<div class="carousel-item'.($primero ? ' active' : '').'">';
+              echo '<img src="'.$row['url'].'" class="d-block w-100 imagen-carrusel" alt="Imagen carrusel">';
+              echo '</div>';
+              $primero = false;
+            }
+
+            // Cierre de la conexión con la base de datos
+            $conn->close();
+            ?>
+          </div>
+
+          <!-- Botón para navegar a la imagen anterior del carrusel -->
+          <button class="carousel-control-prev flecha-carrusel izquierda" type="button" data-bs-target="#carruselBD" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+
+          <!-- Botón para navegar a la imagen siguiente del carrusel -->
+          <button class="carousel-control-next flecha-carrusel derecha" type="button" data-bs-target="#carruselBD" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Script opcional para funcionalidades adicionales del login -->
+  <!--<script src="/Login/JavaScript/login.js"></script>-->
+
 </body>
 </html>

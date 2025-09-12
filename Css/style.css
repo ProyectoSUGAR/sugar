@@ -982,3 +982,16 @@ html, body {
     height: 230px;
   }
 }
+
+/* Puedes agregar esto en tu archivo CSS global */
+/* estilos para el contenedor de la notificacion */
+.notificacion {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: opacity 0.3s;
+}
+/* color para notificacion de exito */
+.notificacion.success { background: #4caf50; }
+/* color para notificacion de error */
+.notificacion.error { background: #f44336; }
+/* color para notificacion de advertencia */
+.notificacion.warning { background: #ff9800; }
