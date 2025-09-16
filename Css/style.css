@@ -995,3 +995,139 @@ html, body {
 .notificacion.error { background: #f44336; }
 /* color para notificacion de advertencia */
 .notificacion.warning { background: #ff9800; }
+
+/* =========================
+   Bloque de estilos para Adscripta - archivo central Css/style.css
+   Añadir al final del archivo existente.
+   Prefijo: sugarads-
+   ========================= */
+
+/* Layout general */
+.sugarads-main { background: #f2e0d3; padding-bottom: 3rem; color: #1f1f1f; font-family: "Nunito", "Arial", sans-serif; }
+
+/* Títulos */
+.sugarads-title { font-size: 2.2rem; text-align: center; margin: 1.25rem 0; font-weight: 400; color: #221f1e; }
+
+/* Grid principal: dos columnas (left narrow, right flexible) */
+.sugarads-grid { display: grid; grid-template-columns: 260px 1fr; gap: 0; border-top: 2px solid rgba(0,0,0,0.15); border-left: 2px solid rgba(0,0,0,0.15); }
+
+/* Left column */
+.sugarads-col-left { padding: 2.25rem; background: transparent; border-right: 2px solid rgba(0,0,0,0.12); min-height: 520px; }
+
+.sugarads-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.sugarads-field { display: flex; flex-direction: column; gap: .45rem; align-items: flex-start; }
+
+.sugarads-label { font-size: 1rem; margin-left: 0.15rem; }
+
+.sugarads-field select {
+  width: 190px;
+  height: 34px;
+  padding: 0 0.6rem;
+  border: 1px solid #3b312a;
+  background: #f7efe6;
+  border-radius: 2px;
+  box-shadow: none;
+  font-size: 0.98rem;
+  appearance: none; /* quitar flechas nativas para estilo uniforme */
+}
+
+/* Custom arrow (keeps native select for accessibility but shows arrow via background image) */
+.sugarads-field select { background-image: linear-gradient(45deg, transparent 50%, #222 50%), linear-gradient(135deg, #222 50%, transparent 50%); background-position: calc(100% - 12px) calc(50% - 6px), calc(100% - 6px) calc(50% - 6px); background-size: 6px 6px; background-repeat: no-repeat; padding-right: 2.2rem; }
+
+/* Right column */
+.sugarads-col-right { padding: 1.5rem 2rem; }
+
+/* Confirm card */
+.sugarads-confirm-card {
+  border: 1px solid rgba(0,0,0,0.16);
+  background: #efe0d4;
+  padding: 2rem;
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+}
+
+.sugarads-confirm-text { max-width: 680px; text-align: center; line-height: 1.45; font-size: 1rem; color: #1d1614; margin-bottom: 1.25rem; }
+
+.sugarads-confirm-actions { display: flex; gap: 2.25rem; }
+
+.sugarads-btn { padding: 0.55rem 1.1rem; border-radius: 24px; border: 1px solid #2d2d2d; background: transparent; cursor: pointer; font-size: 0.95rem; }
+
+.sugarads-btn-guardar { background: #f7efe6; }
+.sugarads-btn-cancelar { background: #f7efe6; }
+
+/* Resultado */
+.sugarads-resultado { border-top: 1px solid rgba(0,0,0,0.12); padding: 1.5rem 0; margin-top: 0.5rem; min-height: 260px; display: flex; flex-direction: column; align-items: center; }
+
+.sugarads-resultado-title { margin-bottom: 1rem; font-size: 1.05rem; }
+
+/* Diagrama maqueta central */
+.sugarads-diagrama { width: 420px; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+
+.sugarads-diagrama-turno { font-size: 0.95rem; margin-bottom: 0.45rem; color: #2b2523; }
+
+.sugarads-diagrama-grid { display: grid; grid-template-columns: 160px 1fr; gap: 0; align-items: stretch; }
+
+/* Caja salón - borde simple */
+.sugarads-diagrama-salon {
+  border: 2px solid rgba(0,0,0,0.25);
+  background: #efe9df;
+  padding: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 86px;
+  font-size: 0.95rem;
+}
+
+/* Caja 1ra - compuesta por label + contenido */
+.sugarads-diagrama-primera {
+  display: flex;
+  flex-direction: column;
+  border-left: none;
+  border-top: 2px solid rgba(0,0,0,0.12);
+  min-height: 86px;
+}
+
+.sugarads-diagrama-primera-label {
+  border: 2px solid rgba(0,0,0,0.2);
+  padding: 0.45rem 0.8rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: #fbf6f1;
+}
+
+.sugarads-diagrama-primera-contenido {
+  border: 2px solid rgba(0,0,0,0.2);
+  border-top: none;
+  padding: 0.6rem;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* Adscripta lower row */
+.sugarads-adscripta-section { margin-top: 2.25rem; border-top: 2px solid rgba(0,0,0,0.12); padding-top: 1.25rem; }
+
+.sugarads-adscripta-row { display: flex; justify-content: center; gap: 2rem; padding: 1.25rem 0; }
+
+.sugarads-field-inline { display: flex; flex-direction: column; gap: 0.45rem; align-items: center; }
+
+.sugarads-ads-confirm { margin: 1.25rem auto; max-width: 900px; }
+
+/* Responsive: adapta a móvil */
+@media (max-width: 900px) {
+  .sugarads-grid { grid-template-columns: 1fr; }
+  .sugarads-col-left { order: 2; border-right: none; border-top: 2px solid rgba(0,0,0,0.12); }
+  .sugarads-col-right { order: 1; }
+  .sugarads-diagrama { width: 100%; }
+  .sugarads-field select { width: 100%; }
+  .sugarads-adscripta-row { flex-direction: column; gap: 1rem; }
+}

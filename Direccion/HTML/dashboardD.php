@@ -47,7 +47,7 @@ include '../../PHP/header.php';
 
         <!-- Bloque gráfico que muestra las ausencias semanales de profesores -->
         <div class="estadistica-item estadistica-grafico" style="grid-column: 2 / span 2; grid-row: 1 / span 2;">
-          <div class="grafico-titulo">Profesores que no han asistido esta semana</div>
+          <div class="grafico-titulo">Asistencia de profesores en esta semana</div>
           <canvas id="grafico-profesores" width="400" height="120"></canvas>
         </div>
 
