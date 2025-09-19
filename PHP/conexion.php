@@ -6,9 +6,9 @@ function conectar_bd() {
     // base de datos
     $bd = "sugar";
     // usuario
-    $usuario = "root";
+    $usuario = "sugar";
     // contraseña
-    $pass = "";
+    $pass = "sugar";
 
     // Crear conexión
     // mysqli_connect es una función que establece una conexión con la base de datos
