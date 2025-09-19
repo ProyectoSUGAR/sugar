@@ -7,7 +7,7 @@ include '../../PHP/header.php';
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <title>Dashboard Secretaria</title>
+    <title>Dashboard Adsministrador</title>
     <link rel="stylesheet" href="/Css/style.css" />
 </head>
 <body>

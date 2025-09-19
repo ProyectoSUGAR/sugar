@@ -120,7 +120,6 @@
     </main>
   </div>
 
-  <!-- Script opcional para funcionalidades adicionales del login -->
   <!--<script src="/Login/JavaScript/login.js"></script>-->
 
 </body>

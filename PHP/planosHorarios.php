@@ -12,7 +12,6 @@ $turnos = ["manana", "tarde", "noche"];
 $bloques = [1,2,3,4,5,6,7,8];
 $horarios = [];
 
-// Función para deducir el piso a partir de la ubicación del espacio
 function obtener_piso($ubicacion) {
     $ubicacion = strtolower($ubicacion);
     if (strpos($ubicacion, 'planta baja') !== false) return 0;
@@ -21,7 +20,6 @@ function obtener_piso($ubicacion) {
     return 0;
 }
 
-// Consulta: para cada horario, obtener asignatura y su profesor principal
 $sql = "
 SELECT 
     e.nombre AS espacio,
@@ -39,7 +37,6 @@ LEFT JOIN profesor p ON pa.id_profesor = p.id_usuario
 LEFT JOIN usuario u ON p.id_usuario = u.id_usuario
 ";
 
-// Ejecuta la consulta
 $res = mysqli_query($con, $sql);
 
 while ($row = mysqli_fetch_assoc($res)) {
@@ -51,7 +48,6 @@ while ($row = mysqli_fetch_assoc($res)) {
     $profesor = trim($row['profesor_nombre'] . ' ' . $row['profesor_apellido']);
     $piso = obtener_piso($ubicacion);
 
-    // Solo si el espacio está en el piso correspondiente
     if (in_array($espacio, $salonesPorPiso[$piso])) {
         $horarios[$piso][$turno][$espacio][$bloque] = [
             'materia' => $materia,
