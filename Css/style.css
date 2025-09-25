@@ -1190,12 +1190,6 @@ html, body {
 /* color para notificacion de advertencia */
 .notificacion.warning { background: #ff9800; }
 
-/* =========================
-   Bloque de estilos para Adscripta - archivo central Css/style.css
-   Añadir al final del archivo existente.
-   Prefijo: sugarads-
-   ========================= */
-
 /* Layout general */
 .sugarads-main { background: #f2e0d3; padding-bottom: 3rem; color: #1f1f1f; font-family: "Nunito", "Arial", sans-serif; }
 
