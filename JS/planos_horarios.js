@@ -1,128 +1,106 @@
+// Archivo: /JS/planos_horarios.js
+
 document.addEventListener('DOMContentLoaded', function() {
-    const planos = [
-        { src: "/Images/PlantaBaja.jpeg", alt: "Plano Planta baja" },
-        { src: "/Images/Piso1y2.jpeg", alt: "Plano Piso 1" },
-        { src: "/Images/Piso1y2.jpeg", alt: "Plano Piso 2" }
-    ];
+    // --- DATOS PRECARGADOS ---
+    const diasSemana = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
+    const bloques = [1,2,3,4,5,6,7,8];
+    const salonesPorPiso = {
+        0: ['Aula 1', 'Laboratorio de Electrónica', 'Laboratorio de Química', 'Laboratorio de Robótica', 'Zoom', 'Taller'],
+        1: ['Aula 2', 'Salón 1', 'Salón 2', 'Laboratorio de Física'],
+        2: ['Aula 3', 'Salón 3', 'Salón 4', 'Salón 5']
+    };
 
-    const salonesPorPiso = [
-        ["Aula 1", "Laboratorio de Electrónica", "Laboratorio de Química", "Laboratorio de Robótica", "Zoom", "Taller"],
-        ["Aula 2", "Salón 1", "Salón 2", "Laboratorio de Física"],
-        ["Aula 3", "Salón 3", "Salón 4", "Salón 5"]
-    ];
-
-    const bloques = ["1°", "2°", "3°", "4°", "5°", "6°", "7°", "8°"];
-
-    const turnos = [
-        { id: "manana", titulo: "Turno Mañana", bloques: bloques },
-        { id: "tarde", titulo: "Turno Tarde", bloques: bloques },
-        { id: "noche", titulo: "Turno Noche", bloques: bloques }
-    ];
-
-    const btns = document.querySelectorAll('.btn-piso');
-    const imgPlano = document.getElementById('imagen-plano');
+    // --- ELEMENTOS DEL DOM ---
+    const selectorDia = document.getElementById('selector-dia');
+    const botonesPiso = document.querySelectorAll('.btn-piso');
     const contenedorTablas = document.getElementById('contenedor-tablas-horarios');
-    let datosHorarios = {};
+    const imagenPlano = document.getElementById('imagen-plano');
 
-    function crearTablasHorarios(piso) {
-        contenedorTablas.innerHTML = "";
-        turnos.forEach(turno => {
-            const section = document.createElement('section');
-            section.className = "turno";
-            section.id = `turno-${turno.id}`;
+    let pisoActual = '0';
+    let diaActual = 'lunes';
 
-            const h3 = document.createElement('h3');
-            h3.textContent = turno.titulo;
-            section.appendChild(h3);
-
-            const table = document.createElement('table');
-            table.className = "tabla-horarios";
-            table.id = `tabla-${turno.id}`;
-
-            const thead = document.createElement('thead');
-            const trHead = document.createElement('tr');
-            const thSalon = document.createElement('th');
-            thSalon.textContent = "Espacio";
-            trHead.appendChild(thSalon);
-
-            turno.bloques.forEach(bloque => {
-                const th = document.createElement('th');
-                th.textContent = bloque;
-                trHead.appendChild(th);
-            });
-
-            thead.appendChild(trHead);
-            table.appendChild(thead);
-
-            const tbody = document.createElement('tbody');
-            salonesPorPiso[piso].forEach((salon) => {
-                const tr = document.createElement('tr');
-                const tdSalon = document.createElement('td');
-                tdSalon.textContent = salon;
-                tr.appendChild(tdSalon);
-
-                turno.bloques.forEach(() => {
-                    const td = document.createElement('td');
-                    td.innerHTML = "";
-                    tr.appendChild(td);
-                });
-
-                tbody.appendChild(tr);
-            });
-
-            table.appendChild(tbody);
-            section.appendChild(table);
-            contenedorTablas.appendChild(section);
-        });
+    // Normaliza nombres de espacios para coincidir con las claves del JSON
+    function normalizarNombre(nombre) {
+        return nombre.toLowerCase().replace(/\s+/g, ' ').trim();
     }
 
-    function llenarHorarios(piso) {
-        fetch('/PHP/planosHorarios.php')
+    // Genera el grid de horarios para un turno
+    function crearGridTurno(titulo, salones) {
+        let html = '<div class="grid-header grid-salon">Espacio</div>';
+        bloques.forEach(b => html += `<div class="grid-header grid-bloque">${b}</div>`);
+        salones.forEach(salon => {
+            html += `<div class="grid-cell grid-salon">${salon}</div>`;
+            bloques.forEach(bloque => {
+                html += `<div class="grid-cell horario-celda" data-turno="${titulo}" data-salon="${normalizarNombre(salon)}" data-bloque="${bloque}"></div>`;
+            });
+        });
+        return `<div class="tabla-horario"><h3>${titulo.charAt(0).toUpperCase()+titulo.slice(1)}</h3><div class="grid-horarios">${html}</div></div>`;
+    }
+
+    // Renderiza la estructura de los tres turnos
+    function renderizarEstructuraHorarios(piso) {
+        const salones = salonesPorPiso[parseInt(piso)];
+        contenedorTablas.innerHTML =
+            crearGridTurno('manana', salones) +
+            crearGridTurno('tarde', salones) +
+            crearGridTurno('noche', salones);
+    }
+
+    // Llama al endpoint y llena las celdas
+    function cargarHorarios(dia, piso) {
+        renderizarEstructuraHorarios(piso);
+        fetch(`/PHP/planosHorarios.php?dia=${dia}`)
             .then(res => res.json())
             .then(data => {
-                datosHorarios = data;
-                turnos.forEach(turno => {
-                    const tabla = document.getElementById(`tabla-${turno.id}`);
-                    if (!tabla) return;
-                    const tbody = tabla.querySelector('tbody');
-                    Array.from(tbody.rows).forEach((tr, idxSalon) => {
-                        const nombreSalon = salonesPorPiso[piso][idxSalon];
-                        Array.from(tr.cells).forEach((td, idxBloque) => {
-                            if (idxBloque === 0) return;
-                            td.innerHTML = "";
-                            const bloqueNum = idxBloque; // 1-based
-                            const info = data?.[piso]?.[turno.id]?.[nombreSalon]?.[bloqueNum];
-                            if (info && info.materia) {
-                                td.innerHTML = `<div class="horario-celda">
-                                    <strong>${info.materia}</strong><br>
-                                    <span style="font-size:0.9em">${info.profesor}</span>
-                                </div>`;
+                if (!data || !data[piso]) return;
+                document.querySelectorAll('.horario-celda').forEach(cell => cell.innerHTML = '');
+                ['manana','tarde','noche'].forEach(turno => {
+                    const datosTurno = data[piso][turno] || {};
+                    Object.keys(datosTurno).forEach(salon => {
+                        Object.keys(datosTurno[salon]).forEach(bloque => {
+                            const celda = document.querySelector(`.horario-celda[data-turno="${turno}"][data-salon="${salon}"][data-bloque="${bloque}"]`);
+                            if (celda) {
+                                const asigns = datosTurno[salon][bloque];
+                                celda.innerHTML = asigns.map(a => `<div class='asignatura'><strong>${a.materia}</strong><br>${a.profesor}</div>`).join('');
                             }
                         });
                     });
                 });
+            })
+            .catch(() => {
+                contenedorTablas.innerHTML = '<p class="error">No se pudieron cargar los horarios.</p>';
             });
     }
 
-    let pisoActivo = 0;
-    btns.forEach((btn, idx) => {
-        if (btn.classList.contains('activo')) {
-            pisoActivo = idx;
+    // Cambia la imagen del plano según el piso
+    function actualizarPlano(piso) {
+        const planos = {
+            '0': '/Images/PlantaBaja.jpeg',
+            '1': '/Images/Piso1y2.jpeg',
+            '2': '/Images/Piso1y2.jpeg'
+        };
+        if (imagenPlano && planos[piso]) {
+            imagenPlano.src = planos[piso];
+            imagenPlano.alt = `Plano del piso ${piso}`;
         }
-    });
-    imgPlano.src = planos[pisoActivo].src;
-    imgPlano.alt = planos[pisoActivo].alt;
-    crearTablasHorarios(pisoActivo);
-    llenarHorarios(pisoActivo);
+    }
 
-    btns.forEach((btn, idx) => {
+    // Eventos
+    selectorDia.addEventListener('change', function(e) {
+        diaActual = e.target.value;
+        cargarHorarios(diaActual, pisoActual);
+    });
+    botonesPiso.forEach(btn => {
         btn.addEventListener('click', function() {
-            btns.forEach(b => b.classList.remove('activo'));
+            botonesPiso.forEach(b => b.classList.remove('activo'));
             btn.classList.add('activo');
-            imgPlano.src = planos[idx].src;
-            imgPlano.alt = planos[idx].alt;
-            crearTablasHorarios(idx);
-            llenarHorarios(idx);
+            pisoActual = btn.dataset.piso;
+            actualizarPlano(pisoActual);
+            cargarHorarios(diaActual, pisoActual);
         });
     });
+
+    // Inicialización
+    actualizarPlano(pisoActual);
+    cargarHorarios(diaActual, pisoActual);
 });

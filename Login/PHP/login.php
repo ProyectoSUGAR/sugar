@@ -9,7 +9,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Inclusión del archivo que contiene la función para conectar con la base de datos
-require("../../PHP/conexion.php");
+require_once("../../PHP/conexion.php");
 
 // Establece la conexión con la base de datos
 $con = conectar_bd();
@@ -119,5 +119,9 @@ function logear($con, $usuario, $contrasenia) {
 }
 
 // Cierra la conexión con la base de datos
-mysqli_close($con);
+if (isset($con) && $con instanceof mysqli) {
+    if (@$con->ping()) {
+
+    }
+}
 ?>

@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const turnoSelect = document.getElementById('hor-turno');
     const horaSelect = document.getElementById('hor-hora');
 
+    // Bloques de horario por turno
     const bloques = {
-        'mañana': [
+        'manana': [
             "07:00 - 07:45",
             "07:50 - 08:35",
             "08:40 - 09:25",
@@ -35,13 +36,22 @@ document.addEventListener('DOMContentLoaded', function () {
         ]
     };
 
+    // Actualiza los bloques de horario según el turno seleccionado
     turnoSelect.addEventListener('change', function () {
-        horaSelect.innerHTML = '<option value="">Seleccionar Bloque</option>';
+        horaSelect.innerHTML = '<option value="">Selecciona un bloque horario</option>';
         const turno = turnoSelect.value;
         if (bloques[turno]) {
             bloques[turno].forEach(function (bloque, idx) {
-                horaSelect.innerHTML += `<option value="${bloque}">Bloque ${idx + 1} (${bloque})</option>`;
+                horaSelect.innerHTML += `<option value="${bloque}">${bloque}</option>`;
             });
         }
     });
+
+    // Si el turno ya está seleccionado al cargar la página, mostrar los bloques
+    if (turnoSelect.value && bloques[turnoSelect.value]) {
+        horaSelect.innerHTML = '<option value="">Selecciona un bloque horario</option>';
+        bloques[turnoSelect.value].forEach(function (bloque, idx) {
+            horaSelect.innerHTML += `<option value="${bloque}">${bloque}</option>`;
+        });
+    }
 });

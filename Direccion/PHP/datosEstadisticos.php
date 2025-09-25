@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 // llamado a la conexion con la base de datos
-require '../../PHP/conexion.php';
+require_once '../../PHP/conexion.php';
 
 // conexion con la base de datos
 $con = conectar_bd();

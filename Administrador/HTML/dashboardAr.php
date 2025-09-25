@@ -7,11 +7,19 @@ include '../../PHP/header.php';
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <title>Dashboard Adsministrador</title>
+    <title>Dashboard Administrador</title>
     <link rel="stylesheet" href="/Css/style.css" />
+    <link rel="stylesheet" href="/Css/menuHamburguesa.css" />
+    <!-- Material Icons CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <main>
+
+
+    <!-- El header institucional y el logo ya están incluidos por header_admin.php -->
+    <!-- Menú hamburguesa ahora está dentro del header incluido -->
+
+        <main>
         <!-- Inclusión del bloque de bienvenida personalizado para el usuario secretaria -->
         <?php include '../../PHP/bienvenida.php'; ?>
         <!-- Sección que muestra las estadísticas institucionales -->
@@ -57,7 +65,8 @@ include '../../PHP/header.php';
                 </div>
             </div>
         </section>
-    </main>
+        </main>
+    <script src="/JS/menuHamburguesa.js"></script>
     <!-- Inclusión del panel de navegación y funcionalidades del dashboard -->
     <?php include '../../PHP/dashboard.php'; ?>
     <!-- Inclusión de la librería Chart.js para renderizar gráficos -->

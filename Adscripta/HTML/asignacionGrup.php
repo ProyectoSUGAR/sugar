@@ -1,44 +1,45 @@
 <?php
 include '../../PHP/header.php';
-require("../../PHP/conexion.php");
-$conn = conectar_bd();
-mysqli_close($conn);
+require_once("../../PHP/conexion.php");
 ?>
 <main class="sugarads-main">
   <section class="sugarads-section titulo">
     <h1 class="sugarads-title">Ingreso de grupos</h1>
   </section>
-
   <section class="sugarads-grid">
-    <aside class="sugarads-col-left" aria-labelledby="sugarads-form-labels">
-      <form id="sugarads-form-grupo" class="sugarads-form" novalidate>
+    <div class="sugarads-col-left">
+      <!-- Formulario de ingreso de grupo -->
+      <form id="sugarads-form-grupo" class="sugarads-form" autocomplete="off" onsubmit="return false;" style="max-width: 400px; margin: 0 auto;">
         <div class="sugarads-field">
           <label for="grupo-tipo" class="sugarads-label">Tipo</label>
-          <input type="text" id="grupo-tipo" name="tipo" placeholder="Ej: Bachillerato, Terciario.">
+          <select id="grupo-tipo" name="tipo" class="input-text sugarads-input" required>
+            <option value="">Selecciona un tipo</option>
+            <option value="Bachillerato">Bachillerato</option>
+            <option value="Terciario">Terciario</option>
+          </select>
         </div>
         <div class="sugarads-field">
           <label for="grupo-nombre" class="sugarads-label">Nombre</label>
-          <input type="text" id="grupo-nombre" name="nombre" placeholder="Ej: 1A, 2B, 3B.">
+          <input type="text" id="grupo-nombre" name="nombre" class="input-text sugarads-input" required placeholder="Ejemplo: MC">
         </div>
         <div class="sugarads-field">
           <label for="grupo-anio" class="sugarads-label">Año</label>
-          <input type="number" id="grupo-anio" name="anio" min="1" max="1" placeholder="Ej: 1, 2, 3...">
+          <input type="number" id="grupo-anio" name="anio" class="input-text sugarads-input" min="1" max="6" required placeholder="Ejemplo: 3">
         </div>
         <div class="sugarads-field">
           <label for="grupo-grupo" class="sugarads-label">Grupo</label>
-          <input type="text" id="grupo-grupo" name="grupo" placeholder="Letra o código de grupo">
+          <input type="text" id="grupo-grupo" name="grupo" class="input-text sugarads-input" required placeholder="Ejemplo: 3MC">
         </div>
         <div class="sugarads-field">
           <label for="grupo-horas" class="sugarads-label">Horas semanales</label>
-          <input type="number" id="grupo-horas" name="horas_semanales" min="1" max="50" placeholder="Ej: 30">
+          <input type="number" id="grupo-horas" name="horas_semanales" class="input-text sugarads-input" min="1" max="50" required placeholder="Ejemplo: 36">
         </div>
-        <div class="sugarads-field">
-          <button type="button" id="sugarads-guardar-grupo" class="sugarads-btn sugarads-btn-guardar">Guardar</button>
-          <button type="reset" id="sugarads-cancelar-grupo" class="sugarads-btn sugarads-btn-cancelar">Cancelar</button>
+        <div class="sugarads-field" style="text-align:center;">
+          <button id="sugarads-guardar-grupo" class="sugarads-btn sugarads-btn-guardar" type="button">Guardar</button>
+          <button id="sugarads-cancelar-grupo" class="sugarads-btn sugarads-btn-cancelar" type="button">Cancelar</button>
         </div>
       </form>
-    </aside>
-
+    </div>
     <article class="sugarads-col-right">
       <div class="sugarads-confirm-card" role="region" aria-live="polite" aria-label="Confirmación de grupo">
         <p class="sugarads-confirm-text">

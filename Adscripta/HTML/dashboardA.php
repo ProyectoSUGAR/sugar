@@ -2,14 +2,19 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
-    <title>Dashboard Adscripta</title>
+      <meta charset="UTF-8" />
+      <title>Dashboard Adscripta</title>
     <link rel="stylesheet" href="/Css/style.css" />
-  </head>
+      <!-- Material Icons CDN -->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
   <?php include '../../PHP/bienvenida.php'; ?>
-  <body>
+    <body>
 
-  <?php include '../../PHP/dashboard.php'; ?>
+    <!-- El header y menú hamburguesa ya están incluidos por header_adscripta.php -->
 
-</body>
-</html>
+    <?php include '../../PHP/dashboard.php'; ?>
+
+  
+  </body>
+  </html>

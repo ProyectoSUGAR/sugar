@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 // Importa el archivo que contiene la función de conexión a la base de datos
-require '../../PHP/conexion.php';
+require_once '../../PHP/conexion.php';
 
 // Ejecuta la función para conectar con la base de datos
 $con = conectar_bd();

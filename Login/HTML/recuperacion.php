@@ -35,7 +35,7 @@
                     <button type="submit" class="btn-primario">Enviar enlace de recuperación</button>
                     <!-- Enlace para volver al formulario de login -->
                     <div class="recuperar-password">
-                        <a href="/Login/HTML/index.php">Volver a ingresar</a>
+                        <a href="/Login/HTML/ingreso.php">Volver a ingresar</a>
                     </div>
                 </form>
                 <!-- Este div parece estar incompleto o innecesario -->

@@ -25,7 +25,7 @@ include '../../PHP/Header.php';
             <section class="panel-formulario">
                 <!-- Grupo de pestañas para cambiar entre login y registro -->
                 <div class="grupo-pestanas">
-                    <a class="pestana-inactiva" href="/Login/HTML/index.php">Ingresar</a>
+                    <a class="pestana-inactiva" href="/Login/HTML/ingreso.php">Ingresar</a>
                     <a class="pestana-activa" href="/Login/HTML/registro.php">Registrarse</a>
                 </div>
                 <!-- Formulario de registro de usuario -->

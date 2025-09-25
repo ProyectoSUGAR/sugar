@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Planos y Horarios</title>
+    <link rel="stylesheet" href="/Css/style.css" />
+</head>
 <!-- Cuerpo principal de la página con clase específica para el perfil de estudiante -->
 <body class="body-estudiante">
     <main>
@@ -16,7 +23,15 @@
             <div class="contenedor-plano">
                 <img id="imagen-plano" src="/Images/PlantaBaja.jpeg" alt="Plano Planta baja" />
             </div>
-            <!-- Contenedor dinámico donde se insertarán las tablas de horarios según el piso -->
+            <!-- Selector de día: permite al usuario elegir el día de la semana para ver el horario correspondiente -->
+            <select id="selector-dia">
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miercoles">Miércoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+            </select>
+            <!-- Contenedor dinámico donde se insertarán las tablas de horarios según el piso y día seleccionados -->
             <div id="contenedor-tablas-horarios"></div>
         </section>
         <!-- Fin del bloque de planos y horarios -->

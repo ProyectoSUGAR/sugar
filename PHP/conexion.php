@@ -1,30 +1,19 @@
 <?php
-// Función para conectar a la base de datos
+// Parámetros de conexión globales
+$DB_SERVIDOR = "localhost";
+$DB_NOMBRE = "sugar";
+$DB_USUARIO = "root";
+$DB_PASS = "";
+
+// Función para conectar con mysqli
 function conectar_bd() {
-    // Parámetros de conexión
-    $servidor = "localhost";
-    // base de datos
-    $bd = "sugar";
-    // usuario
-    $usuario = "sugar";
-    // contraseña
-    $pass = "sugar";
-
-    // Crear conexión
-    // mysqli_connect es una función que establece una conexión con la base de datos
-    $conn = mysqli_connect($servidor, $usuario, $pass, $bd);
-
-    // Verificar conexión
+    global $DB_SERVIDOR, $DB_USUARIO, $DB_PASS, $DB_NOMBRE;
+    $conn = mysqli_connect($DB_SERVIDOR, $DB_USUARIO, $DB_PASS, $DB_NOMBRE);
     if (!$conn) {
-        // Si la conexión falla, mostrar un mensaje de error y terminar el script
         die("Error de conexión: " . mysqli_connect_error());
     }
-
-    // echo "anduvooo";
-    // Retornar la conexión
     return $conn;
 }
 
 // $con= conectar_bd();
-
 ?>

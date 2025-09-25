@@ -2,7 +2,7 @@
 
 // llamado a la conexion con la base de datos
 // require es una funcion que incluye y evalua el archivo especificado
-require("../../PHP/conexion.php");
+require_once("../../PHP/conexion.php");
 
 // conexion con la base de datos
 $con = conectar_bd();
@@ -90,6 +90,10 @@ function insertar_datos($con, $nombre, $apellido, $correo, $cedula, $contrasenia
 }
 
 // Cerrar la conexión a la base de datos
-mysqli_close($con);
+if (isset($con) && $con instanceof mysqli) {
+    if (@$con->ping()) {
+
+    }
+}
 
 ?>

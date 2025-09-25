@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   function $id(id) { return document.getElementById(id); }
 
-  // Inputs
+  // Enlaces a elementos del DOM
   const tipo = $id('grupo-tipo');
   const nombre = $id('grupo-nombre');
   const anio = $id('grupo-anio');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = $id('sugarads-form-grupo');
   const resultadoCanvas = $id('sugarads-resultado-canvas');
 
-  // Spans de confirmación
+  // Variables para resumen de confirmación
   const varTipo = document.querySelector('.sugarads-var-tipo');
   const varNombre = document.querySelector('.sugarads-var-nombre');
   const varAnio = document.querySelector('.sugarads-var-anio');
@@ -71,14 +71,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Cancelar formulario
+  //cacnelar y resetear formulario
   cancelarBtn.addEventListener('click', function () {
     form.reset();
     actualizarConfirmacion();
     resultadoCanvas.textContent = '';
   });
 
-  // Inicializar
+  // inicializar confirmación
   actualizarConfirmacion();
   document.querySelector('.sugarads-confirm-card').style.display = 'none';
 });

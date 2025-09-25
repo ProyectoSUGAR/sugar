@@ -44,7 +44,7 @@
 
         <!-- Grupo de pestañas para alternar entre login y registro -->
         <div class="grupo-pestanas">
-          <a class="pestana-activa" href="/Login/HTML/index.php">Ingresar</a>
+          <a class="pestana-activa" href="/Login/HTML/ingreso.php">Ingresar</a>
           <a class="pestana-inactiva" href="/Login/HTML/registro.php">Registrarse</a>
         </div>
 
@@ -80,28 +80,51 @@
           <!-- Contenedor de las imágenes del carrusel -->
           <div class="carousel-inner">
             <?php
-            // Conexión a la base de datos
-            require_once '../../PHP/conexion.php';
-            $conn = conectar_bd();
+// llamado a la conexion con la base de datos
+require_once("../../PHP/conexion.php");
 
-            // Consulta SQL para obtener las imágenes del carrusel
-            $sql = "SELECT url FROM imagen WHERE entidad='carrusel' ORDER BY fecha DESC";
-            $result = $conn->query($sql);
+// conexion con la base de datos
+$con = conectar_bd();
 
-            // Variable para marcar la primera imagen como activa
-            $primero = true;
+// Procesar el formulario cuando se envíe
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Obtener los datos del formulario
+    $correo = trim($_POST['correo']);
+    $contraseña = trim($_POST['contraseña']);
 
-            // Iteración sobre los resultados de la consulta
-            while ($row = $result->fetch_assoc()) {
-              echo '<div class="carousel-item'.($primero ? ' active' : '').'">';
-              echo '<img src="'.$row['url'].'" class="d-block w-100 imagen-carrusel" alt="Imagen carrusel">';
-              echo '</div>';
-              $primero = false;
-            }
+    // Consulta para buscar el usuario por correo y contraseña
+    $query = "SELECT * FROM usuario WHERE correo='$correo' AND contraseña='$contraseña'";
+    $result = mysqli_query($con, $query);
+    $usuario = mysqli_fetch_assoc($result);
 
-            // Cierre de la conexión con la base de datos
-            $conn->close();
-            ?>
+    if ($usuario) {
+        // Validar si el usuario está activo
+        if ($usuario['estado_usuario'] !== 'activo') {
+            // Usuario inactivo, no permitir acceso
+            echo "<script>alert('Usuario inactivo. Contacte al administrador.'); window.location.href='../HTML/ingreso.php';</script>";
+            exit;
+        }
+        // Usuario activo, iniciar sesión
+        session_start();
+        $_SESSION['id_usuario'] = $usuario['id_usuario'];
+        $_SESSION['nombre'] = $usuario['nombre'];
+        $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
+        // Redirigir al panel principal
+        header("Location: ../../panel.php");
+        exit;
+    } else {
+        // Usuario o contraseña incorrectos
+        echo "<script>alert('Correo o contraseña incorrectos.'); window.location.href='../HTML/ingreso.php';</script>";
+        exit;
+    }
+}
+
+if (isset($con) && $con instanceof mysqli) {
+  if (@$con->ping()) {
+
+  }
+}
+?>
           </div>
 
           <!-- Botón para navegar a la imagen anterior del carrusel -->

@@ -1,3 +1,197 @@
+/* === CRUD Horarios (registroDatos.php) === */
+.crud-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.crud-form {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem;
+}
+.crud-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  overflow: hidden;
+}
+.crud-table th, .crud-table td {
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+.crud-table th {
+  background: #f1f5fa;
+  font-weight: 700;
+}
+.crud-table tr:last-child td {
+  border-bottom: none;
+}
+.crud-actions a {
+  margin-right: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff;
+  background: #2d89ef;
+  font-size: 0.97em;
+  transition: background 0.2s;
+}
+.crud-actions a.crud-eliminar {
+  background: #e53935;
+}
+.crud-actions a:hover {
+  opacity: 0.85;
+}
+/* === GRID DE PLANOS Y HORARIOS === */
+.bloque-planos-horarios {
+  margin: 2rem auto;
+  max-width: 1200px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+.selector-piso {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.btn-piso {
+  background: #e3e8f0;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-piso.activo, .btn-piso:hover {
+  background: #2d89ef;
+  color: #fff;
+}
+
+#imagen-plano {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 8px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+}
+
+#selector-dia {
+  display: block;
+  margin: 0 auto 2rem auto;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #cfd8dc;
+  background: #f7fafc;
+}
+
+#contenedor-tablas-horarios {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+.tabla-horario {
+  margin-bottom: 2.5rem;
+}
+
+.tabla-horario h3 {
+  margin-bottom: 0.7rem;
+  color: #2d89ef;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.grid-horarios {
+  display: grid;
+  grid-template-columns: 160px repeat(8, 1fr);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow-x: auto;
+  background: #f9fafb;
+}
+
+.grid-header {
+  background: #e3e8f0;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.6rem 0.2rem;
+  border-bottom: 1px solid #cfd8dc;
+}
+
+.grid-cell {
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: #fff;
+}
+.grid-cell:last-child {
+  border-right: none;
+}
+.grid-salon {
+  background: #f1f5fa;
+  font-weight: 600;
+  text-align: left;
+  padding-left: 0.7rem;
+}
+.grid-bloque {
+  background: #fff;
+}
+.horario-celda {
+  font-size: 0.98rem;
+  text-align: center;
+  padding: 0.2rem 0.1rem;
+  min-width: 90px;
+  min-height: 48px;
+  word-break: break-word;
+}
+.horario-celda .asignatura {
+  background: #e3e8f0;
+  border-radius: 5px;
+  margin: 2px 0;
+  padding: 2px 4px;
+  font-size: 0.97em;
+}
+
+@media (max-width: 900px) {
+  .grid-horarios {
+    grid-template-columns: 120px repeat(8, 90px);
+    font-size: 0.95rem;
+  }
+  .grid-header, .grid-cell {
+    min-height: 38px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .bloque-planos-horarios {
+    padding: 0.5rem 0.2rem;
+  }
+  .grid-horarios {
+    grid-template-columns: 90px repeat(8, 70px);
+    font-size: 0.9rem;
+  }
+  .grid-header, .grid-cell {
+    min-height: 28px;
+    font-size: 0.9rem;
+  }
+}
 /* Importa la fuente Nunito Sans desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 

@@ -1,5 +1,5 @@
 <?php
-require("../../PHP/conexion.php");
+require_once("../../PHP/conexion.php");
 $conn = conectar_bd();
 
 $data = json_decode(file_get_contents("php://input"), true);
@@ -15,9 +15,9 @@ if ($tipo && $nombre && $anio && $grupo && $horas) {
     if (!$stmt) {
         echo json_encode([
             "status" => "error",
-            "message" => "Error en prepare: " . mysqli_error($conn)
+            "message" => "Error en la preparación de la consulta: " . mysqli_error($conn)
         ]);
-        mysqli_close($conn);
+
         exit;
     }
     mysqli_stmt_bind_param($stmt, "ssisi", $tipo, $nombre, $anio, $grupo, $horas);
@@ -40,5 +40,9 @@ if ($tipo && $nombre && $anio && $grupo && $horas) {
     ]);
 }
 
-mysqli_close($conn);
+if (isset($conn) && $conn instanceof mysqli) {
+    if (@$conn->ping()) {
+
+    }
+}
 ?>
