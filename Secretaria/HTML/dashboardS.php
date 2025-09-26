@@ -59,19 +59,7 @@
             </div> <!-- Fin del contenedor de estadísticas -->
         </section>
 
-        <!-- Grilla de horarios registrados -->
-        <section class="bloque-planos-horarios">
-            <div class="selector-piso">
-                <button type="button" class="btn-piso activo" data-piso="0">Planta baja</button>
-                <button type="button" class="btn-piso" data-piso="1">Piso 1</button>
-                <button type="button" class="btn-piso" data-piso="2">Piso 2</button>
-            </div>
-            <div class="contenedor-plano">
-                <img id="imagen-plano" src="/Images/PlantaBaja.jpeg" alt="Plano Planta baja" />
-            </div>
-            <div id="contenedor-tablas-horarios"></div>
-        </section>
-    </main>
+              
     <!-- Inclusión del panel de navegación o funcionalidades adicionales del dashboard -->
     <?php include '../../PHP/dashboard.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

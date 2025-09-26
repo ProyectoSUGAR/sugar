@@ -24,7 +24,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Datos</title>
-    <link rel="stylesheet" href="../CSS/asignacion.css">
     <link rel="stylesheet" href="/Css/style.css">
 </head>
 <body>

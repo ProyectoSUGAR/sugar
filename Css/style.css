@@ -1175,6 +1175,21 @@ html, body {
   .tarjeta-opcion {
     height: 230px;
   }
+  .grupo-tarjetas {
+    max-width: 1000px;
+  }
+  .seccion-saludo {
+    height: 260px;
+  }
+  .tarjeta-opcion {
+    height: 210px;
+  }
+  .panel-carrusel {
+    width: 60vw;
+    min-width: 400px;
+    max-width: 700px;
+    height: 500px;
+  } 
 }
 
 /* Puedes agregar esto en tu archivo CSS global */

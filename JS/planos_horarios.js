@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- DATOS PRECARGADOS ---
     const diasSemana = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
     const bloques = [1,2,3,4,5,6,7,8];
+    // Nombres de espacios sin tildes, igual que en la base de datos
     const salonesPorPiso = {
-        0: ['Aula 1', 'Laboratorio de Electrónica', 'Laboratorio de Química', 'Laboratorio de Robótica', 'Zoom', 'Taller'],
-        1: ['Aula 2', 'Salón 1', 'Salón 2', 'Laboratorio de Física'],
-        2: ['Aula 3', 'Salón 3', 'Salón 4', 'Salón 5']
+        0: ['Aula 1', 'Laboratorio de Robotica', 'Laboratorio de Quimica', 'Laboratorio de Electronica', 'Zoom', 'Taller'],
+        1: ['Aula 2', 'Salon 1', 'Salon 2', 'Laboratorio de Fisica'],
+        2: ['Aula 3', 'salon 3', 'salon 4', 'salon 5']
     };
 
     // --- ELEMENTOS DEL DOM ---
@@ -20,8 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
     let diaActual = 'lunes';
 
     // Normaliza nombres de espacios para coincidir con las claves del JSON
+    // Normaliza nombres quitando tildes y caracteres especiales
     function normalizarNombre(nombre) {
-        return nombre.toLowerCase().replace(/\s+/g, ' ').trim();
+        return nombre
+            .toLowerCase()
+            .replace(/[áàäâ]/g, 'a')
+            .replace(/[éèëê]/g, 'e')
+            .replace(/[íìïî]/g, 'i')
+            .replace(/[óòöô]/g, 'o')
+            .replace(/[úùüû]/g, 'u')
+            .replace(/ñ/g, 'n')
+            .replace(/ç/g, 'c')
+            .replace(/\s+/g, ' ')
+            .trim();
     }
 
     // Genera el grid de horarios para un turno
@@ -52,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`/PHP/planosHorarios.php?dia=${dia}`)
             .then(res => res.json())
             .then(data => {
+                console.log('Datos recibidos del backend:', data); // DEPURACIÓN
                 if (!data || !data[piso]) return;
                 document.querySelectorAll('.horario-celda').forEach(cell => cell.innerHTML = '');
                 ['manana','tarde','noche'].forEach(turno => {

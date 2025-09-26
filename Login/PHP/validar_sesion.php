@@ -25,4 +25,5 @@ if (!isset($_SESSION['id_usuario'])) {
     // Horario asignado al usuario
     $horario = $_SESSION["horario"];
 }
+
 ?>

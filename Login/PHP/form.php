@@ -87,6 +87,8 @@ function insertar_datos($con, $nombre, $apellido, $correo, $cedula, $contrasenia
     } else {
         echo "El usuario ya existe.";
     }
+
+
 }
 
 // Cerrar la conexión a la base de datos
