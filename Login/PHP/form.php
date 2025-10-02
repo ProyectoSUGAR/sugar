@@ -1,4 +1,48 @@
 <?php
+// llamado a la conexion con la base de datos
+require_once("../../PHP/conexion.php");
+
+// conexion con la base de datos
+$con = conectar_bd();
+
+// Procesar el formulario cuando se envíe
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Obtener los datos del formulario
+    $correo = trim($_POST['correo']);
+    $contraseña = trim($_POST['contraseña']);
+
+    // Consulta para buscar el usuario por correo y contraseña
+    $query = "SELECT * FROM usuario WHERE correo='$correo' AND contraseña='$contraseña'";
+    $result = mysqli_query($con, $query);
+    $usuario = mysqli_fetch_assoc($result);
+
+    if ($usuario) {
+        // Validar si el usuario está activo
+        if ($usuario['estado_usuario'] !== 'activo') {
+            // Usuario inactivo, no permitir acceso
+            echo "<script>alert('Usuario inactivo. Contacte al administrador.'); window.location.href='../HTML/ingreso.php';</script>";
+            exit;
+        }
+        // Usuario activo, iniciar sesión
+        session_start();
+        $_SESSION['id_usuario'] = $usuario['id_usuario'];
+        $_SESSION['nombre'] = $usuario['nombre'];
+        $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
+        // Redirigir al panel principal
+        header("Location: ../../panel.php");
+        exit;
+    } else {
+        // Usuario o contraseña incorrectos
+        echo "<script>alert('Correo o contraseña incorrectos.'); window.location.href='../HTML/ingreso.php';</script>";
+        exit;
+    }
+}
+
+if (isset($con) && $con instanceof mysqli) {
+  if (@$con->ping()) {
+
+  }
+}
 
 // llamado a la conexion con la base de datos
 // require es una funcion que incluye y evalua el archivo especificado

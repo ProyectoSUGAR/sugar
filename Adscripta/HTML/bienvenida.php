@@ -12,6 +12,10 @@ $usuario = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Usuario";
 
 // Define el saludo predeterminado que se mostrará en pantalla
 $saludo = "Bienvenido/a";
+
+// Mostrar notificaciones recientes
+include '../../Adscripta/PHP/notificaciones_usuario.php';
+mostrarNotificacionesUsuario('adscripta');
 ?>
 
 <!-- Sección visual que muestra el saludo personalizado al usuario -->
