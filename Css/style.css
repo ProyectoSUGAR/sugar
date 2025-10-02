@@ -1,0 +1,1312 @@
+/* Importa la fuente Nunito Sans desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+/* Resetea los márgenes, rellenos y establece el box-sizing en border-box para todos los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Establece el alto completo para html y body */
+html, body {
+    height: 100%;
+}
+
+/* Estilos para el body en la página de login */
+.body-login {
+    font-family: 'segoe ui', sans-serif;
+    background: url('/Images/fondo.png') no-repeat center center fixed;
+    color: #071739;
+    height: 100vh;
+}
+
+/* Contenedor principal que organiza el layout en columna y ocupa toda la altura de la pantalla */
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Cabecera institucional con fondo degradado y alineación de elementos */
+.cabecera-institucional {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #e3c39d 0%, #ffffff 62%, #071739 100%);
+    padding: 10px 32px;
+    min-height: 80px;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+/* Logo institucional */
+.logo-app {
+    height: 45px;
+    width: auto;
+}
+
+/* Caja que contiene los datos del usuario y avatar */
+.caja-usuario {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Avatar circular del usuario */
+.avatar-usuario {
+    width: 60px;
+    height: 60px;
+    background-image: url(/images/JoseJose-Imagen.png);
+    border-radius: 50%;
+    margin-right: 6px;
+    background-size: cover;
+}
+
+/* Estilo para el nombre del usuario */
+.datos-usuario strong {
+    font-size: 1.7rem;
+    color: #101f40;
+    letter-spacing: 1px;
+    font-weight: 700;
+    font-family: inherit;
+}
+
+
+
+/* Contenido principal de la página */
+.contenido-principal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+    gap: 2.5rem;
+    padding: 1rem 2rem;
+    min-height: 0;
+}
+
+/* Panel del formulario de login/registro */
+.panel-formulario {
+    background-color: #486382;
+    border-radius: 24px;
+    padding: 1rem 1.2rem;
+    width: 340px;
+    min-width: 240px;
+    max-width: 98vw;
+    color: white;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Espaciado entre campos del formulario */
+.formulario-registro > .campo-con-icono,
+.fila-doble .campo-con-icono {
+    margin-bottom: 10px; /* Menos espacio entre campos */
+}
+
+/* Estilo para los campos con ícono */
+.campo-con-icono {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* Para los campos dentro de .fila-doble, igual distancia */
+.fila-doble .campo-con-icono {
+    flex: 1 1 0;
+    margin-bottom: 16px;
+}
+
+/* Panel del carrusel de imágenes */
+.panel-carrusel {
+    width: 80vw;
+    min-width: 300px;
+    max-width: 700px;
+    height: 60vh;
+    max-height: 700px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 24px;
+    position: relative;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    margin-left: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Carrusel de imágenes */
+.carrusel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+/* Imagen dentro del carrusel */
+.imagen-carrusel {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+}
+
+/* Texto superpuesto en el carrusel */
+.texto-carrusel {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 1rem;
+    font-size: 1.15rem;
+    width: 100%;
+}
+
+/* Botones de flecha para navegar el carrusel */
+.flecha-carrusel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: #e3c39d;
+    font-size: 1.5rem;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* Flecha izquierda del carrusel */
+.flecha-carrusel.izquierda {
+    left: 10px;
+}
+
+/* Flecha derecha del carrusel */
+.flecha-carrusel.derecha {
+    right: 10px;
+}
+
+/* Grupo de pestañas para alternar entre login y registro */
+.grupo-pestanas {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos para pestañas activas e inactivas */
+.grupo-pestanas .pestana-inactiva,
+.grupo-pestanas a.pestana-activa,
+.grupo-pestanas a.pestana-inactiva {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 0.2rem 0.25rem;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Pestaña activa con borde inferior */
+.grupo-pestanas .pestana-activa,
+.grupo-pestanas a.pestana-activa {
+    border-bottom-color: #cdd5db;
+}
+
+/* Hover en pestaña inactiva */
+.grupo-pestanas .pestana-inactiva:hover,
+.grupo-pestanas a.pestana-inactiva:hover {
+    filter: brightness(1.05);
+    text-decoration: none;
+}
+
+/* Focus en pestañas */
+.grupo-pestanas .pestana-activa:focus,
+.grupo-pestanas .pestana-inactiva:focus,
+.grupo-pestanas a.pestana-activa:focus,
+.grupo-pestanas a.pestana-inactiva:focus {
+    outline: 2px solid rgba(255,255,255,0.18);
+    outline-offset: 3px;
+}
+
+/* Formulario de registro con layout en columna */
+.formulario-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1 1 auto;
+}
+
+/* Grupo doble de campos en el formulario */
+.grupo-doble-campo {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Posicionamiento relativo para campos con ícono */
+.campo-con-icono {
+    position: relative;
+}
+
+/* Estilos para inputs y selects dentro de campos con ícono */
+.campo-con-icono input,
+.campo-con-icono select {
+    width: 100%;
+    padding: 0.8rem 2rem 0.8rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #cdd5db;
+    color: #071739;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 1.1rem;
+}
+
+/* Ícono dentro del campo */
+.campo-con-icono i {
+    position: absolute;
+    right: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #486382;
+    pointer-events: none;
+    font-size: 1.2rem;
+}
+
+/* Indicador de calendario para campos de fecha */
+.campo-con-icono input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    display: block;
+    position: absolute;
+    right: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.2em;
+    height: 1.2em;
+    cursor: pointer;
+}
+
+/* Posicionamiento relativo para input de fecha */
+.campo-con-icono input[type="date"] {
+    position: relative;
+}
+
+/* Botón primario para acciones principales */
+.btn-primario {
+    width: 100%;
+    background-color: #071739;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 0;
+    margin-top: 10px; /* Pequeño margen arriba */
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+}
+
+/* Hover en botón primario */
+.btn-primario:hover {
+    background-color: #a4b5c4;
+    color: #071739;
+}
+
+/* Contenedor para el enlace de recuperación de contraseña */
+.recuperar-password {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Línea decorativa antes del enlace de recuperación */
+.recuperar-password::before {
+    content: "";
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    height: 1px;
+    background-color: white;
+    opacity: 0.7;
+    margin: 15px 0;
+}
+
+/* Enlace de recuperación de contraseña */
+.recuperar-password a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+/* Hover en enlace de recuperación */
+.recuperar-password a:hover {
+    color: #dcdcdc;
+}
+
+/* Estilos para el body del perfil estudiante */
+.body-estudiante {
+    margin: 0;
+    font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #1f2a37;
+    background: linear-gradient(to right, #e1b987,#e7d1b6 );
+}
+
+/* Sección de saludo en el dashboard */
+.seccion-saludo {
+    position: relative;
+    height: clamp(160px, 32vw, 280px);
+   background-image: url(/Images/PlazaEntreveroJimmyBaikovicius.jpg);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+   
+}
+/* Sección de saludo en el dashboard 2, degradado por encima de la imagen */
+ .seccion-saludo:after {
+    content: "";
+    background: radial-gradient(1200px 280px at 70% 20%, rgba(255,255,255,.08), transparent 55%), linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.45)), linear-gradient(135deg, #071739, #4B6382 55%, #071739);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    opacity: 0.85;
+} 
+
+
+
+/* Fondo del saludo */
+.fondo-saludo {
+    padding: 24px;
+    text-align: center;
+    color: #CDD5DB;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+        z-index: 2;
+}
+
+/* Título del saludo */
+.seccion-saludo .saludo-titulo {
+    margin: 0;
+    font-size: clamp(22px, 3.3vw, 36px);
+    font-weight: 700;
+    letter-spacing: .3px;
+
+}
+
+/* Texto resaltado en el saludo */
+.resaltado {
+    color: #A4B5C4;
+}
+
+/* Barra descriptiva debajo del saludo */
+.barra-descriptiva {
+    background: #4B6382;
+    color: #CDD5DB;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: clamp(12px, 1.6vw, 14px);
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+/* Tablero principal con accesos rápidos */
+.tablero-principal {
+    position: relative;
+    padding: 22px 12px 32px;
+    background: repeating-linear-gradient(45deg, #E3C39D 0 26px, #A68868 26px 52px), linear-gradient(0deg, rgba(255,255,255,.4), rgba(255,255,255,.4));
+}
+
+/* Grupo de tarjetas de acceso rápido */
+.grupo-tarjetas {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Tarjeta de opción en el tablero */
+.tarjeta-opcion {
+    position: relative;
+    height: 250px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 18px;
+    padding: 12px;
+    background: linear-gradient(0deg, rgba(75,99,130,.6), rgba(75,99,130,.6));
+    box-shadow: 0 10px 22px rgba(0,0,0,.25), inset 0 1px 10px rgba(255,255,255,.08);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.18);
+    overflow: hidden;
+
+}
+
+
+
+
+/* Efecto de luz en la tarjeta de opción */
+.tarjeta-opcion::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px 120px at 50% 10%, rgba(255,255,255,.12), transparent 40%);
+    pointer-events: none;
+}
+
+/* Texto dentro de la tarjeta de opción */
+.tarjeta-opcion span {
+    font-size: clamp(22px, 2.4vw, 18px);
+    font-weight: 600;
+}
+
+/* Franja decorativa azul al final de la página */
+.franja-textura {
+    height: 120px;
+    background: radial-gradient(600px 150px at 25% 30%, rgba(7,23,57,.15), transparent 40%), radial-gradient(800px 200px at 70% 60%, rgba(75,99,130,.15), transparent 45%), linear-gradient(135deg, #A4B5C4, #4B6382 50%, #071739 80%);
+    filter: contrast(1.05) brightness(.95);
+}
+
+/* Pie de página institucional */
+.pie-pagina {
+    padding: 20px 12px 40px;
+    text-align: center;
+    color: #4B6382;
+}
+
+/* Bloque de planos y horarios */
+.bloque-planos-horarios {
+    margin: 2rem auto;
+    max-width: 900px;
+    padding: 1.5rem 1rem;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+/* Selector de piso */
+.selector-piso {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Botón para seleccionar piso */
+.btn-piso {
+    padding: 0.7rem 2.2rem;
+    border-radius: 22px;
+    border: 1px solid #486382;
+    background: #f5f5f5;
+    color: #071739;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+}
+
+/* Hover en botón de piso */
+.btn-piso:hover {
+    background: #e3c39d;
+    color: #071739;
+}
+
+/* Botón de piso activo */
+.btn-piso.activo {
+    background: #486382;
+    color: #fff;
+    border-color: #486382;
+}
+
+/* Contenedor de la imagen del plano */
+.contenedor-plano {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* Imagen del plano */
+.contenedor-plano img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    background: #e3e3e3;
+}
+
+/* Sección de turno en horarios */
+.turno {
+    margin-bottom: 2rem;
+}
+
+/* Título del turno */
+.turno h3 {
+    margin-bottom: 0.7rem;
+    color: #486382;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+/* Tabla de horarios */
+.tabla-horarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.5rem;
+    background: #fafafa;
+}
+
+/* Celdas y encabezados de la tabla de horarios */
+.tabla-horarios th,
+.tabla-horarios td {
+    border: 1px solid #dcdcdc;
+    padding: 0.55rem 0.4rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Encabezado de la tabla de horarios */
+.tabla-horarios th {
+    background: #f0f0f0;
+    font-weight: 600;
+}
+
+/* Primera columna de la tabla de horarios */
+.tabla-horarios td:first-child {
+    background: #f7f7f7;
+    font-weight: 500;
+    text-align: left;
+}
+
+/* Celda ocupada en la tabla de horarios */
+.ocupado {
+    background: #4CAF50 !important;
+    color: #fff !important;
+}
+
+/* Celda desocupada en la tabla de horarios */
+.desocupado {
+    background: #F44336 !important;
+    color: #fff !important;
+}
+
+/* Fila doble en el formulario de registro */
+.fila-doble {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Campos dentro de la fila doble */
+.fila-doble .campo-con-icono {
+    flex: 1 1 0;
+    margin-bottom: 0;
+}
+
+/* Campos especiales en el formulario de registro */
+.formulario-registro > .campo-con-icono,
+.formulario-registro > #campos-alumno,
+.formulario-registro > #campos-funcionario,
+.formulario-registro > #campos-direccion,
+.formulario-registro > #campos-secretaria {
+    width: 100%;
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* Estilo para campos con ícono */
+.campo-con-icono {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* Inputs y selects dentro de campo con ícono */
+.campo-con-icono input,
+.campo-con-icono select {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+}
+
+/* Bloque de estadísticas en el dashboard */
+.bloque-estadisticas {
+    margin: 2.5rem auto;
+    max-width: 1200px;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+}
+
+/* Título de la sección de estadísticas */
+.titulo-estadisticas {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #071739;
+    letter-spacing: 0.5px;
+}
+
+/* Grid de estadísticas */
+.estadisticas-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* Item de estadística */
+.estadistica-item {
+    background: #e5e5e5;
+    border-radius: 28px;
+    box-shadow: none;
+    padding: 1.2rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Número de estadística */
+.estadistica-numero {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+/* Etiqueta de estadística */
+.estadistica-label {
+    font-size: 1.15rem;
+    color: #222;
+    text-align: center;
+    line-height: 1.2;
+    font-weight: 400;
+}
+
+/* Item gráfico de estadística */
+.estadistica-grafico {
+    background: #e5e5e5;
+    border-radius: 28px;
+    box-shadow: none;
+    padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 1;
+}
+
+/* Título del gráfico */
+.grafico-titulo {
+    font-size: 1.15rem;
+    color: #222;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+/* --- Media Queries para Responsividad --- */
+
+/* Media query para pantallas menores a 1200px */
+@media (max-width: 1200px) {
+  /* Ajusta el tamaño de las tarjetas y paneles */
+  .grupo-tarjetas {
+    max-width: 1000px;
+  }
+  .seccion-saludo {
+    height: 260px;
+  }
+  .tarjeta-opcion {
+    height: 210px;
+  }
+  .panel-carrusel {
+    width: 60vw;
+    min-width: 400px;
+    max-width: 700px;
+    height: 500px;
+  }
+}
+
+/* Media query para pantallas menores a 1100px */
+@media (max-width: 1100px) {
+  .estadisticas-grid {
+    grid-template-columns: 180px 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+/* Media query para pantallas menores a 1024px */
+@media (max-width: 1024px) {
+  .seccion-saludo {
+    height: 220px;
+  }
+  .grupo-tarjetas {
+    gap: 18px;
+  }
+  .tarjeta-opcion {
+    height: 200px;
+  }
+  .panel-carrusel {
+    width: 70vw;
+    min-width: 340px;
+    max-width: 800px;
+    height: 500px;
+  }
+}
+
+/* Media query para pantallas menores a 900px */
+@media (max-width: 900px) {
+  .bloque-planos-horarios {
+    max-width: 100%;
+  }
+  .contenedor-plano img {
+    max-width: 100%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 80vw;
+    min-width: 300px;
+    max-width: 600px;
+    height: 500px;
+  }
+  .estadisticas-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+  }
+  .estadistica-grafico {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 1;
+  }
+}
+
+/* Media query para pantallas menores a 768px */
+@media (max-width: 768px) {
+  .grupo-tarjetas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tarjeta-opcion {
+    height: 180px;
+    border-radius: 18px;
+  }
+  .contenido-principal {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 95vw;
+    max-width: 500px;
+    padding: 1.5rem 0.8rem;
+  }
+  .panel-carrusel {
+    height: 500px;
+  }
+  .grupo-doble-campo {
+    flex-direction: column;
+  }
+  .texto-carrusel {
+    font-size: 1rem;
+  }
+}
+
+/* Media query para pantallas menores a 600px */
+@media (max-width: 600px) {
+  .bloque-planos-horarios {
+    padding: 1rem 0.2rem;
+  }
+  .selector-piso {
+    gap: 0.5rem;
+  }
+  .btn-piso {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  .turno h3 {
+    font-size: 1rem;
+  }
+  .tabla-horarios th,
+  .tabla-horarios td {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.2rem;
+  }
+  .body-login {
+    font-size: 1rem;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 98vw;
+    min-width: 180px;
+    max-width: 350px;
+    height: 320px;
+  }
+  .formulario-registro input,
+  .formulario-registro select {
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem 0.7rem 0.8rem;
+  }
+  .bloque-estadisticas {
+    margin: 1.2rem 0.2rem;
+  }
+  .titulo-estadisticas {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .estadisticas-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+  .estadistica-item,
+  .estadistica-grafico {
+    border-radius: 18px;
+    min-height: 80px;
+    padding: 0.7rem 0.5rem;
+  }
+  .estadistica-numero {
+    font-size: 1.3rem;
+  }
+  .grafico-titulo {
+    font-size: 1rem;
+  }
+}
+
+/* Media query para pantallas menores a 480px */
+@media (max-width: 480px) {
+  .contenido-principal {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 100vw;
+    max-width: 320px;
+    min-width: unset;
+    padding: 1rem 0.2rem;
+  }
+  .panel-carrusel {
+    width: 100vw;
+    min-width: unset;
+    max-width: 320px;
+    height: 200px;
+  }
+  .grupo-doble-campo {
+    flex-direction: column;
+  }
+  .texto-carrusel {
+    font-size: 0.9rem;
+  }
+  .flecha-carrusel {
+    font-size: 1.2rem;
+  }
+}
+
+/* Media query para pantallas mayores a 320px */
+@media (min-width: 320px) {
+  .tarjeta-opcion {
+    height: 170px;
+  }
+}
+
+/* Media query para pantallas mayores a 480px */
+@media (min-width: 480px) {
+  .grupo-tarjetas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tarjeta-opcion {
+    height: 180px;
+  }
+}
+
+/* Media query para pantallas mayores a 768px */
+@media (min-width: 768px) {
+  .grupo-tarjetas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .tarjeta-opcion {
+    height: 200px;
+    border-radius: 20px;
+  }
+}
+
+/* Media query para pantallas mayores a 1024px */
+@media (min-width: 1024px) {
+  .seccion-saludo {
+    height: 260px;
+  }
+  .grupo-tarjetas {
+    gap: 22px;
+  }
+  .tarjeta-opcion {
+    height: 220px;
+  }
+}
+
+/* Media query para pantallas mayores a 1200px */
+@media (min-width: 1200px) {
+  .grupo-tarjetas {
+    max-width: 1200px;
+  }
+  .seccion-saludo {
+    height: 300px;
+  }
+  .tarjeta-opcion {
+    height: 230px;
+  }
+}
+/* Color de algunos textos para el header*/
+.p1 {
+  color: #0a2d79;
+}
+
+/* -------------------------------------- Bruno Calupressi ---------------------------- */
+
+
+
+/* Imagen de cartel de anep en el footer */
+.anep {
+margin-left: 810px;
+margin-top: 20px;
+}
+
+/* Estilización de el primer anuncio de la pagina anuncios */
+
+.anuncio1 {
+display: flex;
+  width: 600px;
+  height: 300px;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 15px;
+  background-image: url(/Images/Expo-Uruguay-Sostenible-2025-1024x644.jpeg);
+  background-size: cover;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.411);
+  
+}
+
+/* Estilización de el segundo y tercer anuncio de la pagina anuncios */
+.anuncio2, .anuncio3 {
+  width: 285px;
+  height: 200px;
+  border-radius: 15px;
+     margin-top: 15px;
+     align-items: center;
+     justify-content: center;
+     margin-left: 30px;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.411);
+
+}
+/* Estilización de el tercer anuncio de la pagina anuncios */
+.anuncio3 {
+  background-image: url(/Images/trabajos_en_altura.jpg);
+  background-size: cover;
+}
+
+/* Estilización de el segundo anuncio de la pagina anuncios */
+.anuncio2 {
+  margin-left: 378px;
+  background-image: url(/Images/Copia-de-Comercio-y-Logistica-2025-1024x1024.png);
+  background-size: cover;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.411);
+  
+}
+
+/* Se utiliza el display flex sobre los contenedores anuncios, y se direcciónan de formar horizontal */
+.flexp {
+   display: flex; 
+   flex-direction: row;
+   flex-wrap: wrap;
+
+}
+/* Se le cambia el color al body de la página de anuncios */
+.paganuncios {
+  background-color: #E3C39D;
+}
+/* Estilización de el nav, se le agrega 0.2 segundos de transición para abrirse */
+.main-nav {
+    position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  margin-left: -100%;
+  transition: all 0.2s linear;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+/* Se utiliza para que al mostrarse el menú hamburguesa no cause errores de dimensión */
+.main-nav.show {
+  margin-left: 0;
+}
+/* Estilización de el body de el menú hamburguesa */
+.nav-links {
+  background-color:  #E3C39D;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+.nav-links :hover {
+  background-color: #292521;
+}
+/* Estilizamos las opciones dentro del menú hamburguesa */
+.link-item {
+  margin-top: 2rem;
+  color: #444444;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Botón de menú tipo hamburguesa */
+.boton-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+
+/* Líneas del ícono de hamburguesa */
+.boton-menu span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: #e3c39d;
+    border-radius: 2px;
+    z-index: 200;
+    cursor: pointer;
+}
+/* Botón del menú hamburguesa desplegado*/
+.boton-menu.close span {
+  opacity: 1;
+  transform: rotate(45deg) translate(0px, 0px);
+    background-color: #486382;
+
+}
+
+/*_________________________________________________________________________________*/
+
+
+.bloque-planos-horarios {
+  margin: 2rem auto;
+  max-width: 1200px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+.selector-piso {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.btn-piso {
+  background: #e3e8f0;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-piso.activo, .btn-piso:hover {
+  background: #2d89ef;
+  color: #fff;
+}
+
+#imagen-plano {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+}
+
+#selector-dia {
+  display: block;
+  margin: 0 auto 2rem auto;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #cfd8dc;
+  background: #f7fafc;
+}
+
+#contenedor-tablas-horarios {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+.tabla-horario {
+  margin-bottom: 2.5rem;
+}
+
+.tabla-horario h3 {
+  margin-bottom: 0.7rem;
+  color: #2d89ef;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.grid-horarios {
+  display: grid;
+  grid-template-columns: 160px repeat(8, 1fr);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow-x: auto;
+  background: #f9fafb;
+}
+
+.grid-header {
+  background: #e3e8f0;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.6rem 0.2rem;
+  border-bottom: 1px solid #cfd8dc;
+}
+
+.grid-cell {
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  background: #fff;
+}
+.grid-cell:last-child {
+  border-right: none;
+}
+.grid-salon {
+  background: #f1f5fa;
+  font-weight: 600;
+  text-align: left;
+  padding-left: 0.7rem;
+}
+.grid-bloque {
+  background: #fff;
+}
+.horario-celda {
+  font-size: 0.98rem;
+  text-align: center;
+  padding: 0.2rem 0.1rem;
+  min-width: 90px;
+  min-height: 48px;
+  word-break: break-word;
+}
+.horario-celda .asignatura {
+  background: #e3e8f0;
+  border-radius: 5px;
+  margin: 2px 0;
+  padding: 2px 4px;
+  font-size: 0.97em;
+}
+
+/*Se cambia de color un fondo de los php de asignación*/
+.panels-formulario
+{
+ background-color: #F5E7D7;
+    border-radius: 24px;
+    padding: 1rem 1.2rem;
+    width: 340px;
+    min-width: 240px;
+    max-width: 98vw;
+    color: #071739;
+
+}
+
+
+/*Se cambia de color el fondo de algunos elementos de los php de asignación y se le agrega un maximo y un minimo de tamaño horizontal*/
+.sasignacion {
+ background-color: #F5E7D7;   
+ max-width: 150px;
+ min-width: 180px;
+}
+/*Se cambia de color el fondo de los php de asignación*/
+.bodyregidat {
+   background-color: #F5E7D7;  
+
+  }
+/*Centra textos y se le agrega una fuente de letra a un titulo de una pagina de asignación al igual que se agrega un espacio por encima del mismo de 2rem*/
+.sugarads-title {
+  margin-top: 2rem;
+      font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  text-align: center;
+}
+
+/*Centra textos y se le agrega una fuente de letra a un titulo de una pagina de asignación*/
+.sugarads-form {
+text-align: center;
+      font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+}
+/*Estilización de los botones de las paginas de asignaciones*/
+.sugarads-btn {
+    width: 20%;
+    background-color: #071739;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 0;
+    margin-top: 10px; /* Pequeño margen arriba */
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+}
+/*Para centrar un titulo de una de las paginas*/
+.sugarads-col-right {
+text-align: center;
+}
+/*Se cambia de color algunos textos de tipo input*/
+.input-text {
+  background-color: #F5E7D7;
+}
