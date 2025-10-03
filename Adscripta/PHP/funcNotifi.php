@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../PHP/conexion.php';
+require_once '/PHP/conexion.php';
 
 // Insertar notificación
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_noti'])) {
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['crear_noti'])) {
 
 // Mostrar notificaciones
 function mostrarNotificaciones() {
-	require_once '../../PHP/conexion.php';
+	require_once '/PHP/conexion.php';
 	$conn = conectar_bd();
 	$sql = "SELECT id_notificacion, mensaje, tipo, fecha, destinatario_tipo FROM notificacion ORDER BY fecha DESC LIMIT 30";
 	$result = $conn->query($sql);

@@ -1,5 +1,5 @@
 <?php
-require_once '../../PHP/conexion.php';
+require_once '/PHP/conexion.php';
 
 function mostrarNotificacionesUsuario($tipo_usuario) {
     $conn = conectar_bd();
