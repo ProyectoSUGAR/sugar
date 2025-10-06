@@ -6,7 +6,7 @@ session_start();
 // Si no existe la variable de sesión 'id_usuario', se redirige al login
 if (!isset($_SESSION['id_usuario'])) {
     // Redirección al formulario de inicio de sesión
-    header("Location: /Login/HTML/index.php");
+    header("Location: ../../Login/HTML/index.php");
 
     // Finaliza la ejecución del script para evitar que se cargue contenido protegido
     exit();
