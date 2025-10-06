@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
         mysqli_stmt_bind_param($stmt, "s", $nombre);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        header("Location: asignacionAsig.php");
+        header("Location: ../../Adscripta/HTML/asignacionAsig.php");
         exit;
     } elseif ($accion === 'editar' && !empty($_POST['id_asignatura']) && !empty($_POST['nombre'])) {
         $id = intval($_POST['id_asignatura']);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
         mysqli_stmt_bind_param($stmt, "si", $nombre, $id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        header("Location: asignacionAsig.php");
+        header("Location: ../../Adscripta/HTML/asignacionAsig.php");
         exit;
     } elseif ($accion === 'eliminar' && !empty($_POST['id_asignatura'])) {
         $id = intval($_POST['id_asignatura']);
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
         mysqli_stmt_bind_param($stmt, "i", $id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        header("Location: asignacionAsig.php");
+        header("Location: ../../Adscripta/HTML/asignacionAsig.php");
         exit;
     }
 }
@@ -61,7 +61,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de asignaturas</title>
-    <link rel="stylesheet" href="/SUGAR/Css/style.css">
+    <link rel="stylesheet" href="../../Css/style.css">
     <!-- Material Icons CDN -->
      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -73,7 +73,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
         <div class="sugarads-grid registro-datos">
             <section class="sugarads-col-left">
                 <!-- Formulario para crear o editar asignaturas -->
-                <form class="formasig" method="post" action="/Adscripta/PHP/asignaturaFunciones.php">
+                <form class="formasig" method="post" action="../../Adscripta/PHP/asignaturaFunciones.php">
                     <h2 class="h2asiges"><?= $editar ? "Editar asignatura" : "Nueva asignatura" ?></h2>
                     <div class="sugarads-field">
                         <input type="text" id="nombre" name="nombre" class="inputasig" required placeholder="Ejemplo: Matemática" value="<?= htmlspecialchars($nombre_editar) ?>">
@@ -102,7 +102,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
                        <?php foreach ($asignaturas as $a): ?>
                             <li class="pruebads">
                                 <?= htmlspecialchars($a['nombre']) ?>
-                                <a href="/SUGAR/Adscripta/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="sugarads-btn sugarads-btn-editar">Editar</a>
+                                <a href="../../Adscripta/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="sugarads-btn sugarads-btn-editar">Editar</a>
                                 <form method="post" action="" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta asignatura?');">
                                     <input type="hidden" name="id_asignatura" value="<?= $a['id_asignatura'] ?>">
                                     <input type="hidden" name="accion" value="eliminar">
