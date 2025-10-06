@@ -11,10 +11,10 @@
   <title>S.U.G.A.R.</title>
 
   <!-- Enlace al archivo de estilos principal del sistema -->
-  <link rel="stylesheet" href="Css/style.css" />
+  <link rel="stylesheet" href="../../Css/style.css" />
 
   <!-- Ícono que se muestra en la pestaña del navegador -->
-  <link rel="icon" href="/Images/Logo22-removebg-preview.png" />
+  <link rel="icon" href="../../Images/Logo22-removebg-preview.png" />
 
   <!-- Enlace a la librería de íconos Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -34,7 +34,7 @@
   <div class="contenedor-principal">
 
     <!-- Inclusión del encabezado común del sistema -->
-    <?php include '/xampp/htdocs/SUGARFINAL/PHP/header1.php'; ?>
+    <?php include '../../PHP/header1.php'; ?>
 
     <!-- Área principal de contenido -->
     <main class="contenido-principal">
@@ -44,12 +44,12 @@
 
         <!-- Grupo de pestañas para alternar entre login y registro -->
         <div class="grupo-pestanas">
-          <a class="pestana-activa" href="/Login/HTML/ingreso.php">Ingresar</a>
-          <a class="pestana-inactiva" href="/Login/HTML/registro.php">Registrarse</a>
+          <a class="pestana-activa" href="../../Login/HTML/ingreso.php">Ingresar</a>
+          <a class="pestana-inactiva" href="../../Login/HTML/registro.php">Registrarse</a>
         </div>
 
         <!-- Formulario de ingreso al sistema -->
-        <form id="formulario-ingreso" class="formulario-registro" method="post" action="/Login/PHP/login.php">
+        <form id="formulario-ingreso" class="formulario-registro" method="post" action="../../Login/PHP/login.php">
 
           <!-- Campo para ingresar cédula o correo -->
           <div class="campo-con-icono">
@@ -68,7 +68,7 @@
 
           <!-- Enlace para recuperar la contraseña -->
           <div class="recuperar-password">
-            <a href="/Login/HTML/Recuperacion.php">¿Olvidaste tu contraseña?</a>
+            <a href="../../Login/HTML/Recuperacion.php">¿Olvidaste tu contraseña?</a>
           </div>
         </form>
       </section>
