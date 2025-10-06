@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Validar si el usuario está activo
         if ($usuario['estado_usuario'] !== 'activo') {
             // Usuario inactivo, no permitir acceso
-            echo "<script>alert('Usuario inactivo. Contacte al administrador.'); window.location.href='../HTML/ingreso.php';</script>";
+            echo "<script>alert('Usuario inactivo. Contacte al administrador.'); window.location.href='../../HTML/ingreso.php';</script>";
             exit;
         }
         // Usuario activo, iniciar sesión
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     } else {
         // Usuario o contraseña incorrectos
-        echo "<script>alert('Correo o contraseña incorrectos.'); window.location.href='../HTML/ingreso.php';</script>";
+        echo "<script>alert('Correo o contraseña incorrectos.'); window.location.href='../../HTML/ingreso.php';</script>";
         exit;
     }
 }
