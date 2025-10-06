@@ -9,8 +9,8 @@ include '/xampp/htdocs/SUGAR/PHP/header1.php';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>S.U.G.A.R.</title>
-    <link rel="stylesheet" href="/Css/style.css" />
-    <link rel="icon" href="/Images/Logo22-removebg-preview.png" />
+    <link rel="stylesheet" href="../../Css/style.css" />
+    <link rel="icon" href="../../Images/Logo22-removebg-preview.png" />
     <!-- Enlace a la librería de íconos Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <!-- Inclusión de la librería SweetAlert para mostrar alertas visuales -->
@@ -25,11 +25,11 @@ include '/xampp/htdocs/SUGAR/PHP/header1.php';
             <section class="panel-formulario">
                 <!-- Grupo de pestañas para cambiar entre login y registro -->
                 <div class="grupo-pestanas">
-                    <a class="pestana-inactiva" href="/Login/HTML/ingreso.php">Ingresar</a>
-                    <a class="pestana-activa" href="/Login/HTML/registro.php">Registrarse</a>
+                    <a class="pestana-inactiva" href="../../Login/HTML/ingreso.php">Ingresar</a>
+                    <a class="pestana-activa" href="../../Login/HTML/registro.php">Registrarse</a>
                 </div>
                 <!-- Formulario de registro de usuario -->
-                <form id="formulario-registro" method="post" action="/Login/PHP/form.php" class="formulario-registro">
+                <form id="formulario-registro" method="post" action="../../Login/PHP/form.php" class="formulario-registro">
                     <!-- Fila con campos para nombre y apellido -->
                     <div class="fila-doble">
                         <div class="campo-con-icono">
@@ -81,7 +81,7 @@ include '/xampp/htdocs/SUGAR/PHP/header1.php';
                     <button type="submit" class="btn-primario">Registrarse</button>
                 </form>
                 <!-- Script que gestiona la validación de campos del formulario -->
-                <script src="/Login/JavaScript/registro_campos.js"></script>
+                <script src="../../Login/JavaScript/registro_campos.js"></script>
             </section>
             <!-- Panel lateral que contiene el carrusel visual -->
             <section class="panel-carrusel">
@@ -100,8 +100,8 @@ include '/xampp/htdocs/SUGAR/PHP/header1.php';
         </main>
     </div>
     <!-- Script que gestiona el comportamiento del formulario de registro -->
-    <script src="/Login/JavaScript/registro.js"></script>
+    <script src="../../Login/JavaScript/registro.js"></script>
     <!-- Script que muestra u oculta campos según el tipo de usuario seleccionado -->
-    <script src="/Login/JavaScript/mostrarCampos.js"></script>
+    <script src="../../Login/JavaScript/mostrarCampos.js"></script>
 </body>
 </html>
