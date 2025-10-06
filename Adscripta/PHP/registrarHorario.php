@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $con && $conexion_abierta) {
                 //mysqli_stmt_close cierra una sentencia preparada
                 mysqli_stmt_close($stmt);
                 if ($ok) {
-                    echo "<script>alert('Horario registrado correctamente.'); window.location.href='../HTML/registroDatos.php';</script>";
+                    echo "<script>alert('Horario registrado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
                     exit;
                 } else {
                     $error = mysqli_error($con);
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $con && $conexion_abierta) {
             $ok = mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             if ($ok) {
-                echo "<script>alert('Horario actualizado correctamente.'); window.location.href='../HTML/registroDatos.php';</script>";
+                echo "<script>alert('Horario actualizado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
                 exit;
             } else {
                 $error = mysqli_error($con);
@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $con && $conexion_abierta) {
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
     $id = intval($_GET['eliminar']);
     mysqli_query($con, "DELETE FROM asocia WHERE id_asocia = $id");
-    echo "<script>alert('Horario eliminado correctamente.'); window.location.href='../HTML/registroDatos.php';</script>";
+    echo "<script>alert('Horario eliminado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
     exit;
 }
 
