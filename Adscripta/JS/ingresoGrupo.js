@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
       grupo: grupo.value,
       horas_semanales: horas.value
     };
-    fetch('/Adscripta/PHP/ingresoGrupo.php', {
+    fetch('../../Adscripta/PHP/ingresoGrupo.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos)
