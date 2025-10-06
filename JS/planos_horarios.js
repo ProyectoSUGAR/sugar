@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Llama al endpoint y llena las celdas
     function cargarHorarios(dia, piso) {
         renderizarEstructuraHorarios(piso);
-        fetch(`/PHP/planosHorarios.php?dia=${dia}`)
+        fetch(`../../PHP/planosHorarios.php?dia=${dia}`)
             .then(res => res.json())
             .then(data => {
                 console.log('Datos recibidos del backend:', data); // DEPURACIÓN
@@ -87,9 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cambia la imagen del plano según el piso
     function actualizarPlano(piso) {
         const planos = {
-            '0': '/Images/PlantaBaja.jpeg',
-            '1': '/Images/Piso1y2.jpeg',
-            '2': '/Images/Piso1y2.jpeg'
+            '0': '../../Images/PlantaBaja.jpeg',
+            '1': '../../Images/Piso1y2.jpeg',
+            '2': '../../Images/Piso1y2.jpeg'
         };
         if (imagenPlano && planos[piso]) {
             imagenPlano.src = planos[piso];
