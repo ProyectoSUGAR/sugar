@@ -34,15 +34,14 @@ if (isset($conn) && $conn instanceof mysqli) {
     <title>Asignación de clases</title>
     <link rel="stylesheet" href="/SUGAR/Css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="body-estudiante">
+<body class="bodyregidat">
     <main class="contenido-principal">
-      <section class="panels-formulario asignacion-panel">
+      <section class="formasig">
         <h1 class="titulo-estadisticas">Asignación de clases</h1>
-        <hr>
-        <br>
         <div class="division-asignacion"></div>
-        <form id="formulario-asignacion" class="formulario-registro form-asignacion-grid" method="post" action="../PHP/asignacionProf.php">
+        <form id="formulario-asignacion" class="pruebads" method="post" action="/Adscripta/PHP/asignacionProf.php">
           <div class="campo-asignacion">
             <label for="campo-grupo" class="sugarads-label">Grupo</label>
             <br>

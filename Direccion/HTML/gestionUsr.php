@@ -32,10 +32,12 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body class="body-login">
-    <div class="contenedor-gestion-usuarios">
-        <main class="contenido-principal">
+    <br>
+    <div class="formasig2">
+        <h2 class="titulo-panel">Gestión de Usuarios</h2>
+        <main class="pruebads1">
             <section class="panel-formulario-gestion">
-                <h2 class="titulo-panel">Gestión de Usuarios</h2>
+
                 <form method="get" class="grupo-doble-campo">
                     <input type="text" name="busqueda" placeholder="Buscar por nombre, apellido o correo" value="<?= htmlspecialchars($busqueda) ?>">
                     <select name="estado">
@@ -101,10 +103,10 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
                     </table>
                 </div>
                 <div style="text-align:center; margin-top:24px;">
-                    <a href="reporteUsr.php" class="btn-volver-reporte">
+                    <a href="reporteUsr.php" class="volvereporte">
                         <i class="fa fa-arrow-left"></i> Volver al reporte
                     </a>
-                    <a href="historialActividad.php" class="btn-historial-actividad" style="margin-left:16px;">
+                    <a href="historialActividad.php" class="volvereporte" style="margin-left:16px;">
                         <i class="fa fa-clock-rotate-left"></i> Ver historial de cambios
                     </a>
                 </div>

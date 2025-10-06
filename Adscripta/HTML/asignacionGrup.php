@@ -10,10 +10,10 @@ require_once("../../PHP/conexion.php");
   <section class="sugarads-grid">
     <div class="sugarads-col-left">
       <!-- Formulario de ingreso de grupo -->
-      <form id="sugarads-form-grupo" class="sugarads-form" autocomplete="off" onsubmit="return false;" style="max-width: 400px; margin: 0 auto;">
+      <form id="sugarads-form-grupo" class="formasig" autocomplete="off" onsubmit="return false;" style="max-width: 400px; margin: 0 auto;">
         <div class="sugarads-field">
           <label for="grupo-tipo" class="sugarads-label">Tipo</label>
-          <select id="grupo-tipo" name="tipo" class="input-text sugarads-input" required>
+          <select id="grupo-tipo" name="tipo" class="sasignacion1" required>
             <option value="">Selecciona un tipo</option>
             <option value="Bachillerato">Bachillerato</option>
             <option value="Terciario">Terciario</option>
@@ -21,28 +21,28 @@ require_once("../../PHP/conexion.php");
         </div>
         <div class="sugarads-field">
           <label for="grupo-nombre" class="sugarads-label">Nombre</label>
-          <input type="text" id="grupo-nombre" name="nombre" class="input-text sugarads-input" required placeholder="Ejemplo: MC">
+          <input type="text" id="grupo-nombre" name="nombre" class="inputasig1" required placeholder="Ejemplo: MC">
         </div>
         <div class="sugarads-field">
           <label for="grupo-anio" class="sugarads-label">Año</label>
-          <input type="number" id="grupo-anio" name="anio" class="input-text sugarads-input" min="1" max="6" required placeholder="Ejemplo: 3">
+          <input type="number" id="grupo-anio" name="anio" class="inputasig1" min="1" max="6" required placeholder="Ejemplo: 3">
         </div>
         <div class="sugarads-field">
           <label for="grupo-grupo" class="sugarads-label">Grupo</label>
-          <input type="text" id="grupo-grupo" name="grupo" class="input-text sugarads-input" required placeholder="Ejemplo: 3MC">
+          <input type="text" id="grupo-grupo" name="grupo" class="inputasig1" required placeholder="Ejemplo: 3MC">
         </div>
         <div class="sugarads-field">
           <label for="grupo-horas" class="sugarads-label">Horas semanales</label>
-          <input type="number" id="grupo-horas" name="horas_semanales" class="input-text sugarads-input" min="1" max="50" required placeholder="Ejemplo: 36">
+          <input type="number" id="grupo-horas" name="horas_semanales" class="inputasig1" min="1" max="50" required placeholder="Ejemplo: 36">
         </div>
         <div class="sugarads-field" style="text-align:center;">
-          <button id="sugarads-guardar-grupo" class="sugarads-btn sugarads-btn-guardar" type="button">Guardar</button>
-          <button id="sugarads-cancelar-grupo" class="sugarads-btn sugarads-btn-cancelar" type="button">Cancelar</button>
+          <button id="sugarads-guardar-grupo" class="regasigboton" type="button">Guardar</button>
+          <button id="sugarads-cancelar-grupo" class="botoneliminar" type="button">Cancelar</button>
         </div>
       </form>
     </div>
     <article class="sugarads-col-right">
-      <div class="sugarads-confirm-card" role="region" aria-live="polite" aria-label="Confirmación de grupo">
+      <div class="formasig1" role="region" aria-live="polite" aria-label="Confirmación de grupo">
         <p class="sugarads-confirm-text">
           Se ingresará el grupo
           <strong class="sugarads-var sugarads-var-nombre">(<span aria-hidden="true">…</span>)</strong>
@@ -58,12 +58,11 @@ require_once("../../PHP/conexion.php");
         </div>
       </div>
       <section class="sugarads-resultado" aria-label="Resultado de ingreso de grupo">
-        <h2 class="sugarads-resultado-title">Resultado</h2>
+        <h2 class="h2asiges2">Resultado</h2>
         <div id="sugarads-resultado-canvas" class="sugarads-canvas" aria-live="polite"></div>
       </section>
     </article>
   </section>
 </main>
 <script src="/SUGAR/Adscripta/JS/ingresoGrupo.js" defer></script>
-
-</body>
+ </body>

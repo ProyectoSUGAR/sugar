@@ -32,7 +32,7 @@ include '../../HEADERS/headerAA.php';
                 </div>
                 <!-- Bloque que muestra el número de grupos registrados -->
                 <div class="estadistica-item">
-                    <div class="estadistica-numero" data-tipo="grupos">1</div>
+                    <div class="estadistica-numero" data-tipo="grupos">0</div>
                     <div class="estadistica-label">Grupos<br>registrados</div>
                 </div>
                 <!-- Bloque gráfico que muestra las ausencias semanales de profesores -->
@@ -40,7 +40,11 @@ include '../../HEADERS/headerAA.php';
                     <div class="grafico-titulo">Profesores que no han asistido esta semana</div>
                     <canvas id="grafico-profesores" width="400" height="120"></canvas>
                 </div>
-                
+                <!-- Bloque que muestra el número de secretarios registrados -->
+                <div class="estadistica-item">
+                    <div class="estadistica-numero" data-tipo="secretarios">0</div>
+                    <div class="estadistica-label">Secretarios<br>registrados</div>
+                </div>
                 <!-- Bloque que muestra el número de salones libres actualmente -->
                 <div class="estadistica-item">
                     <div class="estadistica-numero" data-tipo="salones_libres">0</div>
@@ -48,7 +52,7 @@ include '../../HEADERS/headerAA.php';
                 </div>
                 <!-- Bloque que muestra el número de profesores presentes en la institución -->
                 <div class="estadistica-item">
-                    <div class="estadistica-numero" data-tipo="profesores_presentes">2</div>
+                    <div class="estadistica-numero" data-tipo="profesores_presentes">0</div>
                     <div class="estadistica-label">Profesores presentes<br>en la institución</div>
                 </div>
             </div>

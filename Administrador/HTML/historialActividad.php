@@ -1,5 +1,5 @@
 <?php
-include '../../PHP/header.php';
+include '../../HEADERS/headerAA.php';
 require_once("../../PHP/conexion.php");
 $conexion = conectar_bd();
 

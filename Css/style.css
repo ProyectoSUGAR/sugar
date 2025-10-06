@@ -317,6 +317,7 @@ html, body {
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
     box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    margin-top: 1.5rem;
 }
 
 /* Hover en botón primario */
@@ -1164,6 +1165,7 @@ display: flex;
   display: block;
   margin: 0 auto 1.5rem auto;
   max-width: 100%;
+  max-height: 320px;
   border-radius: 8px;
   box-shadow: 0 1px 8px rgba(0,0,0,0.08);
 }
@@ -1264,21 +1266,41 @@ display: flex;
 
 
 /*Se cambia de color el fondo de algunos elementos de los php de asignación y se le agrega un maximo y un minimo de tamaño horizontal*/
+.sasignacion, .sasignacion1 {
+ font-size: 17px;
+ border: 2px solid #cecece;
+ border-radius: 10px;
+ height: 50px;
+}
+
 .sasignacion {
- background-color: #F5E7D7;   
- max-width: 150px;
- min-width: 180px;
+ max-width: 400px;
+ min-width: 400px;
+}
+
+.sasignacion1 {
+width: 350px;
+margin-top: 1rem;
+
+}
+
+.sugarads-label {
+display: flex;
+margin-top: 1.5rem;
+font-weight: bold;
+font-size: 18px;
 }
 /*Se cambia de color el fondo de los php de asignación*/
 .bodyregidat {
-   background-color: #F5E7D7;  
+   background-color: #f0f0f0;  
 
   }
 /*Centra textos y se le agrega una fuente de letra a un titulo de una pagina de asignación al igual que se agrega un espacio por encima del mismo de 2rem*/
 .sugarads-title {
-  margin-top: 2rem;
-      font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  text-align: center;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+text-align: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
 /*Centra textos y se le agrega una fuente de letra a un titulo de una pagina de asignación*/
@@ -1288,9 +1310,10 @@ text-align: center;
 
 }
 /*Estilización de los botones de las paginas de asignaciones*/
-.sugarads-btn {
-    width: 20%;
-    background-color: #071739;
+.sugarads-btn, .botoneliminar, .regasigboton {
+    width: 150px;
+text-decoration: none;
+    margin-bottom: 0.5rem;
     color: #fff;
     font-size: 1.1rem;
     font-weight: 600;
@@ -1300,8 +1323,23 @@ text-align: center;
     margin-top: 10px; /* Pequeño margen arriba */
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+.sugarads-btn {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    background-color: #071739;
+      display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.regasigboton {
+  background-color: #071739;
+}
+
 /*Para centrar un titulo de una de las paginas*/
 .sugarads-col-right {
 text-align: center;
@@ -1309,4 +1347,110 @@ text-align: center;
 /*Se cambia de color algunos textos de tipo input*/
 .input-text {
   background-color: #F5E7D7;
+}
+
+.formasig, .formasig1, .formasig2 {
+   background-color: #ffffff;  
+   width: 500px;
+   text-align: center;
+   padding: 1.5rem;
+   margin: auto;
+   border-radius: 20px;
+   box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.308);
+    font-family: 'Roboto', sans-serif;
+}
+
+.formasig2 {
+  min-width: 600px;
+}
+
+.formasig1, .h2asiges2 {
+  max-width: 400px;
+  margin-top: 1rem;
+}
+
+
+.inputasig, .inputasig1 {
+  border: 2px solid rgb(177, 177, 177);
+  border-radius: 10px;
+  height: 50px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+}
+
+.inputasig {
+  width: 450px;
+}
+
+.inputasig1 {
+  width: 350px;
+}
+
+
+.inputasig::placeholder, .inputasig1::placeholder {
+  font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+
+}
+
+.h2asiges, .h2asiges1, .h2asiges2 {
+    font-family: 'Roboto', sans-serif;
+font-size: 25px;
+}
+
+.h2asiges2 {
+  margin: auto;
+}
+
+.h2asiges, .h2asiges1 {
+text-align: left;
+}
+
+.h2asiges1 {
+
+  margin-bottom: 1.5rem;
+}
+
+.sugarads-entradas, .pruebads, .pruebads1 {
+margin-top: 1rem;
+   text-align: center;
+   text-decoration: none;
+   padding: 1.5rem;
+   margin: auto;
+   font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+   border-radius: 20px;
+
+   list-style-type: none;
+}
+
+.sugarads-entradas {
+     background-color: #ffffff;  
+     width: 500px;
+        box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.308);
+        
+}
+
+.pruebads {
+  margin-top: 1rem;
+  border:  2px solid #cecece;
+}
+
+.pruebads1 {
+  border:  2px solid #cecece;
+}
+
+.titulo-panel {
+  margin-bottom: 1rem;
+}
+
+.botoneliminar {
+    background-color: #202738;
+}
+
+.volvereporte {
+  text-decoration: none;
+font-size: 17px;
 }
