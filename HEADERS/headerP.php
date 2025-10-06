@@ -1,10 +1,10 @@
 <!-- Enlace al archivo de estilos CSS principal del sistema -->
-<link rel="stylesheet" href="/Css/style.css" />
+<link rel="stylesheet" href="../../Css/style.css" />
 
 <!-- Cabecera institucional de la página -->
 <header class="cabecera-institucional">
     <!-- Imagen del logo institucional ubicada a la izquierda -->
-    <img src="/Images/Logo22-removebg-preview.png" alt="Logo" class="logo-app" />
+    <img src="../../Images/Logo22-removebg-preview.png" alt="Logo" class="logo-app" />
 
     <!-- Bloque central que muestra la información del usuario -->
     <div class="caja-usuario">
@@ -14,7 +14,7 @@
         <div class="datos-usuario">
             <strong >Profesor/a</strong>
             <br>
-            <a  class="p1" href="/Login/HTML/index.php">Cerrar sesión</a>
+            <a  class="p1" href="../../Login/HTML/index.php">Cerrar sesión</a>
             
         </div>
     </div>
@@ -30,11 +30,11 @@
     <!-- Lista de opciones del menú hamburguesa (oculta por defecto) -->
      <nav id="nav" class="main-nav">
         <div class="nav-links">
-      <a class="link-item" href="/Profesor/HTML/dashboardP.php">Inicio</a>
+      <a class="link-item" href="../../Profesor/HTML/dashboardP.php">Inicio</a>
     <a class="link-item" href="#contenedor-tablas-horarios">Horarios</a>
-      <a class="link-item" href="/Profesor/HTML/anuncios.php">Anuncios</a>
+      <a class="link-item" href="../../Profesor/HTML/anuncios.php">Anuncios</a>
     </div>
 </nav>
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
-    <script src="/JS/menuHamb.js"></script>
+    <script src="../../JS/menuHamb.js"></script>
 </header>
