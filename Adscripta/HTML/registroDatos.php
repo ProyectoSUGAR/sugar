@@ -24,7 +24,7 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Datos</title>
-    <link rel="stylesheet" href="/Css/style.css">
+    <link rel="stylesheet" href="../../Css/style.css">
 </head>
 <body>
     <?php include '../../PHP/header.php'; ?>
@@ -33,7 +33,7 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
         <div class="sugarads-grid">
             <div class="sugarads-col-left">
                 <!-- crear horario -->
-                <form id="form-crear" class="sugarads-form" method="post" action="../PHP/registrarHorario.php" style="border-top:2px solid #c7b299; padding-top:1.5rem;">
+                <form id="form-crear" class="sugarads-form" method="post" action="../../PHP/registrarHorario.php" style="border-top:2px solid #c7b299; padding-top:1.5rem;">
                     <h2 class="sugarads-section-title">Crear Horario</h2>
                     
                     <!-- profesor -->
@@ -116,7 +116,7 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
 
                 <!-- editar el horario -->
                 <?php if ($horarioEditar): ?>
-                <form id="form-editar" class="sugarads-form" method="post" action="../PHP/registrarHorario.php" style="margin-top:2.5rem; border-top:2px solid #2d89ef; padding-top:1.5rem;">
+                <form id="form-editar" class="sugarads-form" method="post" action="../../PHP/registrarHorario.php" style="margin-top:2.5rem; border-top:2px solid #2d89ef; padding-top:1.5rem;">
                     <h2 class="sugarads-section-title">Editar Horario</h2>
                     <input type="hidden" name="id_asocia" value="<?= htmlspecialchars($horarioEditar['id_asocia']) ?>">
                     
@@ -265,7 +265,7 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
             </div>
         </div>
     </main>
-    <script src="../JS/bloquesHorarios.js"></script>
+    <script src="../../JS/bloquesHorarios.js"></script>
     <?php
     if (isset($con) && $con instanceof mysqli) {
         if (@$con->ping()) {
