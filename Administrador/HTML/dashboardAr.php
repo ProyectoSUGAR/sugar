@@ -63,6 +63,6 @@ include '../../HEADERS/headerAA.php';
     <!-- Inclusión de la librería Chart.js para renderizar gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Inclusión del script que actualiza dinámicamente las estadísticas -->
-    <script src="/Administrador/JS/estadisticas.js"></script>
+    <script src="../../Administrador/JS/estadisticas.js"></script>
 </body>
 </html>
