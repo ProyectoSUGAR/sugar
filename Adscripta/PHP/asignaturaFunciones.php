@@ -7,7 +7,7 @@ function crearAsignatura($conn, $nombre) {
         $ok = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         if ($ok) {
-            echo "<script>alert('Asignatura registrada correctamente.'); window.location.href='asignacionAsig.php';</script>";
+            echo "<script>alert('Asignatura registrada correctamente.'); window.location.href='../../Adscripta/HTML/asignacionAsig.php';</script>";
             exit;
         } else {
             echo "<script>alert('Error al registrar la asignatura.');</script>";
@@ -26,7 +26,7 @@ function editarAsignatura($conn, $id, $nombre) {
         $ok = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         if ($ok) {
-            echo "<script>alert('Asignatura editada correctamente.'); window.location.href='asignacionAsig.php';</script>";
+            echo "<script>alert('Asignatura editada correctamente.'); window.location.href='../../Adscripta/HTML/asignacionAsig.php';</script>";
             exit;
         } else {
             echo "<script>alert('Error al editar la asignatura.');</script>";
@@ -58,10 +58,10 @@ function eliminarAsignatura($conn, $id) {
     mysqli_stmt_close($stmt);
 
     if ($ok) {
-        echo "<script>alert('Asignatura eliminada correctamente.'); window.location.href='asignacionAsig.php';</script>";
+        echo "<script>alert('Asignatura eliminada correctamente.'); window.location.href='../../Adscripta/HTML/asignacionAsig.php';</script>";
         exit;
     } else {
-        echo "<script>alert('No se puede eliminar la asignatura porque está relacionada con otros datos.'); window.location.href='asignacionAsig.php';</script>";
+        echo "<script>alert('No se puede eliminar la asignatura porque está relacionada con otros datos.'); window.location.href='../../Adscripta/HTML/asignacionAsig.php';</script>";
         exit;
     }
 }
