@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     // Solicitud HTTP para obtener los datos estadísticos desde el archivo PHP
-    fetch('/Secretaria/PHP/datosEstadisticos.php')
+    fetch('../../Secretaria/PHP/datosEstadisticos.php')
         // Conversión de la respuesta a formato JSON
         .then(res => res.json())
         // Manejo de los datos recibidos
