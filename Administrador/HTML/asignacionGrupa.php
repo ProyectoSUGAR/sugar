@@ -64,5 +64,5 @@ require_once("../../PHP/conexion.php");
     </article>
   </section>
 </main>
-<script src="/SUGAR/Adscripta/JS/ingresoGrupo.js" defer></script>
+<script src="../../Adscripta/JS/ingresoGrupo.js" defer></script>
 </body>
