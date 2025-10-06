@@ -4,7 +4,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 // Importa la función conectar_pdo() desde conexion.php
-require_once __DIR__ . '/conexion.php';
+require_once __DIR__ . '../../conexion.php';
 
 // Objeto PDO para consultas a la base de datos
 // pdo sirve para hacer consultas a la base de datos de forma segura y eficiente
