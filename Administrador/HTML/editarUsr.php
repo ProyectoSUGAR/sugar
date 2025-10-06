@@ -59,7 +59,7 @@ if (!$usuario) {
             </section>
         </main>
     </div>
-    <script src="/JS/menuHamburguesa.js"></script>
+    <script src="../../JS/menuHamburguesa.js"></script>
 </body>
 </html>
 <?php
