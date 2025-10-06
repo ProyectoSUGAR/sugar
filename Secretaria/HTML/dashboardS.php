@@ -7,7 +7,7 @@ include '../../HEADERS/headerS.php';
 <head>
     <meta charset="UTF-8" />
     <title>Dashboard Secretaria</title>
-    <link rel="stylesheet" href="/Css/style.css" />
+    <link rel="stylesheet" href="../../Css/style.css" />
 </head>
 <body>
     <main>
@@ -63,6 +63,6 @@ include '../../HEADERS/headerS.php';
     <!-- Inclusión de la librería Chart.js para renderizar gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Inclusión del script que actualiza dinámicamente las estadísticas -->
-    <script src="/Secretaria/JS/estadisticas.js"></script>
+    <script src="../../Secretaria/JS/estadisticas.js"></script>
 </body>
 </html>
