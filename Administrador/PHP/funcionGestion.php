@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sql = "INSERT INTO actividad (id_usuario, accion, detalle, fecha) VALUES ($id_usuario_admin, '$accion', '$detalle_sql', '$fecha')";
             mysqli_query($con, $sql);
         }
-        echo "<script>window.location.href='../HTML/gestionUsr.php';</script>";
+        echo "<script>window.location.href='../../HTML/gestionUsr.php';</script>";
         exit;
     }
     if (isset($_POST['eliminar_usuario'])) {
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sql = "INSERT INTO actividad (id_usuario, accion, detalle, fecha) VALUES ($id_usuario_admin, '$accion', '$detalle_sql', '$fecha')";
             mysqli_query($con, $sql);
         }
-        echo "<script>window.location.href='../HTML/gestionUsr.php';</script>";
+        echo "<script>window.location.href='../../HTML/gestionUsr.php';</script>";
         exit;
     }
 }
