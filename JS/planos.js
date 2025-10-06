@@ -2,9 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Array que contiene las rutas y descripciones de las imágenes de los planos por piso
     const planos = [
-        { src: "/Images/placeholder.png", alt: "Plano Planta baja" },
-        { src: "/Images/placeholder.png", alt: "Plano Piso 1" },
-        { src: "/Images/placeholder.png", alt: "Plano Piso 2" }
+        { src: "../../Images/placeholder.png", alt: "Plano Planta baja" },
+        { src: "../../Images/placeholder.png", alt: "Plano Piso 1" },
+        { src: "../../Images/placeholder.png", alt: "Plano Piso 2" }
     ];
 
     // Selección de todos los botones que permiten elegir el piso
