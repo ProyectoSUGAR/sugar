@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Si hay errores, redirige con mensaje
     if ($errores) {
         $mensajeError = implode(" ", $errores);
-        header("Location: ../HTML/asignacion.php?error=" . urlencode($mensajeError));
+        header("Location: ../../HTML/asignacion.php?error=" . urlencode($mensajeError));
         exit;
     }
 
@@ -45,10 +45,10 @@ if (isset($conn) && $conn instanceof mysqli) {
 }
 
     // Redirigir con mensaje de éxito
-    header("Location: ../HTML/asignacion.php?resultado=" . urlencode("Asignación realizada correctamente."));
+    header("Location: ../../HTML/asignacion.php?resultado=" . urlencode("Asignación realizada correctamente."));
     exit;
 }
 // Si no es POST, redirige con error
-header("Location: ../HTML/asignacion.php?error=" . urlencode("Método no permitido."));
+header("Location: ../../HTML/asignacion.php?error=" . urlencode("Método no permitido."));
 exit;
 ?>
