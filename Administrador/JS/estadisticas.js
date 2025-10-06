@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
   // Llamada al que devuelve los datos estadísticos en formato JSON
-  fetch('/Secretaria/PHP/datosEstadisticos.php')
+  fetch('../../Secretaria/PHP/datosEstadisticos.php')
 
     // Procesa la respuesta y la convierte en objeto JavaScript
     .then(res => res.json())
