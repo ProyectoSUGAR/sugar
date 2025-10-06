@@ -35,7 +35,7 @@ $saludo = "Bienvenido/a";
             <span>Horarios y<br />clases</span>
         </a>
         <!-- Tarjeta que redirige a la sección de anuncios -->
-        <a class="tarjeta-opcion" href="/Secretaria/HTML/anuncios.php">
+        <a class="tarjeta-opcion" href="../../Secretaria/HTML/anuncios.php">
             <span>Anuncios</span>
         </a>
         <!-- Tarjeta que redirige a la sección de profesores -->
