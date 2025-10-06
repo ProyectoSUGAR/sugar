@@ -11,7 +11,7 @@
   <title>S.U.G.A.R.</title>
 
   <!-- Enlace al archivo de estilos principal del sistema -->
-  <link rel="stylesheet" href="/Css/style.css" />
+  <link rel="stylesheet" href="Css/style.css" />
 
   <!-- Ícono que se muestra en la pestaña del navegador -->
   <link rel="icon" href="/Images/Logo22-removebg-preview.png" />
