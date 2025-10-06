@@ -1,5 +1,5 @@
 <!-- Enlace al archivo de estilos CSS principal del sistema -->
-<link rel="stylesheet" href="/Css/style.css" />
+<link rel="stylesheet" href="../../Css/style.css" />
 
 <!-- Cabecera institucional de la página -->
 <header class="cabecera-institucional">
@@ -14,7 +14,7 @@
         <div class="datos-usuario">
             <strong >Secretario/a</strong>
             <br>
-            <a  class="p1" href="/Login/HTML/index.php">Cerrar sesión</a>
+            <a  class="p1" href="../../Login/HTML/index.php">Cerrar sesión</a>
             
         </div>
     </div>
@@ -30,15 +30,15 @@
     <!-- Lista de opciones del menú hamburguesa (oculta por defecto) -->
      <nav id="nav" class="main-nav">
         <div class="nav-links">
-      <a class="link-item" href="/Secretaria/HTML/dashboardS.php">Inicio</a>
-      <a class="link-item" href="/Secretaria/HTML/asignacion.php">Asignar clases</a>
-      <a class="link-item" href="/Secretaria/HTML/asignacionAsig.php">Registro de Horarios</a>
-      <a class="link-item" href="/Secretaria/HTML/asignacionGrup.php">Registrar grupos</a>
-    <a class="link-item" href="/Secretaria/HTML/gestionUsr.php">Gestionar usuarios</a>
+      <a class="link-item" href="../../Secretaria/HTML/dashboardS.php">Inicio</a>
+      <a class="link-item" href="../../Secretaria/HTML/asignacion.php">Asignar clases</a>
+      <a class="link-item" href="../../Secretaria/HTML/asignacionAsig.php">Registro de Horarios</a>
+      <a class="link-item" href="../../Secretaria/HTML/asignacionGrup.php">Registrar grupos</a>
+    <a class="link-item" href="../../Secretaria/HTML/gestionUsr.php">Gestionar usuarios</a>
     <a class="link-item" href="#contenedor-tablas-horarios">Horarios</a>
-      <a class="link-item" href="/Secretaria/HTML/anuncios.php">Anuncios</a>
+      <a class="link-item" href="../../Secretaria/HTML/anuncios.php">Anuncios</a>
     </div>
 </nav>
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
-    <script src="/JS/menuHamb.js"></script>
+    <script src="../../JS/menuHamb.js"></script>
 </header>
