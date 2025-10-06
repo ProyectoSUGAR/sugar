@@ -103,7 +103,7 @@ function logear($con, $usuario, $contrasenia) {
                     break;
                 default:
                     // Redirige al login si el tipo de usuario no está definido
-                    header("Location: ../HTML/index.php");
+                    header("Location: ../../HTML/index.php");
             }
 
             // Finaliza la ejecución del script después de redirigir
