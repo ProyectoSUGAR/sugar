@@ -75,14 +75,14 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
                                 <td><?= htmlspecialchars($usuario['tipo_usuario']) ?></td>
                                 <td><?= htmlspecialchars($usuario['estado_usuario']) ?></td>
                                 <td>
-                                    <form method="post" action="../PHP/funcionGestion.php" class="accion-form" style="display:inline;">
+                                    <form method="post" action="../../PHP/funcionGestion.php" class="accion-form" style="display:inline;">
                                         <input type="hidden" name="id_usuario" value="<?= $usuario['id_usuario'] ?>">
                                         <input type="hidden" name="estado_usuario" value="<?= $usuario['estado_usuario'] ?>">
                                         <button type="submit" name="cambiar_estado" class="btn-accion" title="Cambiar estado">
                                             <i class="fa <?= $usuario['estado_usuario'] === 'activo' ? 'fa-toggle-on' : 'fa-toggle-off' ?>"></i>
                                         </button>
                                     </form>
-                                    <form method="post" action="../PHP/funcionGestion.php" class="accion-form eliminar-form" style="display:inline;">
+                                    <form method="post" action="../../PHP/funcionGestion.php" class="accion-form eliminar-form" style="display:inline;">
                                         <input type="hidden" name="id_usuario" value="<?= $usuario['id_usuario'] ?>">
                                         <button type="submit" name="eliminar_usuario" class="btn-accion btn-eliminar" title="Eliminar">
                                             <i class="fa fa-trash"></i>
@@ -111,7 +111,7 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
             </section>
         </main>
     </div>
-    <script src="../JS/gestionUsr.js"></script>
+    <script src="../../JS/gestionUsr.js"></script>
 </body>
 </html>
 <?php
