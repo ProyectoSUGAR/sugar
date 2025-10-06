@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Planos y Horarios</title>
-    <link rel="stylesheet" href="/Css/style.css" />
+    <link rel="stylesheet" href="../../Css/style.css" />
 </head>
 <!-- Cuerpo principal de la página con clase específica para el perfil de estudiante -->
 <body class="body-estudiante">
@@ -24,7 +24,7 @@
             </div>
             <!-- Contenedor que muestra la imagen del plano correspondiente al piso seleccionado -->
             <div class="contenedor-plano">
-                <img id="imagen-plano" src="/Images/PlantaBaja.jpeg" alt="Plano Planta baja" />
+                <img id="imagen-plano" src="../../Images/PlantaBaja.jpeg" alt="Plano Planta baja" />
             </div>
             <!-- Selector de día: permite al usuario elegir el día de la semana para ver el horario correspondiente -->
             <select id="selector-dia">
@@ -43,8 +43,8 @@
     <!-- Franja decorativa azul ubicada al final de la página -->
     <section class="franja-textura" aria-hidden="true"></section>
     <!-- Inclusión del script principal de la aplicación -->
-    <script src="/JS/app.js"></script>
+    <script src="../../JS/app.js"></script>
     <!-- Inclusión del script que gestiona la lógica de planos y horarios -->
-    <script src="/JS/planos_horarios.js"></script>
+    <script src="../../JS/planos_horarios.js"></script>
 </body>
 </html>
