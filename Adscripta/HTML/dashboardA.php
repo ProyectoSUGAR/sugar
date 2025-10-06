@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Dashboard Adscripta</title>
-    <link rel="stylesheet" href="/Css/style.css" />
+    <link rel="stylesheet" href="../../Css/style.css" />
   </head>
   <?php include '../../Adscripta/HTML/bienvenida.php'; ?>
   <body>
