@@ -12,10 +12,6 @@ $usuario = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Usuario";
 
 // Define el saludo predeterminado que se mostrará en pantalla
 $saludo = "Bienvenido/a";
-
-// Mostrar notificaciones recientes
-include '../../Adscripta/PHP/notificaciones_usuario.php';
-mostrarNotificacionesUsuario('funcionarios');
 ?>
 
 <!-- Sección visual que muestra el saludo personalizado al usuario -->
@@ -38,8 +34,8 @@ mostrarNotificacionesUsuario('funcionarios');
         <a class="tarjeta-opcion" href="#contenedor-tablas-horarios">
             <span>Horarios y<br />clases</span>
         </a>
-        <!-- Tarjeta que redirige a la sección de anuncios -->
-        <a class="tarjeta-opcion" href="/Funcionario/HTML/anuncios.php">
+    <!-- Tarjeta que redirige a la sección de anuncios -->
+    <a class="tarjeta-opcion" href="../../Funcionario/HTML/anuncios.php">
             <span>Anuncios</span>
         </a>
         <!-- Tarjeta que redirige a la sección de profesores -->

@@ -8,7 +8,7 @@ include '../../HEADERS/headerAA.php';
 <head>
     <meta charset="UTF-8" />
     <title>Dashboard Secretaria</title>
-    <link rel="stylesheet" href="/Css/style.css" />
+    <link rel="stylesheet" href="../../Css/style.css" />
 </head>
 <body>
     <main>

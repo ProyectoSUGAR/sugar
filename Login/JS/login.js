@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = form.querySelector('[name="password"]').value;
 
         // Realiza una solicitud HTTP POST al servidor para validar las credenciales
-        fetch('/Login/PHP/login.php', {
+    fetch('../../Login/PHP/login.php', {
             method: 'POST', // Método de envío
             headers: { 'Content-Type': 'application/json' }, // Tipo de contenido enviado
             body: JSON.stringify({ usuario, password }) // Convierte los datos a formato JSON

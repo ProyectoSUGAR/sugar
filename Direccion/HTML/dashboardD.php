@@ -8,7 +8,7 @@ include '../../HEADERS/headerD.php';
 <head>
   <meta charset="UTF-8" />
 <title>Dashboard Secretaria</title>
-  <link rel="stylesheet" href="/Css/style.css" />
+  <link rel="stylesheet" href="../../Css/style.css" />
 </head>
 
 <body>
@@ -84,7 +84,7 @@ include '../../HEADERS/headerD.php';
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Inclusión del script que actualiza dinámicamente las estadísticas -->
-  <script src="/Direccion/JS/estadisticas.js"></script>
+  <script src="../../Direccion/JS/estadisticas.js"></script>
 
 </body>
 </html>

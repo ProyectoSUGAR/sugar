@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Dashboard Funcionario</title>
-    <link rel="stylesheet" href="/Css/style.css" />
+  <link rel="stylesheet" href="../../Css/style.css" />
   </head>
   <?php include '../../Funcionario/HTML/bienvenida.php'; ?>
   <body>

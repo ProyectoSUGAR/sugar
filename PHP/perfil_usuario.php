@@ -2,10 +2,10 @@
 session_start();
 
 // Cierre de sesión
-if (isset($_GET['cerrar_sesion']) && $_GET['cerrar_sesion'] == '1') {
+	if (isset($_GET['cerrar_sesion']) && $_GET['cerrar_sesion'] == '1') {
 	session_unset();
 	session_destroy();
-	header('Location: /Login/HTML/ingreso.php');
+	header('Location: ../../Login/HTML/ingreso.php');
 	exit;
 }
 

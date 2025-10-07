@@ -17,7 +17,7 @@ if ($id_usuario > 0) {
 
 // Solo permiten acceso "direccion" y "administrador"
 if ($tipo_usuario !== 'direccion' && $tipo_usuario !== 'administrador') {
-    echo "<script>alert('No tienes permiso para ver el historial de actividad.'); window.location.href='gestionUsr.php';</script>";
+    echo "<script>alert('No tienes permiso para ver el historial de actividad.'); window.location.href='../../Administrador/HTML/gestionUsr.php';</script>";
     if (isset($conexion) && $conexion instanceof mysqli) {
         if (@$conexion->ping()) {
 

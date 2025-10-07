@@ -113,7 +113,7 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
             </section>
         </main>
     </div>
-    <script src="../JS/gestionUsr.js"></script>
+    <script src="../../JS/gestionUsr.js"></script>
 </body>
 </html>
 <?php

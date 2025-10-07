@@ -35,7 +35,7 @@ if (!$usuario) {
         <main class="contenido-principal">
             <section class="panel-formulario" style="max-width:400px;">
                 <h2 class="titulo-panel">Editar Usuario</h2>
-                <form method="post" action="../PHP/editarUsr.php">
+                <form method="post" action="../../PHP/editarUsr.php">
                     <input type="hidden" name="id_usuario" value="<?= $usuario['id_usuario'] ?>">
                     <div class="campo-con-icono">
                         <input type="text" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required placeholder="Nombre">

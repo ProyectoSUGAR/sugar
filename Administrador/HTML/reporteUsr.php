@@ -3,7 +3,7 @@ include '../../HEADERS/headerAA.php';
 require_once("../../PHP/conexion.php");
 $conexion = conectar_bd();
 
-// Consulta para contar usuarios por rol
+// consulta para contar usuarios por rol
 $consulta = "SELECT tipo_usuario, COUNT(*) as cantidad FROM usuario GROUP BY tipo_usuario";
 $resultado = mysqli_query($conexion, $consulta);
 
@@ -12,7 +12,7 @@ foreach (mysqli_fetch_all($resultado, MYSQLI_ASSOC) as $fila_rol) {
     $lista_roles[] = $fila_rol;
 }
 
-// Rol seleccionado
+// selección de roles de usuario
 $rol_seleccionado = isset($_GET['tipo']) ? $_GET['tipo'] : ($lista_roles[0]['tipo_usuario'] ?? '');
 
 ?>

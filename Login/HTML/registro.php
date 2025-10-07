@@ -1,6 +1,6 @@
 <?php 
 // Inclusión del encabezado común que contiene configuraciones compartidas
-include '/xampp/htdocs/SUGAR/PHP/header1.php';
+include '../../PHP/header1.php';
 ?>
 
 <!DOCTYPE html>

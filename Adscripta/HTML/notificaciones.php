@@ -1,4 +1,4 @@
-<?php include '/HEADERS/headerAA.php'; ?>
+<?php include '../../HEADERS/headerAA.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,7 +30,7 @@
                     <option value="direccion">Dirección</option>
                     <option value="secretaria">Secretaría</option>
                 </select>
-                <button type="submit" name="crear_noti">Crear Notificación</button>
+                <button type="submit" name="crear_notificacion">Crear Notificación</button>
             </form>
             <hr>
             <h3>Historial de Notificaciones</h3>
