@@ -2,8 +2,8 @@
 <?php
 // Parámetros de conexión globales
 $DB_SERVIDOR = "localhost";
-$DB_NOMBRE = "db_S-ugar";
-$DB_USUARIO = "S-ugar";
+$DB_NOMBRE = "db_sugar";
+$DB_USUARIO = "sugar";
 $DB_PASS = "sugar";
 
 // Función para conectar con PDO
