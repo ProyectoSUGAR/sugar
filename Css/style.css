@@ -16,7 +16,7 @@ html, body {
 /* Estilos para el body en la página de login */
 .body-login {
     font-family: 'segoe ui', sans-serif;
-    background: url('../../Images/fondo.png') no-repeat center center fixed;
+    background: url('.././Images/fondo.png') no-repeat center center fixed;
     color: #071739;
     height: 100vh;
 }
@@ -56,7 +56,7 @@ html, body {
 .avatar-usuario {
     width: 60px;
     height: 60px;
-    background-image: url(/images/JoseJose-Imagen.png);
+    background-image: url(".././images/JoseJose-Imagen.png");
     border-radius: 50%;
     margin-right: 6px;
     background-size: cover;
@@ -371,7 +371,7 @@ html, body {
 .seccion-saludo {
     position: relative;
     height: clamp(160px, 32vw, 280px);
-   background-image: url("../../Images/PlazaEntreveroJimmyBaikovicius.jpg");
+   background-image: url(".././Images/PlazaEntreveroJimmyBaikovicius.jpg");
     display: grid;
     place-items: center;
     overflow: hidden;
@@ -1036,14 +1036,14 @@ display: flex;
 }
 /* Estilización de el tercer anuncio de la pagina anuncios */
 .anuncio3 {
-  background-image: url("../../Images/trabajos_en_altura.jpg");
+  background-image: url(".././Images/trabajos_en_altura.jpg");
   background-size: cover;
 }
 
 /* Estilización de el segundo anuncio de la pagina anuncios */
 .anuncio2 {
   margin-left: 378px;
-  background-image: url("../../Images/Copia-de-Comercio-y-Logistica-2025-1024x1024.png");
+  background-image: url(".././Images/Copia-de-Comercio-y-Logistica-2025-1024x1024.png");
   background-size: cover;
   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.411);
   
