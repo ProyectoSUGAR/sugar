@@ -4,7 +4,7 @@
 <!-- Cabecera institucional de la página -->
 <header class="cabecera-institucional">
     <!-- Imagen del logo institucional ubicada a la izquierda -->
-    <img src="/Images/Logo22-removebg-preview.png" alt="Logo" class="logo-app" />
+    <img src="../../Images/Logo22-removebg-preview.png" alt="Logo" class="logo-app" />
 
     <!-- Bloque central que muestra la información del usuario -->
     <div class="caja-usuario">
