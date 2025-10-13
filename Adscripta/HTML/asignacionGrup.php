@@ -53,7 +53,7 @@ require_once("../../PHP/conexion.php");
         </div>
       </div>
       <section class="sugarads-resultado" aria-label="Resultado de ingreso de grupo">
-        <h2 class="h2asiges2">Resultado</h2>
+        <h2 class="h2asiges2">Resultado:</h2>
         <div id="sugarads-resultado-canvas" class="sugarads-canvas" aria-live="polite"></div>
       </section>
     </article>
