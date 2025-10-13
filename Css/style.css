@@ -1513,3 +1513,41 @@ margin: auto;
 background-color: #071739;
 color: wheat;
 }
+
+.sugarads-grid {
+  display: flex;
+  justify-content: center;      
+  align-items: flex-start;
+  gap: 60px;                    
+  padding: 40px 0;
+  flex-wrap: wrap;    
+}
+
+.sugarads-col-left {
+  flex: 1;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+.sugarads-col-right {
+  flex: 1;
+  max-width: 500px;
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;           
+  gap: 20px;
+}
+
+
+.sugarads-resultado {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Centrar título principal también */
+.sugarads-section.titulo {
+  text-align: center;
+  margin-top: 20px;
+}
