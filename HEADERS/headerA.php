@@ -14,7 +14,7 @@
         <div class="datos-usuario">
             <strong >Adscripta</strong>
             <br>
-            <a  class="p1" href="../../Login/HTML/index.php">Cerrar sesión</a>
+            <a  class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
             
         </div>
     </div>
