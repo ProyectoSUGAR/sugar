@@ -33,6 +33,12 @@
       <a class="link-item" href="/Estudiante/HTML/dashboardE.php">Inicio</a>
     <a class="link-item" href="#contenedor-tablas-horarios">Horarios</a>
       <a class="link-item" href="/Estudiante/HTML/anuncios.php">Anuncios</a>
+                <!-- Alerta -->
+           <div class="alerta">
+        <H2 class="h2alerta">Comunicado oficial</H2>
+        <div class="textoalerta">
+            <h3 class="h3alerta">Aquí va el texto.</h3>
+        </div>
     </div>
 </nav>
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
