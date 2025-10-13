@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const tipo = $id('grupo-tipo');
   const nombre = $id('grupo-nombre');
   const anio = $id('grupo-anio');
-  const grupo = $id('grupo-grupo');
   const horas = $id('grupo-horas');
   const guardarBtn = $id('sugarads-guardar-grupo');
   const confirmarBtn = $id('sugarads-confirmar-grupo');
@@ -18,18 +17,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const varTipo = document.querySelector('.sugarads-var-tipo');
   const varNombre = document.querySelector('.sugarads-var-nombre');
   const varAnio = document.querySelector('.sugarads-var-anio');
-  const varGrupo = document.querySelector('.sugarads-var-grupo');
   const varHoras = document.querySelector('.sugarads-var-horas');
 
   function actualizarConfirmacion() {
     varTipo.textContent = tipo.value || '—';
     varNombre.textContent = nombre.value || '—';
     varAnio.textContent = anio.value || '—';
-    varGrupo.textContent = grupo.value || '—';
     varHoras.textContent = horas.value || '—';
   }
 
-  [tipo, nombre, anio, grupo, horas].forEach(el => {
+  [tipo, nombre, anio, horas].forEach(el => {
     el.addEventListener('input', actualizarConfirmacion);
   });
 
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
       tipo: tipo.value,
       nombre: nombre.value,
       anio: anio.value,
-      grupo: grupo.value,
       horas_semanales: horas.value
     };
     fetch('../../Adscripta/PHP/ingresoGrupo.php', {
