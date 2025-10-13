@@ -35,8 +35,15 @@
       <a class="link-item" href="../../Secretaria/HTML/asignacionAsig.php">Registro de Horarios</a>
       <a class="link-item" href="../../Secretaria/HTML/asignacionGrup.php">Registrar grupos</a>
     <a class="link-item" href="../../Secretaria/HTML/gestionUsr.php">Gestionar usuarios</a>
+    <a class="link-item" href="/Secretaria/HTML/asignarRec.php">Asignar recursos</a>
     <a class="link-item" href="#contenedor-tablas-horarios">Horarios</a>
       <a class="link-item" href="../../Secretaria/HTML/anuncios.php">Anuncios</a>
+                        <!-- Alerta -->
+           <div class="alerta">
+        <H2 class="h2alerta">Comunicado oficial</H2>
+        <div class="textoalerta">
+            <h3 class="h3alerta">Aquí va el texto.</h3>
+        </div>
     </div>
 </nav>
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
