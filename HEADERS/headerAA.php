@@ -48,3 +48,20 @@
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
     <script src="/JS/menuHamb.js"></script>
 </header>
+<<<<<<< HEAD
+=======
+
+<script>
+fetch('/PHP/notificaciones_usuario.php?tipo_usuario=administrador')
+    .then(response => response.json())
+    .then(data => {
+        const alertaTexto = document.querySelector('.textoalerta h3');
+        if (data.length > 0) {
+            alertaTexto.textContent = data[0].mensaje; // Mostrar la última notificación
+        } else {
+            alertaTexto.textContent = 'No hay notificaciones.';
+        }
+    })
+    .catch(error => console.error('Error al cargar notificaciones:', error));
+</script>
+>>>>>>> dff50c8 (Act)

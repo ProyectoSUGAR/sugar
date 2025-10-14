@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> dff50c8 (Act)
 // Espera a que todo el contenido HTML se haya cargado completamente
 document.addEventListener('DOMContentLoaded', function() {
     // Array que contiene las rutas y descripciones de las imágenes de los planos por piso

@@ -35,7 +35,11 @@ $saludo = "Bienvenido/a";
             <span>Horarios y<br />clases</span>
         </a>
         <!-- Tarjeta que redirige a la sección de anuncios -->
+<<<<<<< HEAD
         <a class="tarjeta-opcion" href="/Adscripta/HTML/anuncios.php">
+=======
+        <a class="tarjeta-opcion" href="../../Adscripta/HTML/anuncios.php">
+>>>>>>> dff50c8 (Act)
             <span>Anuncios</span>
         </a>
         <!-- Tarjeta que redirige a la sección de profesores -->

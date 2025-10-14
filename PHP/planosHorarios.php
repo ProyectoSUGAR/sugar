@@ -1,7 +1,11 @@
 <?php
 
 // Indica al navegador que la respuesta será JSON
+<<<<<<< HEAD
 header('Content-Type: application/json; charset=utf-8');
+=======
+header('Content-Type: application/json');
+>>>>>>> dff50c8 (Act)
 
 // Importa la función conectar_pdo() desde conexion.php
 require_once __DIR__ . '../../conexion.php';
@@ -64,6 +68,14 @@ function obtener_dia($dias_validos) {
 // Ejecuta la consulta SQL y devuelve los resultados para el día solicitado
 function obtener_horarios($pdo, $dia) {
     // Consulta SQL con joins para traer nombres de espacio, materia y profesor
+<<<<<<< HEAD
+=======
+    // select sirve para seleccionar datos de una base de datos
+    // AS asigna un alias a una columna o tabla
+    // JOIN combina filas de dos o más tablas basadas en una columna relacionada
+    // ON especifica la condición de unión entre tablas
+    // WHERE filtra los resultados según una condición
+>>>>>>> dff50c8 (Act)
     $sql = "SELECT a.turno, a.horario, a.dia_semana, a.id_asignatura, a.id_profesor, e.nombre AS espacio, e.ubicacion, asig.nombre AS materia, u.nombre AS nombre_profesor, u.apellido AS apellido_profesor
         FROM asocia a
         JOIN espacio e ON a.id_espacio = e.id_espacio

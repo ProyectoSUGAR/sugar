@@ -464,9 +464,6 @@ html, body {
 
 }
 
-
-
-
 /* Efecto de luz en la tarjeta de opción */
 .tarjeta-opcion::before {
     content: "";
@@ -990,6 +987,121 @@ html, body {
     height: 230px;
   }
 }
+
+/* Media Queries para diseño responsive */
+
+/* Pantallas pequeñas: 320px - 480px */
+@media (max-width: 480px) {
+  .cabecera-institucional {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  .logo-app {
+    height: 35px;
+  }
+  .caja-usuario {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .main-nav {
+    width: 100%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 100%;
+    max-width: 320px;
+    padding: 1rem;
+  }
+  .grupo-tarjetas {
+    grid-template-columns: 1fr;
+  }
+  .tarjeta-opcion {
+    height: 150px;
+  }
+}
+
+/* Pantallas medianas: 481px - 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+  .cabecera-institucional {
+    padding: 15px;
+  }
+  .logo-app {
+    height: 40px;
+  }
+  .caja-usuario {
+    gap: 12px;
+  }
+  .main-nav {
+    width: 60%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 90%;
+    max-width: 500px;
+  }
+  .grupo-tarjetas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tarjeta-opcion {
+    height: 180px;
+  }
+}
+
+/* Pantallas grandes: 769px - 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cabecera-institucional {
+    padding: 20px;
+  }
+  .logo-app {
+    height: 50px;
+  }
+  .caja-usuario {
+    gap: 16px;
+  }
+  .main-nav {
+    width: 50%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 80%;
+    max-width: 600px;
+  }
+  .grupo-tarjetas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .tarjeta-opcion {
+    height: 200px;
+  }
+}
+
+/* Pantallas extra grandes: 1025px - 1600px */
+@media (min-width: 1025px) and (max-width: 1600px) {
+  .cabecera-institucional {
+    padding: 25px;
+  }
+  .logo-app {
+    height: 60px;
+  }
+  .caja-usuario {
+    gap: 20px;
+  }
+  .main-nav {
+    width: 40%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 70%;
+    max-width: 800px;
+  }
+  .grupo-tarjetas {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .tarjeta-opcion {
+    height: 220px;
+  }
+}
+
 /* Color de algunos textos para el header*/
 .p1 {
   color: #0a2d79;
@@ -1081,7 +1193,7 @@ display: flex;
   background-color:  #E3C39D;
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 40%;
   height: 100%;
   align-items: center;
   justify-content: flex-start;
@@ -1290,7 +1402,7 @@ margin-top: 1.5rem;
 font-weight: bold;
 font-size: 18px;
 }
-/*Se cambia de color el fondo de los php de asignación*/
+ /*Se cambia de color el fondo de los php de asignación*/
 .bodyregidat {
    background-color: #f0f0f0;  
 
@@ -1450,7 +1562,7 @@ margin-top: 1rem;
     background-color: #202738;
 }
 
-.volvereporte {
+.volereporte {
   text-decoration: none;
 font-size: 17px;
 }
@@ -1491,28 +1603,7 @@ border: 2px solid #9b784e;
     font-size: 16px;
 }
 
-
-
-.subirimg::file-selector-button {
-  display: flex;
-  color: #071739;
-  background-color: #ffffff;
-  border: 2px solid #cecece;
-  border-radius: 15px;
-  width: 150px;
-  height: 30px;
-  font-family: 'Roboto', sans-serif;
-margin: auto;
-}
-
-.subirimg {
-    margin-top: 1rem;
-}
-
-.subirimg::file-selector-button:hover { 
-background-color: #071739;
-color: wheat;
-}
+/* Sugar Ads Styles */
 
 .sugarads-grid {
   display: flex;

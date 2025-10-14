@@ -6,6 +6,10 @@ const navWrapper = document.getElementById("nav");
   agrega y quita las clases necesarias 
   para que el menú se muestre.
 */
+<<<<<<< HEAD
+=======
+
+>>>>>>> dff50c8 (Act)
 toggleButton.addEventListener("click", () => {
   toggleButton.classList.toggle("close");
   navWrapper.classList.toggle("show");

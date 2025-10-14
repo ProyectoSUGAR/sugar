@@ -1,9 +1,14 @@
 <?php
 include '../../HEADERS/headerD.php';
 require_once("../../PHP/conexion.php");
+<<<<<<< HEAD
 $conexion = conectar_bd();
 
 // Filtros
+=======
+$conn = conectar_bd();
+
+>>>>>>> dff50c8 (Act)
 $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
 $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
@@ -19,7 +24,11 @@ if ($tipo) {
     $consulta .= " AND tipo_usuario='$tipo'";
 }
 $consulta .= " ORDER BY nombre, apellido";
+<<<<<<< HEAD
 $resultado_usuarios = mysqli_query($conexion, $consulta);
+=======
+$resultado_usuarios = mysqli_query($conn, $consulta);
+>>>>>>> dff50c8 (Act)
 ?>
 
 <!DOCTYPE html>
@@ -84,13 +93,21 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
                                             <i class="fa <?= $usuario['estado_usuario'] === 'activo' ? 'fa-toggle-on' : 'fa-toggle-off' ?>"></i>
                                         </button>
                                     </form>
+<<<<<<< HEAD
                                     <form method="post" action="../PHP/funcionGestion.php" class="accion-form eliminar-form" style="display:inline;">
+=======
+                                    <form method="post" action="../../PHP/funcionGestion.php" class="accion-form eliminar-form" style="display:inline;">
+>>>>>>> dff50c8 (Act)
                                         <input type="hidden" name="id_usuario" value="<?= $usuario['id_usuario'] ?>">
                                         <button type="submit" name="eliminar_usuario" class="btn-accion btn-eliminar" title="Eliminar">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
+<<<<<<< HEAD
                                     <form method="get" action="../HTML/editarUsr.php" style="display:inline;">
+=======
+                                    <form method="get" action="../../HTML/editarUsr.php" style="display:inline;">
+>>>>>>> dff50c8 (Act)
                                         <input type="hidden" name="id_usuario" value="<?= $usuario['id_usuario'] ?>">
                                         <button type="submit" class="btn-accion" title="Editar">
                                             <i class="fa fa-edit"></i>
@@ -113,12 +130,22 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
             </section>
         </main>
     </div>
+<<<<<<< HEAD
     <script src="../JS/gestionUsr.js"></script>
 </body>
 </html>
 <?php
 if (isset($conexion) && $conexion instanceof mysqli) {
     if (@$conexion->ping()) {
+=======
+    <script src="../../JS/gestionUsr.js"></script>
+</body>
+</html>
+<?php
+// Cierre de la conexión
+if (isset($conn) && $conn instanceof mysqli) {
+    if (@$conn->ping()) {
+>>>>>>> dff50c8 (Act)
 
     }
 }

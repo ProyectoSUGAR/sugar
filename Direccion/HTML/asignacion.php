@@ -32,7 +32,11 @@ if (isset($conn) && $conn instanceof mysqli) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignación de clases</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="/SUGAR/Css/style.css">
+=======
+    <link rel="stylesheet" href="../../Css/style.css">
+>>>>>>> dff50c8 (Act)
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
          <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -41,7 +45,11 @@ if (isset($conn) && $conn instanceof mysqli) {
       <section class="formasig">
         <h1 class="titulo-estadisticas">Asignación de clases</h1>
         <div class="division-asignacion"></div>
+<<<<<<< HEAD
         <form id="formulario-asignacion" class="pruebads" method="post" action="/Adscripta/PHP/asignacionProf.php">
+=======
+        <form id="formulario-asignacion" class="pruebads" method="post" action="../../Adscripta/PHP/asignacionProf.php">
+>>>>>>> dff50c8 (Act)
           <div class="campo-asignacion">
             <label for="campo-grupo" class="sugarads-label">Grupo</label>
             <br>
@@ -87,6 +95,10 @@ if (isset($conn) && $conn instanceof mysqli) {
         <?php endif; ?>
       </section>
     </main>
+<<<<<<< HEAD
     <script src="../JS/menuHamburguesa.js"></script>
+=======
+    <script src="../../JS/menuHamburguesa.js"></script>
+>>>>>>> dff50c8 (Act)
 </body>
 </html>
