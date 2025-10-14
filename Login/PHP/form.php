@@ -2,11 +2,7 @@
 // Manejador de registro de usuario
 require_once("../../PHP/conexion.php");
 echo "ec";
-<<<<<<< HEAD
-$con = conectar_bd();
-=======
 $conn = conectar_bd();
->>>>>>> dff50c8 (Act)
 
 // Procesar registro
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -32,11 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Verificar si el usuario ya existe
-<<<<<<< HEAD
-    $existe_usr = consultar_existe_usr($con, $correo, $cedula);
-=======
     $existe_usr = consultar_existe_usr($conn, $correo, $cedula);
->>>>>>> dff50c8 (Act)
 
     if ($existe_usr) {
         echo "<script>alert('El usuario ya existe.'); window.location.href='../../Login/HTML/registro.php';</script>";
@@ -44,11 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Insertar usuario
-<<<<<<< HEAD
-    $insert_ok = insertar_datos($con, $nombre, $apellido, $correo, $cedula, $contrasenia, $horario, $tipo_usuario);
-=======
     $insert_ok = insertar_datos($conn, $nombre, $apellido, $correo, $cedula, $contrasenia, $horario, $tipo_usuario);
->>>>>>> dff50c8 (Act)
 
     if ($insert_ok) {
         // Redirigir al login con mensaje de exito
@@ -61,35 +49,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // Comprueba si existe usuario por correo o cédula
-<<<<<<< HEAD
-function consultar_existe_usr($con, $correo, $cedula) {
-    $correo = mysqli_real_escape_string($con, $correo);
-    $cedula = mysqli_real_escape_string($con, $cedula);
-
-    $consulta = "SELECT id_usuario FROM usuario WHERE correo = '$correo' OR cedula = '$cedula'";
-    $resultado = mysqli_query($con, $consulta);
-=======
 function consultar_existe_usr($conn, $correo, $cedula) {
     $correo = mysqli_real_escape_string($conn, $correo);
     $cedula = mysqli_real_escape_string($conn, $cedula);
 
     $consulta = "SELECT id_usuario FROM usuario WHERE correo = '$correo' OR cedula = '$cedula'";
     $resultado = mysqli_query($conn, $consulta);
->>>>>>> dff50c8 (Act)
 
     return $resultado && mysqli_num_rows($resultado) > 0;
 }
 
 // Inserta usuario con password hasheada
-<<<<<<< HEAD
-function insertar_datos($con, $nombre, $apellido, $correo, $cedula, $contrasenia, $horario, $tipo_usuario) {
-    $nombre = mysqli_real_escape_string($con, $nombre);
-    $apellido = mysqli_real_escape_string($con, $apellido);
-    $correo = mysqli_real_escape_string($con, $correo);
-    $cedula = mysqli_real_escape_string($con, $cedula);
-    $horario = mysqli_real_escape_string($con, $horario);
-    $tipo_usuario = mysqli_real_escape_string($con, $tipo_usuario);
-=======
 function insertar_datos($conn, $nombre, $apellido, $correo, $cedula, $contrasenia, $horario, $tipo_usuario) {
     $nombre = mysqli_real_escape_string($conn, $nombre);
     $apellido = mysqli_real_escape_string($conn, $apellido);
@@ -97,26 +67,15 @@ function insertar_datos($conn, $nombre, $apellido, $correo, $cedula, $contraseni
     $cedula = mysqli_real_escape_string($conn, $cedula);
     $horario = mysqli_real_escape_string($conn, $horario);
     $tipo_usuario = mysqli_real_escape_string($conn, $tipo_usuario);
->>>>>>> dff50c8 (Act)
 
     $hash = password_hash($contrasenia, PASSWORD_DEFAULT);
 
     $consulta_insertar = "INSERT INTO usuario (nombre, apellido, correo, cedula, contrasenia, horario, tipo_usuario, estado_usuario) VALUES ('$nombre', '$apellido', '$correo', '$cedula', '$hash', '$horario', '$tipo_usuario', 'activo')";
 
-<<<<<<< HEAD
-    return mysqli_query($con, $consulta_insertar);
-}
-
-// cerrar conexion
-if (isset($con) && $con instanceof mysqli) {
-    mysqli_close($con);
-=======
     return mysqli_query($conn, $consulta_insertar);
 }
 
+// cerrar conexion
 if (isset($conn) && $conn instanceof mysqli) {
     mysqli_close($conn);
->>>>>>> dff50c8 (Act)
 }
-
-?>

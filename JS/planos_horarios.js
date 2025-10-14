@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     // --- DATOS PRECARGADOS ---
     const diasSemana = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
@@ -10,10 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         2: ['Aula 3', 'salon 3', 'salon 4', 'salon 5']
     };
 
-<<<<<<< HEAD
     // --- ELEMENTOS DEL DOM ---
-=======
->>>>>>> dff50c8 (Act)
     const selectorDia = document.getElementById('selector-dia');
     const botonesPiso = document.querySelectorAll('.btn-piso');
     const contenedorTablas = document.getElementById('contenedor-tablas-horarios');
@@ -27,19 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function normalizarNombre(nombre) {
         return nombre
             .toLowerCase()
-<<<<<<< HEAD
             .replace(/[áàäâ]/g, 'a')
             .replace(/[éèëê]/g, 'e')
             .replace(/[íìïî]/g, 'i')
             .replace(/[óòöô]/g, 'o')
             .replace(/[úùüû]/g, 'u')
-=======
-            .replace(/[á]/g, 'a')
-            .replace(/[é]/g, 'e')
-            .replace(/[í]/g, 'i')
-            .replace(/[ó]/g, 'o')
-            .replace(/[ú]/g, 'u')
->>>>>>> dff50c8 (Act)
             .replace(/ñ/g, 'n')
             .replace(/ç/g, 'c')
             .replace(/\s+/g, ' ')
