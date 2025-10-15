@@ -34,6 +34,7 @@ html, body {
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(90deg, #e3c39d 0%, #ffffff 62%, #071739 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
     padding: 10px 32px;
     min-height: 80px;
     font-family: "Nunito Sans", sans-serif;
@@ -1183,6 +1184,7 @@ display: flex;
   transition: all 0.2s linear;
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.7);
+  border-right: 1px solid rgba(0, 0, 0, 0.6);
 }
 /* Se utiliza para que al mostrarse el menú hamburguesa no cause errores de dimensión */
 .main-nav.show {
