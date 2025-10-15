@@ -1406,8 +1406,10 @@ font-size: 18px;
 }
  /*Se cambia de color el fondo de los php de asignación*/
 .bodyregidat {
-   background-color: #f0f0f0;  
-
+  background-color: #fafafa;
+  background-image:
+  linear-gradient(135deg, #fafafa 0%, #eae8ff 100%);
+  background-size: 5px 5px;
   }
 /*Centra textos y se le agrega una fuente de letra a un titulo de una pagina de asignación al igual que se agrega un espacio por encima del mismo de 2rem*/
 .sugarads-title {
