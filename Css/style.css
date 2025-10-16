@@ -1646,3 +1646,150 @@ border: 2px solid #9b784e;
   text-align: center;
   margin-top: 20px;
 }
+
+/* Estilos de página editar perfil(termina en botoneditar:hover) */
+
+.diveditarperfil {
+  display: flex;
+  margin: auto;
+  background-color: #f0f0f0;
+  width: 95%;
+  height: 81%;
+  border: 5px solid #071739 ;
+  margin-top: 1.5rem;
+}
+
+.h1editperfil {
+  padding: 1.5rem;
+  margin-left: 0.5rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+}
+
+.h2editperfil {
+  display: flex;
+    font-family: 'Roboto', sans-serif;
+  margin: auto;
+  margin-left: 29%;
+  margin-top: 9%;
+}
+
+.cambiarfotoperfil {
+  display: flex;
+  background-color: red;
+  width: 50%;
+  height: 30%;
+  margin: auto;
+margin-right: 24%;
+background-color: #071739;
+margin-top: 10%;
+border-radius: 100px;
+}
+
+.fotodeperfil {
+  display: absolute;
+  min-width: 20%;
+  min-height: 85%;
+   max-width: 20%;
+  max-height: 85%;
+  background-image: url(/Images/perfilpordefecto.jpg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 200px;
+  border: 2px solid white;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+
+.imagenflecha {
+  max-width: 170px;
+  max-height: 100px;
+  padding: 10px;
+  margin-top: 25px;
+  margin-left: 83px;
+}
+
+.imga::file-selector-button {
+  width: 53%;
+  height: 87%;
+  max-width: 52%;
+  border-radius: 200px;
+  margin-top: 3.5%;
+  margin-left: 93px;
+  border: 7px solid white;
+
+}
+
+.h2cambiarperfil, .h2cambiarperfil1, .h2cambiarperfil2 {
+  position: absolute;
+      font-family: 'Roboto', sans-serif;
+}
+.h2cambiarperfil2 {
+    top: 70%;
+  left: 18.5%; 
+    z-index: 14;
+    font-size: 20px;
+}
+
+.h2cambiarperfil1 {
+    top: 70%;
+  right: 21%; 
+    z-index: 13;
+    font-size: 20px;
+}
+
+.h2cambiarperfil {
+    top: 30%;
+  left: 42%; 
+    z-index: 15;
+}
+
+.inputuser {
+  position: absolute;
+  top: 75%;
+  left: 15%;
+  width: 25%;
+  height: 8%;
+border-radius: 50px;
+border: 3px solid #071739;
+}
+
+.inputuser1 {
+  position: absolute;
+  top: 75%;
+  right: 15%;
+  width: 25%;
+  height: 8%;
+border-radius: 50px;
+border: 3px solid #071739;
+z-index: 1;
+}
+
+
+.inputuser::placeholder, .inputuser1::placeholder {
+  font-size: 17px;
+  padding: 1rem;
+}
+
+.botoneditaru {
+  position: absolute;
+   width: 10%;
+   height: 7%;
+background-color: white;
+    font-size: 1.1rem;
+    border: 2px solid #071739;
+    border-radius: 50px;
+    top: 85%;
+right: 45.5%;
+}
+
+.botoneditaru:hover {
+  background-color: #071739;
+  color: white;
+  
+}
+/* Estilización de texto de Editar perfil y cerrar sesión en el header */
+.p1 {
+  color: #0a2d79;
+  text-decoration: none;
+}
