@@ -51,8 +51,6 @@
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
     <script src="../../JS/menuHamb.js"></script>
 </header>
-<<<<<<< HEAD
-=======
 
 <script>
 fetch('/PHP/notificaciones_usuario.php?tipo_usuario=secretaria')
@@ -67,4 +65,3 @@ fetch('/PHP/notificaciones_usuario.php?tipo_usuario=secretaria')
     })
     .catch(error => console.error('Error al cargar notificaciones:', error));
 </script>
->>>>>>> dff50c8 (Act)
