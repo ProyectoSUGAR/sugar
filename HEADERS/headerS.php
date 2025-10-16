@@ -14,6 +14,8 @@
         <div class="datos-usuario">
             <strong >Secretario/a</strong>
             <br>
+            <a  class="p1" href="/../../Secretaria/HTML/editarPerfil.php">Editar perfil</a>
+            <br>
             <a  class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
             
         </div>
