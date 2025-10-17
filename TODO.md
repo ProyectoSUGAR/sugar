@@ -1,0 +1,3 @@
+- [x] Remove the grupo input field from Adscripta/HTML/asignacionGrup.php
+- [x] Update the confirmation text in Adscripta/HTML/asignacionGrup.php to exclude grupo reference
+- [x] Remove grupo variable, event listener, confirmation update, and data inclusion from Adscripta/JS/ingresoGrupo.js
