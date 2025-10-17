@@ -1,15 +1,24 @@
 const toggleButton = document.getElementById("btnHamburguesa");
 const navWrapper = document.getElementById("nav");
 
-/* Abrir / cerrar menú */
+/* 
+  cada ves que se haga click en el botón 
+  agrega y quita las clases necesarias 
+  para que el menú se muestre.
+*/
+
 toggleButton.addEventListener("click", () => {
   toggleButton.classList.toggle("close");
   navWrapper.classList.toggle("show");
 });
 
-/* Mantiene tu comportamiento anterior: clic en el fondo del nav */
+/* 
+  Cuándo se haga click fuera del contenedor de enlaces 
+  el menú debe esconderse.
+*/
+
 navWrapper.addEventListener("click", e => {
-  if (e.target.id === "nav") { // clic en la parte vacía del nav
+  if (e.target.id === "nav") {
     navWrapper.classList.remove("show");
     toggleButton.classList.remove("close");
   }

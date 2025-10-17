@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 include '../../HEADERS/headerA.php';
+=======
+include '../../HEADERS/headerD.php';
+>>>>>>> dff50c8 (Act)
 require_once("../../PHP/conexion.php");
 ?>
  <body class="bodyregidat">
@@ -28,6 +32,13 @@ require_once("../../PHP/conexion.php");
           <input type="number" id="grupo-anio" name="anio" class="inputasig1" min="1" max="6" required placeholder="Ejemplo: 3">
         </div>
         <div class="sugarads-field">
+<<<<<<< HEAD
+=======
+          <label for="grupo-grupo" class="sugarads-label">Grupo</label>
+          <input type="text" id="grupo-grupo" name="grupo" class="inputasig1" required placeholder="Ejemplo: 3MC">
+        </div>
+        <div class="sugarads-field">
+>>>>>>> dff50c8 (Act)
           <label for="grupo-horas" class="sugarads-label">Horas semanales</label>
           <input type="number" id="grupo-horas" name="horas_semanales" class="inputasig1" min="1" max="50" required placeholder="Ejemplo: 36">
         </div>
@@ -44,6 +55,10 @@ require_once("../../PHP/conexion.php");
           <strong class="sugarads-var sugarads-var-nombre">(<span aria-hidden="true">…</span>)</strong>
           de tipo <strong class="sugarads-var sugarads-var-tipo">(<span aria-hidden="true">…</span>)</strong>,
           año <strong class="sugarads-var sugarads-var-anio">(<span aria-hidden="true">…</span>)</strong>,
+<<<<<<< HEAD
+=======
+          grupo <strong class="sugarads-var sugarads-var-grupo">(<span aria-hidden="true">…</span>)</strong>,
+>>>>>>> dff50c8 (Act)
           con <strong class="sugarads-var sugarads-var-horas">(<span aria-hidden="true">…</span>)</strong> horas semanales.
           <br>¿Desea realizar esta acción?
         </p>
@@ -60,4 +75,8 @@ require_once("../../PHP/conexion.php");
   </section>
 </main>
 <script src="../../Adscripta/JS/ingresoGrupo.js" defer></script>
+<<<<<<< HEAD
  </body>
+=======
+ </body>
+>>>>>>> dff50c8 (Act)

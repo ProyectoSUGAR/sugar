@@ -30,7 +30,10 @@ function traer_datos_usuario($con, $usuario) {
     // Escapa caracteres especiales para evitar inyecciones SQL
     $usuario = mysqli_real_escape_string($con, $usuario);
 
+<<<<<<< HEAD
     // Consulta SQL que busca al usuario por correo o cédula
+=======
+>>>>>>> dff50c8 (Act)
     $sql = "SELECT * FROM usuario WHERE correo = '$usuario' OR cedula = '$usuario'";
 
     // Ejecuta la consulta en la base de datos
@@ -119,6 +122,10 @@ function logear($con, $usuario, $contrasenia) {
 }
 
 // Cierra la conexión con la base de datos
+<<<<<<< HEAD
+=======
+
+>>>>>>> dff50c8 (Act)
 if (isset($con) && $con instanceof mysqli) {
     if (@$con->ping()) {
 

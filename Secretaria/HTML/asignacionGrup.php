@@ -65,4 +65,8 @@ require_once("../../PHP/conexion.php");
   </section>
 </main>
 <script src="../../Adscripta/JS/ingresoGrupo.js" defer></script>
+<<<<<<< HEAD
  </body>
+=======
+ </body>
+>>>>>>> dff50c8 (Act)

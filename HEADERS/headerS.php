@@ -4,7 +4,7 @@
 <!-- Cabecera institucional de la página -->
 <header class="cabecera-institucional">
     <!-- Imagen del logo institucional ubicada a la izquierda -->
-    <img src="/Images/Logo22-removebg-preview.png" alt="Logo" class="logo-app" />
+    <img src="../../Images/Logo22-removebg-preview.png" alt="Logo" class="logo-app" />
 
     <!-- Bloque central que muestra la información del usuario -->
     <div class="caja-usuario">
@@ -14,7 +14,9 @@
         <div class="datos-usuario">
             <strong >Secretario/a</strong>
             <br>
-            <a  class="p1" href="../../Login/HTML/index.php">Cerrar sesión</a>
+            <a  class="p1" href="/../../Secretaria/HTML/editarPerfil.php">Editar perfil</a>
+            <br>
+            <a  class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
             
         </div>
     </div>
@@ -35,10 +37,31 @@
       <a class="link-item" href="../../Secretaria/HTML/asignacionAsig.php">Registro de Horarios</a>
       <a class="link-item" href="../../Secretaria/HTML/asignacionGrup.php">Registrar grupos</a>
     <a class="link-item" href="../../Secretaria/HTML/gestionUsr.php">Gestionar usuarios</a>
+    <a class="link-item" href="/Secretaria/HTML/asignarRec.php">Asignar recursos</a>
     <a class="link-item" href="#contenedor-tablas-horarios">Horarios</a>
       <a class="link-item" href="../../Secretaria/HTML/anuncios.php">Anuncios</a>
+                        <!-- Alerta -->
+           <div class="alerta">
+        <H2 class="h2alerta">Comunicado oficial</H2>
+        <div class="textoalerta">
+            <h3 class="h3alerta">Aquí va el texto.</h3>
+        </div>
     </div>
 </nav>
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
     <script src="../../JS/menuHamb.js"></script>
 </header>
+
+<script>
+fetch('/PHP/notificaciones_usuario.php?tipo_usuario=secretaria')
+    .then(response => response.json())
+    .then(data => {
+        const alertaTexto = document.querySelector('.textoalerta h3');
+        if (data.length > 0) {
+            alertaTexto.textContent = data[0].mensaje; // Mostrar la última notificación
+        } else {
+            alertaTexto.textContent = 'No hay notificaciones.';
+        }
+    })
+    .catch(error => console.error('Error al cargar notificaciones:', error));
+</script>

@@ -465,9 +465,6 @@ html, body {
 
 }
 
-
-
-
 /* Efecto de luz en la tarjeta de opción */
 .tarjeta-opcion::before {
     content: "";
@@ -991,10 +988,129 @@ html, body {
     height: 230px;
   }
 }
+
+/* Media Queries para diseño responsive */
+
+/* Pantallas pequeñas: 320px - 480px */
+@media (max-width: 480px) {
+  .cabecera-institucional {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  .logo-app {
+    height: 35px;
+  }
+  .caja-usuario {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .main-nav {
+    width: 100%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 100%;
+    max-width: 320px;
+    padding: 1rem;
+  }
+  .grupo-tarjetas {
+    grid-template-columns: 1fr;
+  }
+  .tarjeta-opcion {
+    height: 150px;
+  }
+}
+
+/* Pantallas medianas: 481px - 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+  .cabecera-institucional {
+    padding: 15px;
+  }
+  .logo-app {
+    height: 40px;
+  }
+  .caja-usuario {
+    gap: 12px;
+  }
+  .main-nav {
+    width: 60%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 90%;
+    max-width: 500px;
+  }
+  .grupo-tarjetas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tarjeta-opcion {
+    height: 180px;
+  }
+}
+
+/* Pantallas grandes: 769px - 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cabecera-institucional {
+    padding: 20px;
+  }
+  .logo-app {
+    height: 50px;
+  }
+  .caja-usuario {
+    gap: 16px;
+  }
+  .main-nav {
+    width: 50%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 80%;
+    max-width: 600px;
+  }
+  .grupo-tarjetas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .tarjeta-opcion {
+    height: 200px;
+  }
+}
+
+/* Pantallas extra grandes: 1025px - 1600px */
+@media (min-width: 1025px) and (max-width: 1600px) {
+  .cabecera-institucional {
+    padding: 25px;
+  }
+  .logo-app {
+    height: 60px;
+  }
+  .caja-usuario {
+    gap: 20px;
+  }
+  .main-nav {
+    width: 40%;
+  }
+  .panel-formulario,
+  .panel-carrusel {
+    width: 70%;
+    max-width: 800px;
+  }
+  .grupo-tarjetas {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .tarjeta-opcion {
+    height: 220px;
+  }
+}
+
 /* Color de algunos textos para el header*/
 .p1 {
   color: #0a2d79;
 }
+
+/* -------------------------------------- Bruno Calupressi ---------------------------- */
+
+
 
 /* Imagen de cartel de anep en el footer */
 .anep {
@@ -1057,87 +1173,74 @@ display: flex;
 .paganuncios {
   background-color: #E3C39D;
 }
-
+/* Estilización de el nav, se le agrega 0.2 segundos de transición para abrirse */
 .main-nav {
-  position: fixed;
+    position: fixed;
   top: 0;
-  right: 0; 
+  left: 0;
   height: 100vh;
-  width: 0; /* cerrado por defecto */
-  overflow: hidden;
-  transition: width 0.3s ease-in-out;
+  width: 100%;
+  margin-left: -100%;
+  transition: all 0.2s linear;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.15); 
-  border-left: 1px solid rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
+  border-right: 1px solid rgba(0, 0, 0, 0.6);
 }
-
-/* Menú abierto */
+/* Se utiliza para que al mostrarse el menú hamburguesa no cause errores de dimensión */
 .main-nav.show {
-  width: 20%; /* ancho del menú */
-  overflow: hidden;
-  transition: width 0.3s ease-in-out;
-  z-index: 100;
-  background-color: rgba(0, 0, 0, 0.15); 
+  margin-left: 0;
 }
-
-/* Bloque interno de links */
+/* Estilización de el body de el menú hamburguesa */
 .nav-links {
-  background-color: #E3C39D;
+  background-color:  #E3C39D;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 40%;
   height: 100%;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 2rem;
-  box-sizing: border-box;
+  cursor: pointer;
 }
-
-/* ====== LINKS / ITEMS (hover suave, no oscurecer todo) ====== */
+.nav-links :hover {
+  background-color: #292521;
+}
+/* Estilizamos las opciones dentro del menú hamburguesa */
 .link-item {
-  margin-top: 1.25rem;
-  color: #3d3d3d; /* color legible del segundo bloque */
+  margin-top: 2rem;
+  color: #444444;
   text-decoration: none;
   font-weight: bold;
-  transition: transform 0.18s ease, text-shadow 0.18s ease, color 0.18s ease;
   position: relative;
 }
 
-/* Hover moderno: aumenta ligeramente y agrega sombra sutil — NO cambia el fondo general */
-.link-item:hover {
-  transform: scale(1.05);
-  text-shadow: 0 0 6px rgba(0,0,0,0.25);
-  color: #000;
-}
-
-/* ====== BOTÓN HAMBURGUESA ====== */
+/* Botón de menú tipo hamburguesa */
 .boton-menu {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 10px;
-  z-index: 200; /* por encima del overlay y del menú para que siempre se vea */
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
 }
 
+/* Líneas del ícono de hamburguesa */
 .boton-menu span {
-  display: block;
-  width: 26px;
-  height: 3px;
-  background: #e3c39d; /* color concordante */
-  border-radius: 2px;
-  transition: transform 0.28s ease, background-color 0.28s ease, opacity 0.28s ease;
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: #e3c39d;
+    border-radius: 2px;
+    z-index: 200;
+    cursor: pointer;
 }
-
-/* Estado "cerrar" del botón (tu JS añade/remueve la clase .close) */
+/* Botón del menú hamburguesa desplegado*/
 .boton-menu.close span {
-  transform: rotate(45deg) translate(0px, 0px);
-  background-color: #486382; /* color secundario del segundo bloque */
   opacity: 1;
-}
+  transform: rotate(45deg) translate(0px, 0px);
+    background-color: #486382;
 
+}
 
 /*_________________________________________________________________________________*/
 
@@ -1301,14 +1404,13 @@ margin-top: 1.5rem;
 font-weight: bold;
 font-size: 18px;
 }
-/*Se cambia de color el fondo de los php de asignación*/
-body.bodyregidat {
+ /*Se cambia de color el fondo de los php de asignación*/
+.bodyregidat {
   background-color: #fafafa;
   background-image:
-    linear-gradient(135deg, #fafafa 0%, #eae8ff 100%);
+  linear-gradient(135deg, #fafafa 0%, #eae8ff 100%);
   background-size: 5px 5px;
-}
-
+  }
 /*Centra textos y se le agrega una fuente de letra a un titulo de una pagina de asignación al igual que se agrega un espacio por encima del mismo de 2rem*/
 .sugarads-title {
   margin-top: 1rem;
@@ -1354,6 +1456,10 @@ text-decoration: none;
   background-color: #071739;
 }
 
+/*Para centrar un titulo de una de las paginas*/
+.sugarads-col-right {
+text-align: center;
+}
 /*Se cambia de color algunos textos de tipo input*/
 .input-text {
   background-color: #F5E7D7;
@@ -1460,18 +1566,56 @@ margin-top: 1rem;
     background-color: #202738;
 }
 
-.volvereporte {
+.volereporte {
   text-decoration: none;
 font-size: 17px;
 }
 
+.alerta {
+  width: 400px;
+  height: 150px;
+  border-radius: 15px;
+  margin-top: 1.5rem;
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+        background-image: linear-gradient(135deg, #071739c4, #4b6382c4 55%, #071739c4),  url(/Images/uruguay_1_featured.jpg);
+border: 2px solid #9b784e;
+}
+
+.textoalerta {
+    background-color: rgb(0, 0, 0);
+  width: auto;
+  height: 94px;
+  border-radius: 0 0 15px 15px;
+  opacity: 0.9;
+}
+
+.h2alerta, .h3alerta {
+  color: wheat;
+  padding: 10px;
+}
+
+.h2alerta {
+    text-align: center;
+}
+
+.h3alerta {
+    font-family: 'Roboto', sans-serif; 
+    max-width: 380px; 
+    max-height: 70px;
+    font-size: 16px;
+}
+
+/* Sugar Ads Styles */
+
 .sugarads-grid {
   display: flex;
-  justify-content: center;       /* Centra horizontalmente el contenido */
+  justify-content: center;      
   align-items: flex-start;
-  gap: 60px;                     /* Espacio entre formulario y confirmación */
+  gap: 60px;                    
   padding: 40px 0;
-  flex-wrap: wrap;               /* Permite que se acomoden en pantallas chicas */
+  flex-wrap: wrap;    
 }
 
 .sugarads-col-left {
@@ -1486,11 +1630,11 @@ font-size: 17px;
   min-width: 350px;
   display: flex;
   flex-direction: column;
-  align-items: center;           /* Centra los contenidos dentro de la columna derecha */
+  align-items: center;           
   gap: 20px;
 }
 
-/* Centrado del bloque de resultado debajo de la confirmación */
+
 .sugarads-resultado {
   width: 100%;
   text-align: center;
@@ -1501,4 +1645,151 @@ font-size: 17px;
 .sugarads-section.titulo {
   text-align: center;
   margin-top: 20px;
+}
+
+/* Estilos de página editar perfil(termina en botoneditar:hover) */
+
+.diveditarperfil {
+  display: flex;
+  margin: auto;
+  background-color: #f0f0f0;
+  width: 95%;
+  height: 81%;
+  border: 5px solid #071739 ;
+  margin-top: 1.5rem;
+}
+
+.h1editperfil {
+  padding: 1.5rem;
+  margin-left: 0.5rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 40px;
+}
+
+.h2editperfil {
+  display: flex;
+    font-family: 'Roboto', sans-serif;
+  margin: auto;
+  margin-left: 29%;
+  margin-top: 9%;
+}
+
+.cambiarfotoperfil {
+  display: flex;
+  background-color: red;
+  width: 50%;
+  height: 30%;
+  margin: auto;
+margin-right: 24%;
+background-color: #071739;
+margin-top: 10%;
+border-radius: 100px;
+}
+
+.fotodeperfil {
+  display: absolute;
+  min-width: 20%;
+  min-height: 85%;
+   max-width: 20%;
+  max-height: 85%;
+  background-image: url(/Images/perfilpordefecto.jpg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 200px;
+  border: 2px solid white;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+
+.imagenflecha {
+  max-width: 170px;
+  max-height: 100px;
+  padding: 10px;
+  margin-top: 25px;
+  margin-left: 83px;
+}
+
+.imga::file-selector-button {
+  width: 53%;
+  height: 87%;
+  max-width: 52%;
+  border-radius: 200px;
+  margin-top: 3.5%;
+  margin-left: 93px;
+  border: 7px solid white;
+
+}
+
+.h2cambiarperfil, .h2cambiarperfil1, .h2cambiarperfil2 {
+  position: absolute;
+      font-family: 'Roboto', sans-serif;
+}
+.h2cambiarperfil2 {
+    top: 70%;
+  left: 18.5%; 
+    z-index: 14;
+    font-size: 20px;
+}
+
+.h2cambiarperfil1 {
+    top: 70%;
+  right: 21%; 
+    z-index: 13;
+    font-size: 20px;
+}
+
+.h2cambiarperfil {
+    top: 30%;
+  left: 42%; 
+    z-index: 15;
+}
+
+.inputuser {
+  position: absolute;
+  top: 75%;
+  left: 15%;
+  width: 25%;
+  height: 8%;
+border-radius: 50px;
+border: 3px solid #071739;
+}
+
+.inputuser1 {
+  position: absolute;
+  top: 75%;
+  right: 15%;
+  width: 25%;
+  height: 8%;
+border-radius: 50px;
+border: 3px solid #071739;
+z-index: 1;
+}
+
+
+.inputuser::placeholder, .inputuser1::placeholder {
+  font-size: 17px;
+  padding: 1rem;
+}
+
+.botoneditaru {
+  position: absolute;
+   width: 10%;
+   height: 7%;
+background-color: white;
+    font-size: 1.1rem;
+    border: 2px solid #071739;
+    border-radius: 50px;
+    top: 85%;
+right: 45.5%;
+}
+
+.botoneditaru:hover {
+  background-color: #071739;
+  color: white;
+  
+}
+/* Estilización de texto de Editar perfil y cerrar sesión en el header */
+.p1 {
+  color: #0a2d79;
+  text-decoration: none;
 }

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     // --- DATOS PRECARGADOS ---
     const diasSemana = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];

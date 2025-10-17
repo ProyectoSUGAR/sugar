@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+/*
+>>>>>>> dff50c8 (Act)
 // Espera a que todo el contenido HTML se haya cargado completamente
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -153,3 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> dff50c8 (Act)
