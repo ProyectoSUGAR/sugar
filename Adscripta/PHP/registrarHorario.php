@@ -28,10 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $con && $conexion_abierta) {
             exit;
         }
 
-<<<<<<< HEAD
-=======
         
->>>>>>> dff50c8 (Act)
         // 1. asegura que el profesor exista en la tabla profesor
         // si no existe, lo crea
         // si existe, no hace nada
@@ -98,11 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $con && $conexion_abierta) {
             mysqli_stmt_close($stmt_insert_pa);
         }
 
-<<<<<<< HEAD
-        // CREAR
-=======
         // 3.
->>>>>>> dff50c8 (Act)
         // si no se envió id_asocia, es creación
         if (!$id_asocia) {
             // sql_check_duplicado verifica si ya existe esa combinación en la tabla asocia
