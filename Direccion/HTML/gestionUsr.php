@@ -1,14 +1,9 @@
 <?php
 include '../../HEADERS/headerD.php';
 require_once("../../PHP/conexion.php");
-<<<<<<< HEAD
-$conexion = conectar_bd();
 
-// Filtros
-=======
 $conn = conectar_bd();
 
->>>>>>> dff50c8 (Act)
 $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
 $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
