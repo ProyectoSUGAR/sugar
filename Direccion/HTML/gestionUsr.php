@@ -1,7 +1,6 @@
 <?php
 include '../../HEADERS/headerD.php';
 require_once("../../PHP/conexion.php");
-
 $conn = conectar_bd();
 
 $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
@@ -19,7 +18,6 @@ if ($tipo) {
     $consulta .= " AND tipo_usuario='$tipo'";
 }
 $consulta .= " ORDER BY nombre, apellido";
-
 $resultado_usuarios = mysqli_query($conn, $consulta);
 ?>
 
@@ -121,6 +119,7 @@ $resultado_usuarios = mysqli_query($conn, $consulta);
 // Cierre de la conexión
 if (isset($conn) && $conn instanceof mysqli) {
     if (@$conn->ping()) {
+
     }
 }
 ?>
