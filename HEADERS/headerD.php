@@ -3,7 +3,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 // Usar imagen por defecto con ruta relativa normalizada
 $avatar_url = '../../images/perfiles/perfilpordefecto.jpg';
 // Cargar conexión con fallback
-require_once('../../PHP/conexion.php');
+require_once(__DIR__ . '/../PHP/conexion.php');
 
 if (!empty($_SESSION['id_usuario'])) {
     $db = function_exists('conectar_bd') ? conectar_bd() : null;
@@ -12,7 +12,7 @@ if (!empty($_SESSION['id_usuario'])) {
     if (!empty($_SESSION['avatar_url'])) {
         $avatar_url = $_SESSION['avatar_url'];
     } elseif ($db) {
-        $q = $db->prepare("SELECT url FROM imagen WHERE id_usuario = ? AND tipo = 'perfil' ORDER BY fecha DESC LIMIT 1");
+        $q = $db->prepare("SELECT url FROM imagen WHERE id_recurso = ? AND tipo = 'perfil' ORDER BY id_imagen DESC LIMIT 1");
         if ($q) {
             $q->bind_param('i', $uid);
             $q->execute();
@@ -67,7 +67,7 @@ if (!empty($_SESSION['id_usuario'])) {
         <div class="datos-usuario">
             <strong >Director</strong>
             <br>
-            <a  class="p1" href="/../../PHP/editarPerfil.php">Editar perfil</a>
+            <a  class="p1" href="../../PHP/editarPerfil.php">Editar perfil</a>
             <br>
             <a  class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
             
@@ -101,7 +101,7 @@ if (!empty($_SESSION['id_usuario'])) {
     </div>
 </nav>
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
-    <script src="/JS/menuHamb.js"></script>
+    <script src="../../JS/menuHamb.js"></script>
 </header>
 
 <script>

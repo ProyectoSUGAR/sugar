@@ -1,13 +1,8 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-// Intentar obtener la imagen de perfil del usuario si existe
+$avatar_url = '../../Images/perfiles/perfilpordefecto.jpg';
+require_once(__DIR__ . '/../PHP/conexion.php');
 
-// Usar imagen por defecto con ruta relativa normalizada
-$avatar_url = '../../images/perfiles/perfilpordefecto.jpg';
-// Cargar conexión con fallback
-require_once('../../PHP/conexion.php');
-
-// Resolver avatar de sesión o DB y normalizar la URL para el navegador
 if (!empty($_SESSION['id_usuario'])) {
     $db = function_exists('conectar_bd') ? conectar_bd() : null;
     $uid = (int) $_SESSION['id_usuario'];
@@ -16,7 +11,7 @@ if (!empty($_SESSION['id_usuario'])) {
     if (!empty($_SESSION['avatar_url'])) {
         $avatar_url = $_SESSION['avatar_url'];
     } elseif ($db) {
-        $q = $db->prepare("SELECT url FROM imagen WHERE id_usuario = ? AND tipo = 'perfil' ORDER BY fecha DESC LIMIT 1");
+        $q = $db->prepare("SELECT url FROM imagen WHERE id_recurso = ? AND tipo = 'perfil' ORDER BY id_imagen DESC LIMIT 1");
         if ($q) {
             $q->bind_param('i', $uid);
             $q->execute();
@@ -80,7 +75,7 @@ if (!empty($_SESSION['id_usuario'])) {
         <div class="datos-usuario">
             <strong >Secretario/a</strong>
             <br>
-            <a  class="p1" href="/../../PHP/editarPerfil.php">Editar perfil</a>
+            <a  class="p1" href="../../PHP/editarPerfil.php">Editar perfil</a>
             <br>
             <a  class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
             
@@ -97,23 +92,11 @@ if (!empty($_SESSION['id_usuario'])) {
 
     <!-- Lista de opciones del menú hamburguesa (oculta por defecto) -->
      <nav id="nav" class="main-nav">
-        <div class="nav-links">
-      <a class="link-item" href="../../Secretaria/HTML/dashboardS.php">Inicio</a>
-      <a class="link-item" href="../../Secretaria/HTML/asignacion.php">Asignar clases</a>
-      <a class="link-item" href="../../Secretaria/HTML/asignacionAsig.php">Registro de Horarios</a>
-      <a class="link-item" href="../../Secretaria/HTML/asignacionGrup.php">Registrar grupos</a>
-    <a class="link-item" href="../../Secretaria/HTML/gestionUsr.php">Gestionar usuarios</a>
-    <a class="link-item" href="/Secretaria/HTML/asignarRec.php">Asignar recursos</a>
-    <a class="link-item" href="#contenedor-tablas-horarios">Horarios</a>
-      <a class="link-item" href="../../Secretaria/HTML/anuncios.php">Anuncios</a>
-                        <!-- Alerta -->
-           <div class="alerta">
-        <H2 class="h2alerta">Comunicado oficial</H2>
-        <div class="textoalerta">
-            <h3 class="h3alerta">Aquí va el texto.</h3>
-        </div>
-    </div>
-</nav>
+            <div class="nav-links">
+                <a class="link-item" href="../../Secretaria/HTML/asignarRec.php">Asignar recursos</a>
+                <a class="link-item" href="../../Secretaria/HTML/dashboardS.php">Inicio</a>
+            </div>
+        </nav>
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
     <script src="../../JS/menuHamb.js"></script>
 </header>

@@ -4,7 +4,7 @@
 header('Content-Type: application/json');
 
 // Importa la función conectar_pdo() desde conexion.php
-require_once __DIR__ . '../../conexion.php';
+require_once 'conexion.php';
 
 // Objeto PDO para consultas a la base de datos
 $pdo = conectar_pdo();

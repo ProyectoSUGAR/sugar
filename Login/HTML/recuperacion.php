@@ -41,20 +41,7 @@
                 <!-- Este div parece estar incompleto o innecesario -->
                 <div class="campo-con-icono"></div>
             </section>
-            <!-- Panel lateral que contiene el carrusel visual -->
-            <section class="panel-carrusel">
-                <div class="carrusel">
-                    <!-- Imagen institucional que se muestra en el carrusel -->
-                    <img src="../../Login/Images/fondo.png" alt="Imagen institucional" class="imagen-carrusel" />
-                    <!-- Texto descriptivo del carrusel -->
-                    <div class="texto-carrusel">
-                        Recupera tu acceso de forma segura y rápida.
-                    </div>
-                    <!-- Botones para navegar entre imágenes del carrusel -->
-                    <button class="flecha-carrusel izquierda">&lt;</button>
-                    <button class="flecha-carrusel derecha">&gt;</button>
-                </div>
-            </section>
+            
         </main>
     </div>
     <!-- Script que gestiona funcionalidades generales de la página -->

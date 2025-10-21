@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cedula = isset($_POST['cedula']) ? trim($_POST['cedula']) : '';
     $contrasenia = isset($_POST['password']) ? $_POST['password'] : '';
     $confirmaPassword = isset($_POST['confirmaPassword']) ? $_POST['confirmaPassword'] : '';
-    $horario = isset($_POST['horario']) ? $_POST['horario'] : '';
+    
     $tipo_usuario = isset($_POST['tipo_usuario']) ? $_POST['tipo_usuario'] : '';
 
     // Validaciones basicas
@@ -65,7 +65,7 @@ function insertar_datos($conn, $nombre, $apellido, $correo, $cedula, $contraseni
     $apellido = mysqli_real_escape_string($conn, $apellido);
     $correo = mysqli_real_escape_string($conn, $correo);
     $cedula = mysqli_real_escape_string($conn, $cedula);
-    $horario = mysqli_real_escape_string($conn, $horario);
+
     $tipo_usuario = mysqli_real_escape_string($conn, $tipo_usuario);
 
     $hash = password_hash($contrasenia, PASSWORD_DEFAULT);

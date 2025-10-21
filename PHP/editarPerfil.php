@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../../PHP/conexion.php");
+require_once("conexion.php");
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['id_usuario'])) {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $conn->prepare("UPDATE usuario SET correo = ? WHERE id_usuario = ?");
             $stmt->bind_param("si", $nuevo_correo, $id_usuario);
             if ($stmt->execute()) {
-                $mensaje .= "Correo actualizado exitosamente. ";
+                $mensaje .= "Éxito: Correo actualizado exitosamente. ";
                 // Registrar actividad
                 $detalle = "Usuario actualizó su correo electrónico";
                 $stmt = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
@@ -39,11 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->execute();
             } else {
                 $error = true;
-                $mensaje .= "Error al actualizar el correo. ";
+                $mensaje .= "Error: Al actualizar el correo. ";
             }
         } else {
             $error = true;
-            $mensaje .= "Formato de correo inválido. ";
+            $mensaje .= "Error: Formato de correo inválido. ";
         }
     }
 
@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nueva_contrasenia = password_hash($_POST['contrasenia'], PASSWORD_DEFAULT);
         $stmt = $conn->prepare("UPDATE usuario SET contrasenia = ? WHERE id_usuario = ?");
         $stmt->bind_param("si", $nueva_contrasenia, $id_usuario);
-        if ($stmt->execute()) {
-            $mensaje .= "Contraseña actualizada exitosamente. ";
+            if ($stmt->execute()) {
+            $mensaje .= "Éxito: Contraseña actualizada exitosamente. ";
             // Registrar actividad
             $detalle = "Usuario actualizó su contraseña";
             $stmt = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->execute();
         } else {
             $error = true;
-            $mensaje .= "Error al actualizar la contraseña. ";
+            $mensaje .= "Error: Al actualizar la contraseña. ";
         }
     }
 
@@ -91,34 +91,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Guardar en sesión para actualización inmediata (ruta relativa)
                 $_SESSION['avatar_url'] = '../' . $url_web_rel;
 
-                // Guardar URL relativa en la DB
-                $stmt = $conn->prepare("INSERT INTO imagen (entidad, referencia_id, tipo, url, id_usuario, categoria) 
-                                      VALUES ('usuario', ?, 'perfil', ?, ?, 'documento')");
-                $url_db = '../' . $url_web_rel;
-                $stmt->bind_param("isi", $id_usuario, $url_db, $id_usuario);
-                if ($stmt->execute()) {
-                    $mensaje .= "Foto de perfil actualizada exitosamente. ";
-                    // Registrar actividad
-                    $detalle = "Usuario actualizó su foto de perfil";
-                    $stmt = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
-                    $stmt->bind_param("is", $id_usuario, $detalle);
-                    $stmt->execute();
+                // Verificar si el id_recurso existe en la tabla recurso
+                $stmt_check = $conn->prepare("SELECT COUNT(*) FROM recurso WHERE id_recurso = ?");
+                $stmt_check->bind_param("i", $id_usuario);
+                $stmt_check->execute();
+                $stmt_check->bind_result($exists);
+                $stmt_check->fetch();
+                $stmt_check->close();
 
-                    // Actualizar la variable para mostrar la nueva imagen de inmediato (usar la URL relativa con cache-bust)
-                    $foto_perfil = $url_web_rel;
-                    // Guardar en sesión para que los headers muestren la nueva imagen inmediatamente (con cache-bust y prefijo de proyecto)
-                    $_SESSION['avatar_url'] = '/sugar-main' . $url_web_rel . '?v=' . time();
+                if ($exists === 0) {
+                    // Manejar el caso donde el id_recurso no existe
+                    $mensaje = "Error: El recurso asociado no existe. Por favor, verifique.";
                 } else {
-                    $error = true;
-                    $mensaje .= "Error al registrar la imagen en la base de datos. ";
+                    // Guardar URL relativa en la DB
+                    $stmt = $conn->prepare("INSERT INTO imagen (id_recurso, tipo, url) 
+                                      VALUES (?, 'perfil', ?)");
+                    $url_db = '../' . $url_web_rel;
+                    $stmt->bind_param("is", $id_usuario, $url_db);
+                    if ($stmt->execute()) {
+                        $mensaje = "Éxito: Foto de perfil actualizada exitosamente.";
+                        // Registrar actividad
+                        $detalle = "Usuario actualizó su foto de perfil";
+                        $stmt = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
+                        $stmt->bind_param("is", $id_usuario, $detalle);
+                        $stmt->execute();
+
+                        // Actualizar la variable para mostrar la nueva imagen de inmediato (usar la URL relativa con cache-bust)
+                        $foto_perfil = $url_web_rel;
+                        // Guardar en sesión para que los headers muestren la nueva imagen inmediatamente (con cache-bust y prefijo de proyecto)
+                        $_SESSION['avatar_url'] = '/sugar-main' . $url_web_rel . '?v=' . time();
+                    } else {
+                        $mensaje = "Error: No se pudo actualizar la foto de perfil.";
+                    }
                 }
             } else {
                 $error = true;
-                $mensaje .= "Error al subir la imagen. ";
+                $mensaje .= "Error: Al subir la imagen. ";
             }
         } else {
             $error = true;
-            $mensaje .= "Tipo de archivo no permitido. ";
+            $mensaje .= "Error: Tipo de archivo no permitido. ";
         }
     }
 
@@ -132,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Obtener la foto de perfil actual
-$stmt = $conn->prepare("SELECT url FROM imagen WHERE id_usuario = ? AND tipo = 'perfil' ORDER BY fecha DESC LIMIT 1");
+$stmt = $conn->prepare("SELECT url FROM imagen WHERE id_recurso = ? AND tipo = 'perfil' ORDER BY id_imagen DESC LIMIT 1");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -206,7 +218,7 @@ include $header_file;
     <?php if (!empty($flash_message)) : ?>
     <script>
         Swal.fire({
-            title: '<?php echo $flash_message['error'] ? "Error" : "Éxito"; ?>',
+            title: '<?php echo $flash_message['error'] ? "Error" : "Foto actualizada"; ?>',
             text: '<?php echo addslashes($flash_message['text']); ?>',
             icon: '<?php echo $flash_message['error'] ? "error" : "success"; ?>',
             confirmButtonText: 'Ok'

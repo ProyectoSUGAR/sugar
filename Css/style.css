@@ -245,9 +245,9 @@ html, body {
     background-color: #486382;
     border-radius: 24px;
     padding: 1rem 1.2rem;
-    width: 340px;
+    width: 300px;
     min-width: 240px;
-    max-width: 98vw;
+    max-width: 400px;
     color: white;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
     display: flex;
@@ -954,7 +954,7 @@ html, body {
   .panel-carrusel {
     width: 80vw;
     min-width: 300px;
-    max-width: 600px;
+    max-width: 400px;
     height: 500px;
   }
   .estadisticas-grid {
@@ -984,7 +984,7 @@ html, body {
   .panel-formulario,
   .panel-carrusel {
     width: 95vw;
-    max-width: 500px;
+    max-width: 400px;
     padding: 1.5rem 0.8rem;
   }
   .panel-carrusel {
@@ -1193,8 +1193,8 @@ html, body {
   }
   .panel-formulario,
   .panel-carrusel {
-    width: 90%;
-    max-width: 500px;
+    width: 60%;
+    max-width: 400px;
   }
   .grupo-tarjetas {
     grid-template-columns: repeat(2, 1fr);
@@ -1220,8 +1220,8 @@ html, body {
   }
   .panel-formulario,
   .panel-carrusel {
-    width: 80%;
-    max-width: 600px;
+    width: 60%;
+    max-width: 400px;
   }
   .grupo-tarjetas {
     grid-template-columns: repeat(3, 1fr);
@@ -1247,8 +1247,8 @@ html, body {
   }
   .panel-formulario,
   .panel-carrusel {
-    width: 70%;
-    max-width: 800px;
+    width: 60%;
+    max-width: 400px;
   }
   .grupo-tarjetas {
     grid-template-columns: repeat(3, 1fr);

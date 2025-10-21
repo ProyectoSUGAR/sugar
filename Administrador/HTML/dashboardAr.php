@@ -68,7 +68,7 @@ include '../../HEADERS/headerAA.php';
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-ui.min.js"></script>
     <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.11.0/css/anychart-ui.min.css">
     <!-- Inclusión del script que actualiza dinámicamente las estadísticas -->
-    <script src="../../Direccion/JS/estadisticas.js"></script>
+    <script src="../../Administrador/JS/estadisticas.js"></script>
     <!-- Inclusión del script que muestra los planos de horarios -->
     <script src="../../JS/planos_horarios.js"></script>
 </body>

@@ -73,27 +73,7 @@
         </form>
       </section>
 
-      <!-- Panel lateral que contiene el carrusel visual -->
-      <section class="panel-carrusel">
-        <div id="carruselBD" class="carousel slide carrusel" data-bs-ride="carousel">
-
-          <!-- Contenedor de las imágenes del carrusel -->
-          <div class="carousel-inner">
-          </div>
-
-          <!-- Botón para navegar a la imagen anterior del carrusel -->
-          <button class="carousel-control-prev flecha-carrusel izquierda" type="button" data-bs-target="#carruselBD" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </button>
-
-          <!-- Botón para navegar a la imagen siguiente del carrusel -->
-          <button class="carousel-control-next flecha-carrusel derecha" type="button" data-bs-target="#carruselBD" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </button>
-
-        </div>
-      </section>
-
+      
     </main>
   </div>
 

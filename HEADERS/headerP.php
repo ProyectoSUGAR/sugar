@@ -3,7 +3,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 // Use existing default image under /Images
 $avatar_url = '../../Images/perfiles/perfilpordefecto.jpg';
 // Cargar conexión con fallback
-require_once('../../PHP/conexion.php');
+require_once(__DIR__ . '/../PHP/conexion.php');
 
 if (!empty($_SESSION['id_usuario'])) {
     $db = function_exists('conectar_bd') ? conectar_bd() : null;
@@ -12,7 +12,7 @@ if (!empty($_SESSION['id_usuario'])) {
     if (!empty($_SESSION['avatar_url'])) {
         $avatar_url = $_SESSION['avatar_url'];
     } elseif ($db) {
-        $q = $db->prepare("SELECT url FROM imagen WHERE id_usuario = ? AND tipo = 'perfil' ORDER BY fecha DESC LIMIT 1");
+        $q = $db->prepare("SELECT url FROM imagen WHERE id_recurso = ? AND tipo = 'perfil' ORDER BY id_imagen DESC LIMIT 1");
         if ($q) {
             $q->bind_param('i', $uid);
             $q->execute();
@@ -63,13 +63,13 @@ if (!empty($_SESSION['id_usuario'])) {
                 }
             }
             ?>
-            <img src="<?php echo htmlspecialchars($avatarSrc); ?>" alt="Avatar" class="avatar-img" onerror="this.src='/sugar-main/Images/perfiles/perfilpordefecto.jpg'">
+            <img src="<?php echo htmlspecialchars($avatarSrc); ?>" alt="Avatar" class="avatar-img" onerror="this.src='../../Images/perfiles/perfilpordefecto.jpg'">
         </div>
         <!-- Nombre del sistema o usuario actual -->
         <div class="datos-usuario">
             <strong >Profesor/a</strong>
             <br>
-            <a  class="p1" href="/../../PHP/editarPerfil.php">Editar perfil</a>
+            <a  class="p1" href="../../PHP/editarPerfil.php">Editar perfil</a>
             <br>
             <a  class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
             
@@ -87,17 +87,11 @@ if (!empty($_SESSION['id_usuario'])) {
     <!-- Lista de opciones del menú hamburguesa (oculta por defecto) -->
      <nav id="nav" class="main-nav">
         <div class="nav-links">
-      <a class="link-item" href="../../Profesor/HTML/dashboardP.php">Inicio</a>
-    <a class="link-item" href="#contenedor-tablas-horarios">Horarios</a>
-      <a class="link-item" href="../../Profesor/HTML/anuncios.php">Anuncios</a>
-                <!-- Alerta -->
-           <div class="alerta">
-        <H2 class="h2alerta">Comunicado oficial</H2>
-        <div class="textoalerta">
-            <h3 class="h3alerta">Aquí va el texto.</h3>
+            <a class="link-item" href="../../Profesor/HTML/reservaEspacios.php">Reservar espacios</a>
+            <a class="link-item" href="../../Profesor/HTML/profesores.php">Profesores</a>
+            <a class="link-item" href="../../Profesor/HTML/anuncios.php">Anuncios</a>
         </div>
-    </div>
-</nav>
+    </nav>
     <!-- Inclusión del script que gestiona la funcionalidad del menú hamburguesa -->
     <script src="../../JS/menuHamb.js"></script>
 </header>

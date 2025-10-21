@@ -90,19 +90,6 @@ include '../../PHP/header1.php';
                 <script src="../../Login/JavaScript/registro_campos.js"></script>
             </section>
             <!-- Panel lateral que contiene el carrusel visual -->
-            <section class="panel-carrusel">
-                <div class="carrusel">
-                    <!-- Imagen institucional que se muestra en el carrusel -->
-                    <img src="../../Images/fondo.png" alt="Imagen institucional" class="imagen-carrusel" />
-                    <!-- Texto descriptivo del carrusel -->
-                    <div class="texto-carrusel">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde perspiciati.
-                    </div>
-                    <!-- Botones para navegar entre imágenes del carrusel -->
-                    <button class="flecha-carrusel izquierda"><</button>
-                    <button class="flecha-carrusel derecha">></button>
-                </div>
-            </section>
         </main>
     </div>
     <!-- Script que gestiona el comportamiento del formulario de registro -->

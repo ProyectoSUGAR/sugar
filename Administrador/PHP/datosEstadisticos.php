@@ -1,39 +1,46 @@
 <?php
-// Establece el tipo de contenido de la respuesta como JSON
+// elementos JSON 
 header('Content-Type: application/json');
 
-// Importa el archivo que contiene la función de conexión a la base de datos
-require_once '../../PHP/conexion.php';
+// llamado a la conexion con la base de datos
+require_once('../../PHP/conexion.php');
 
-// Ejecuta la función para conectar con la base de datos
+// conexion con la base de datos
 $con = conectar_bd();
 
-// Consulta SQL para contar el total de alumnos registrados
+// alumnos registrados
+//mysql_query es una funcion que ejecuta la consulta SQL
 $qAlumnos = mysqli_query($con, "SELECT COUNT(*) AS total FROM alumno");
 
-// Extrae el resultado de la consulta y obtiene el total de alumnos
+// total de alumnos
+// mysql_fetch_assoc es una funcion que obtiene el valor de la consulta SQL
 $alumnos = mysqli_fetch_assoc($qAlumnos)['total'];
 
-// Consulta SQL para contar el total de usuarios con rol de profesor
+// profesores registrados
+//mysql_query es una funcion que ejecuta la consulta SQL
 $qProfesores = mysqli_query($con, "SELECT COUNT(*) AS total FROM usuario WHERE tipo_usuario = 'profesor'");
 
-// Extrae el resultado de la consulta y obtiene el total de profesores
+// total de profesores
+// mysql_fetch_assoc es una funcion que obtiene el valor de la consulta SQL
 $profesores = mysqli_fetch_assoc($qProfesores)['total'];
 
-// Consulta SQL para contar el total de grupos registrados
+// grupos registrados
+//mysql_query es una funcion que ejecuta la consulta SQL
 $qGrupos = mysqli_query($con, "SELECT COUNT(*) AS total FROM grupo");
 
-// Extrae el resultado de la consulta y obtiene el total de grupos
+// total de grupos
+//mysql_query es una funcion que ejecuta la consulta SQL
 $grupos = mysqli_fetch_assoc($qGrupos)['total'];
 
-// Consulta SQL para contar el total de secretarios registrados
+// secretarios registrados
+//mysql_query es una funcion que ejecuta la consulta SQL
 $qSecretarios = mysqli_query($con, "SELECT COUNT(*) AS total FROM secretaria");
 
-// Extrae el resultado de la consulta y obtiene el total de secretarios
+// total de secretarios
+// mysql_fetch_assoc es una funcion que obtiene el valor de la consulta SQL
 $secretarios = mysqli_fetch_assoc($qSecretarios)['total'];
 
-// Consulta SQL para contar los salones disponibles actualmente
-// Se excluyen aquellos que están reservados en este momento con estado "aprobada"
+// salones libres en este momento
 $qSalonesLibres = mysqli_query($con, "
     SELECT COUNT(*) AS total FROM espacio 
     WHERE tipo_espacio='salon' AND id_espacio NOT IN (
@@ -42,32 +49,39 @@ $qSalonesLibres = mysqli_query($con, "
     )
 ");
 
-// Extrae el resultado de la consulta y obtiene el total de salones libres
+// total de salones libres
 $salones_libres = mysqli_fetch_assoc($qSalonesLibres)['total'];
 
-// Consulta SQL para contar los profesores presentes en este momento
-// Se consideran reservas activas con estado 'aprobada'
-$qProfesoresPresentes = mysqli_query($con, "
-    SELECT COUNT(DISTINCT r.id_usuario) AS total
-    FROM reserva r
-    INNER JOIN profesor p ON r.id_usuario = p.id_usuario
-    WHERE r.fecha_inicio <= NOW() AND r.fecha_fin >= NOW() AND r.estado='aprobada'
+// gráfico: distribución de asignaturas por turno y día
+$qClasesPorDia = mysqli_query($con, "
+    SELECT 
+        dia_semana,
+        turno,
+        COUNT(*) as total
+    FROM asocia 
+    GROUP BY dia_semana, turno
+    ORDER BY FIELD(dia_semana, 'lunes', 'martes', 'miercoles', 'jueves', 'viernes'), 
+             FIELD(turno, 'manana', 'tarde', 'noche')
 ");
 
-// Extrae el resultado de la consulta y obtiene el total de profesores presentes
-$profesores_presentes = mysqli_fetch_assoc($qProfesoresPresentes)['total'];
+$graficoData = [];
+while ($row = mysqli_fetch_assoc($qClasesPorDia)) {
+    $dia = ucfirst($row['dia_semana']); // Primera letra en mayúscula
+    $turno = $row['turno'] === 'manana' ? 'Mañana' : ucfirst($row['turno']); // Corregir "manana" a "Mañana"
+    $graficoData[] = [
+        'dia' => $dia,
+        'turno' => $turno,
+        'clases' => (int)$row['total']
+    ];
+}
 
-// Datos simulados para el gráfico de ausencias de profesores durante la semana
-$grafico = [2, 7, 5, 10, 4];
-
-// Codifica todos los datos en formato JSON y los envía como respuesta
+// envio de datos en formato JSON
 echo json_encode([
     "alumnos" => $alumnos,
     "profesores" => $profesores,
     "grupos" => $grupos,
     "secretarios" => $secretarios,
     "salones_libres" => $salones_libres,
-    "profesores_presentes" => $profesores_presentes,
-    "grafico" => $grafico
+    "grafico" => $graficoData
 ]);
 ?>
