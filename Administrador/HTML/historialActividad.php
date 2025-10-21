@@ -1,33 +1,9 @@
 <?php
 include '../../HEADERS/headerAA.php';
-require_once("../../PHP/conexion.php");
-$conexion = conectar_bd();
-
+require_once("../PHP/funcHistorial.php");
 session_start();
-$id_usuario = $_SESSION['id_usuario'] ?? 0;
 
-// Consulta el tipo de usuario
-$tipo_usuario = '';
-if ($id_usuario > 0) {
-    $resultado_tipo = mysqli_query($conexion, "SELECT tipo_usuario FROM usuario WHERE id_usuario=$id_usuario");
-    if ($fila_tipo = mysqli_fetch_assoc($resultado_tipo)) {
-        $tipo_usuario = $fila_tipo['tipo_usuario'];
-    }
-}
-
-// Solo permiten acceso "direccion" y "administrador"
-if ($tipo_usuario !== 'direccion' && $tipo_usuario !== 'administrador') {
-    echo "<script>alert('No tienes permiso para ver el historial de actividad.'); window.location.href='../../Administrador/HTML/gestionUsr.php';</script>";
-    if (isset($conexion) && $conexion instanceof mysqli) {
-        if (@$conexion->ping()) {
-
-        }
-    }
-    exit;
-}
-
-$consulta = "SELECT a.*, u.nombre, u.apellido FROM actividad a JOIN usuario u ON a.id_usuario = u.id_usuario ORDER BY a.fecha DESC LIMIT 100";
-$resultado_actividad = mysqli_query($conexion, $consulta);
+$actividades = obtenerHistorialActividad();
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +13,66 @@ $resultado_actividad = mysqli_query($conexion, $consulta);
     <title>Historial de Actividad</title>
     <link rel="stylesheet" href="../../Css/style.css">
     <link rel="stylesheet" href="../../Css/historialActividad.css">
+    <style>
+        .contenedor-historial-actividad {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .titulo-panel {
+            color: #333;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+        }
+
+        .tabla-historial-actividad {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #fff;
+        }
+
+        .tabla-historial-actividad th {
+            background: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .tabla-historial-actividad td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tabla-historial-actividad tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-volver-reporte {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-volver-reporte:hover {
+            background-color: #0056b3;
+        }
+
+        .fa-arrow-left {
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
 <body class="body-login">
     <div class="contenedor-historial-actividad">
@@ -51,14 +87,14 @@ $resultado_actividad = mysqli_query($conexion, $consulta);
                 </tr>
             </thead>
             <tbody>
-                <?php while ($actividad = mysqli_fetch_assoc($resultado_actividad)): ?>
+                <?php foreach ($actividades as $actividad): ?>
                 <tr>
                     <td><?= $actividad['fecha'] ?></td>
                     <td><?= htmlspecialchars($actividad['nombre'] . ' ' . $actividad['apellido']) ?></td>
                     <td><?= htmlspecialchars($actividad['accion']) ?></td>
                     <td><?= htmlspecialchars($actividad['detalle']) ?></td>
                 </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
         <div style="text-align:center; margin-top:24px;">
@@ -69,10 +105,3 @@ $resultado_actividad = mysqli_query($conexion, $consulta);
     </div>
 </body>
 </html>
-<?php
-if (isset($conexion) && $conexion instanceof mysqli) {
-    if (@$conexion->ping()) {
-
-    }
-}
-?>

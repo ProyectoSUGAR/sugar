@@ -1,46 +1,67 @@
 <?php
-// Verifica si la sesión aún no ha sido iniciada
-// session_status() devuelve el estado actual de la sesión (PHP_SESSION_NONE indica que no hay sesión activa)
 if (session_status() === PHP_SESSION_NONE) {
-    // Inicia una nueva sesión para el usuario
     session_start();
 }
 
-// Obtiene el nombre de usuario almacenado en la sesión
-// isset() verifica si la variable 'usuario' está definida y no es null
 $usuario = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Usuario";
-
-// Define el saludo predeterminado que se mostrará en pantalla
 $saludo = "Bienvenido/a";
 ?>
 
-<!-- Sección visual que muestra el saludo personalizado al usuario -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="header-left">
+        <img src="img/logo.png" alt="Logo" class="logo">
+        <div class="foto-perfil"></div>
+        <div class="info-usuario">
+            <h2>Adscrita</h2>
+            <a href="#">Editar perfil</a>
+            <a href="#">Cerrar sesión</a>
+        </div>
+    </div>
+    <div class="menu-icon">&#9776;</div>
+</header>
+
+<!-- SECCIÓN DE SALUDO -->
 <section class="seccion-saludo">
     <div class="fondo-saludo">
-        <!-- Muestra el saludo seguido del nombre del usuario, escapado para evitar inyecciones -->
         <h1><?php echo $saludo; ?> <span class="resaltado"><?php echo htmlspecialchars($usuario); ?></span>!</h1>
     </div>
 </section>
 
-<!-- Barra descriptiva que presenta el nombre completo del sistema -->
+<!-- BARRA DESCRIPTIVA -->
 <div class="barra-descriptiva">
     <p>Sistema Unificado de Gestión de Aulas y Recursos</p>
 </div>
 
-<!-- Sección principal del tablero con accesos rápidos a funcionalidades clave -->
+<!-- TABLERO PRINCIPAL -->
 <section class="tablero-principal">
     <div class="grupo-tarjetas">
-        <!-- Tarjeta que redirige a la sección de horarios y clases -->
-        <a class="tarjeta-opcion" href="#contenedor-tablas-horarios">
-            <span>Horarios y<br />clases</span>
+        <!-- 🔹 BOTÓN FUNCIONAL DE HORARIOS Y CLASES -->
+        <a class="tarjeta-opcion" href="asignacion.php">
+            <span>Horarios y<br>Clases</span>
         </a>
-        <!-- Tarjeta que redirige a la sección de anuncios -->
-        <a class="tarjeta-opcion" href="../../Administrador/HTML/anuncios.php">
+
+        <!-- 🔹 BOTÓN DE ANUNCIOS -->
+        <a class="tarjeta-opcion" href="anuncios.php">
             <span>Anuncios</span>
         </a>
-        <!-- Tarjeta que redirige a la sección de profesores -->
-        <a class="tarjeta-opcion" href="#">
+
+        <!-- 🔹 BOTÓN DE PROFESORES -->
+        <a class="tarjeta-opcion" href="gestionUsr.php">
             <span>Profesores</span>
         </a>
     </div>
 </section>
+
+</body>
+</html>
