@@ -97,27 +97,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
         $tmp = $_FILES['imagen']['tmp_name'];
         $orig_name = basename($_FILES['imagen']['name']);
-        $safe = time() . '_' . safe_filename($orig_name);
-        $dest = $images_dir . $safe;
+        $ext = strtolower(pathinfo($orig_name, PATHINFO_EXTENSION));
+        $allowed = ['jpg','jpeg','png','gif','webp','avif'];
+        $maxBytes = 5 * 1024 * 1024; // 5MB max for recursos
 
-        if (move_uploaded_file($tmp, $dest)) {
-            // Store a relative URL that works from Secretaria/HTML/asignarRec.php
-            // Using ../../Images/recursos/ so the image shows correctly on that page
-            $rel_path = '../../Images/recursos/' . $safe;
-
-            // Insert into imagen table
-            $stmt2 = mysqli_prepare($conn, "INSERT INTO imagen (tipo, url, id_recurso) VALUES (?, ?, ?)");
-            if (!$stmt2) {
-                error_log('Error preparing imagen insert: ' . mysqli_error($conn));
-            } else {
-                mysqli_stmt_bind_param($stmt2, 'ssi', $orig_name, $rel_path, $id_recurso);
-                $ok = mysqli_stmt_execute($stmt2);
-                if (!$ok) {
-                    error_log('Error inserting imagen: ' . mysqli_error($conn));
-                }
-            }
+        if (!in_array($ext, $allowed)) {
+            error_log('Tipo de imagen no permitido: ' . $ext);
+        } elseif ($_FILES['imagen']['size'] > $maxBytes) {
+            error_log('Imagen demasiado grande: ' . $_FILES['imagen']['size']);
         } else {
-            error_log('Error moviendo la imagen subida');
+            $safe = time() . '_' . safe_filename($orig_name);
+            $dest = $images_dir . $safe;
+
+            if (move_uploaded_file($tmp, $dest)) {
+                // Store a relative URL that works from Secretaria/HTML/asignarRec.php
+                $rel_path = '../../Images/recursos/' . $safe;
+
+                // Insert into imagen table: usar 'tipo' como la extensión para facilitar filtrado
+                $tipo_img = $ext;
+                $stmt2 = mysqli_prepare($conn, "INSERT INTO imagen (tipo, url, id_recurso) VALUES (?, ?, ?)");
+                if (!$stmt2) {
+                    error_log('Error preparing imagen insert: ' . mysqli_error($conn));
+                } else {
+                    mysqli_stmt_bind_param($stmt2, 'ssi', $tipo_img, $rel_path, $id_recurso);
+                    $ok = mysqli_stmt_execute($stmt2);
+                    if (!$ok) {
+                        error_log('Error inserting imagen: ' . mysqli_error($conn));
+                    }
+                }
+            } else {
+                error_log('Error moviendo la imagen subida');
+            }
         }
     }
 

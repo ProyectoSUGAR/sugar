@@ -52,11 +52,11 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
     <script src="../JS/bloquesHorarios.js"></script>
 </head>
 <body class="bodyregidat">
-    <?php include '../../HEADERS/headerA.php'; ?>
+    <?php include '../../HEADERS/headerAA.php'; ?>
     <main class="sugarads-main">
         <h1 class="sugarads-title">Registro de Horarios</h1>
         <div class="sugarads-grid">
-            <div class="sugarads-col-left">
+            <div class="sugarads-col-left sugar-card">
                 <!-- crear horario -->
                 <form id="form-crear" class="formasig" method="post" action="procesarHorario.php" style="border-top:2px solid #c7b299; padding-top:1.5rem; max-width:400px;">
                     <?php if (isset($_GET['success'])): ?>
@@ -159,8 +159,8 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                     </div>
                     <div class="sugarads-field">
                         <br>
-                        <button type="submit" class="regasigboton">Guardar</button>
-                        <button type="reset" class="botoneliminar">Cancelar</button>
+                        <button type="submit" class="btn-primario">Guardar</button>
+                        <button type="reset" class="btn-secundario">Cancelar</button>
                     </div>
                 </form>
 
@@ -253,8 +253,8 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                         </div>
                     </div>
                     <div class="sugarads-field">
-                        <button type="submit" class="sugarads-btn sugarads-btn-guardar">Actualizar</button>
-                        <a href="registroDatos.php" class="sugarads-btn sugarads-btn-cancelar">Cancelar</a>
+                        <button type="submit" class="btn-primario">Actualizar</button>
+                        <a href="registroDatos.php" class="btn-secundario" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:8px 12px;">Cancelar</a>
                     </div>
                 </form>
                 <?php endif; ?>
@@ -268,8 +268,8 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                         <span>¿Estás seguro que deseas eliminar este horario?</span>
                     </div>
                     <div class="sugarads-field">
-                        <button type="submit" class="sugarads-btn sugarads-btn-cancelar" style="background:#e53935;color:#fff;">Eliminar</button>
-                        <a href="registroDatos.php" class="sugarads-btn sugarads-btn-guardar">Cancelar</a>
+                        <button type="submit" class="btn-secundario" style="background:#e53935;color:#fff;">Eliminar</button>
+                        <a href="registroDatos.php" class="btn-primario" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:8px 12px;">Cancelar</a>
                     </div>
                 </form>
                 <?php endif; ?>

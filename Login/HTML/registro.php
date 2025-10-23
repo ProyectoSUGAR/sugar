@@ -1,6 +1,78 @@
-<?php 
+<?php
 // Inclusión del encabezado común que contiene configuraciones compartidas
 include '../../PHP/header1.php';
+
+// llamado a la conexion con la base de datos
+require_once("../../PHP/conexion.php");
+$con = conectar_bd();
+
+// Inicializar variables para persistencia de formulario
+$valores = [
+    'nombre' => '',
+    'apellido' => '',
+    'correo' => '',
+    'cedula' => '',
+    'tipo_usuario' => ''
+];
+
+$errores = [];
+
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+    // Recoger y sanear entradas
+    $valores['nombre'] = isset($_POST['nombre']) ? trim($_POST['nombre']) : '';
+    $valores['apellido'] = isset($_POST['apellido']) ? trim($_POST['apellido']) : '';
+    $valores['correo'] = isset($_POST['correo']) ? trim($_POST['correo']) : '';
+    $valores['cedula'] = isset($_POST['cedula']) ? trim($_POST['cedula']) : '';
+    $contrasenia = isset($_POST['password']) ? $_POST['password'] : '';
+    $confirmaPassword = isset($_POST['confirmaPassword']) ? $_POST['confirmaPassword'] : '';
+    $valores['tipo_usuario'] = isset($_POST['tipo_usuario']) ? $_POST['tipo_usuario'] : '';
+
+    // Validaciones backend
+    if (mb_strlen(preg_replace('/[^a-zA-Z]/u', '', $valores['nombre'])) < 3) {
+        $errores[] = 'El nombre debe tener al menos 3 letras.';
+    }
+    if (empty($valores['tipo_usuario'])) {
+        $errores[] = 'Debes seleccionar un tipo de usuario.';
+    }
+    if ($contrasenia !== $confirmaPassword) {
+        $errores[] = 'Las contraseñas no coinciden.';
+    }
+    if (!(strlen($contrasenia) >= 6 && preg_match('/[A-Z]/', $contrasenia) && preg_match('/[a-z]/', $contrasenia) && preg_match('/[0-9]/', $contrasenia))) {
+        $errores[] = 'La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula y un número.';
+    }
+    // Validar cédula: solo dígitos y longitud entre 7 y 8
+    if (!preg_match('/^[0-9]{7,8}$/', $valores['cedula'])) {
+        $errores[] = 'La cédula debe contener solo números y tener entre 7 y 8 dígitos.';
+    }
+
+    // Si errores, se mostrarán más abajo en JS SweetAlert y el formulario mantendrá valores
+    if (empty($errores)) {
+        // Verificar si el usuario ya existe
+        $correo_db = mysqli_real_escape_string($con, $valores['correo']);
+        $cedula_db = mysqli_real_escape_string($con, $valores['cedula']);
+        $consulta = "SELECT id_usuario FROM usuario WHERE correo = '$correo_db' OR cedula = '$cedula_db'";
+        $resultado = mysqli_query($con, $consulta);
+        if (mysqli_num_rows($resultado) > 0) {
+            $errores[] = 'El usuario ya está registrado.';
+        } else {
+            // Insertar
+            $nombre_db = mysqli_real_escape_string($con, $valores['nombre']);
+            $apellido_db = mysqli_real_escape_string($con, $valores['apellido']);
+            $hash = password_hash($contrasenia, PASSWORD_DEFAULT);
+            $tipo_db = mysqli_real_escape_string($con, $valores['tipo_usuario']);
+            $insertar = "INSERT INTO usuario (nombre, apellido, correo, cedula, contrasenia, horario, tipo_usuario, estado_usuario) VALUES ('$nombre_db', '$apellido_db', '$correo_db', '$cedula_db', '$hash', '', '$tipo_db', 'activo')";
+            if (mysqli_query($con, $insertar)) {
+                // Éxito: redirigir o mostrar alerta success
+                echo '<script>window.onload = function(){ Swal.fire({icon: "success", title: "Se registró exitosamente!", timer: 1600, showConfirmButton:false}).then(()=>{ window.location.href="../../Login/HTML/ingreso.php"; }); }</script>';
+                // Evitar reenvío posterior
+                $valores = ['nombre'=>'','apellido'=>'','correo'=>'','cedula'=>'','tipo_usuario'=>''];
+            } else {
+                $errores[] = 'Error al registrar usuario: ' . mysqli_error($con);
+            }
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -29,209 +101,73 @@ include '../../PHP/header1.php';
                     <a class="pestana-activa" href="../../Login/HTML/registro.php">Registrarse</a>
                 </div>
                 <!-- Formulario de registro de usuario -->
-                <form id="formulario-registro" method="post" action="../../Login/HTML/registro.php" class="formulario-registro">
+                <form id="formulario-registro" method="post" action="" class="formulario-registro">
                     <!-- Fila con campos para nombre y apellido -->
                     <div class="fila-doble">
                         <div class="campo-con-icono">
                             <label for="nombre"></label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required maxlength="50" value="<?php echo htmlspecialchars($valores['nombre']); ?>">
                         </div>
                         <div class="campo-con-icono">
                             <label for="apellido"></label>
-                            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+                            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required maxlength="50" value="<?php echo htmlspecialchars($valores['apellido']); ?>">
                         </div>
                     </div>
                     <!-- Campo para ingresar la cédula del usuario -->
                     <div class="campo-con-icono">
                         <label for="cedula"></label>
-                        <input type="text" id="cedula" name="cedula" placeholder="Cédula" maxlength="8" required>
+                        <input type="text" id="cedula" name="cedula" placeholder="Cédula" maxlength="8" required pattern="[0-9]{7,8}" value="<?php echo htmlspecialchars($valores['cedula']); ?>">
                     </div>
                     <!-- Campo para ingresar el correo electrónico -->
                     <div class="campo-con-icono">
                         <label for="correo"></label>
-                        <input type="email" id="correo" name="correo" placeholder="Correo" required>
+                        <input type="email" id="correo" name="correo" placeholder="Correo" required maxlength="100" value="<?php echo htmlspecialchars($valores['correo']); ?>">
                     </div>
                     <!-- Campo para ingresar la contraseña -->
                     <div class="campo-con-icono">
                         <label for="password"></label>
-                        <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                        <input type="password" id="password" name="password" placeholder="Contraseña" required maxlength="64">
                     </div>
                     <!-- Campo para confirmar la contraseña -->
                     <div class="campo-con-icono">
                         <label for="confirmaPassword"> </label>
-                        <input type="password" id="confirmaPassword" name="confirmaPassword" placeholder="Confirmar contraseña" required>
-                    </div>
-                    <!-- Selector de horario preferido -->
-                    <div class="campo-con-icono">
-                        <select name="horario" required>
-                            <option value="" disabled selected>Seleccione horario</option>
-                            <option value="mañana">Mañana</option>
-                            <option value="tarde">Tarde</option>
-                            <option value="noche">Noche</option>
-                        </select>
+                        <input type="password" id="confirmaPassword" name="confirmaPassword" placeholder="Confirmar contraseña" required maxlength="64">
                     </div>
                     <!-- Selector del tipo de usuario que se está registrando -->
                     <div class="campo-con-icono">
                         <select name="tipo_usuario" id="tipo_usuario" required>
                             <option value="">Seleccione tipo de usuario</option>
-                            <option value="administrador">Administrador</option>
-                            <option value="adscripta">Adscripta</option>
-                            <option value="alumno">Alumno</option>
-                            <option value="profesor">Profesor</option>
-                            <option value="secretaria">Secretaria</option>
-                            <option value="direccion">Dirección</option>
-                            <option value="funcionario">Funcionario</option>
+                            <option value="administrador" <?php echo $valores['tipo_usuario'] === 'administrador' ? 'selected' : ''; ?>>Administrador</option>
+                            <option value="adscripta" <?php echo $valores['tipo_usuario'] === 'adscripta' ? 'selected' : ''; ?>>Adscripta</option>
+                            <option value="alumno" <?php echo $valores['tipo_usuario'] === 'alumno' ? 'selected' : ''; ?>>Alumno</option>
+                            <option value="profesor" <?php echo $valores['tipo_usuario'] === 'profesor' ? 'selected' : ''; ?>>Profesor</option>
+                            <option value="secretaria" <?php echo $valores['tipo_usuario'] === 'secretaria' ? 'selected' : ''; ?>>Secretaria</option>
+                            <option value="direccion" <?php echo $valores['tipo_usuario'] === 'direccion' ? 'selected' : ''; ?>>Dirección</option>
+                            <option value="funcionario" <?php echo $valores['tipo_usuario'] === 'funcionario' ? 'selected' : ''; ?>>Funcionario</option>
                         </select>
                     </div>
                     <!-- Botón para enviar el formulario de registro -->
                     <button type="submit" class="btn-primario">Registrarse</button>
                 </form>
                 <!-- Script que gestiona la validación de campos del formulario -->
-                <script src="../../Login/JavaScript/registro_campos.js"></script>
+                <script src="../../Login/JS/registro.js"></script>
+                <?php if (!empty($errores)): ?>
+                    <script>
+                        window.onload = function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error de registro',
+                                html: <?php echo json_encode(implode('<br>', array_map('htmlspecialchars', $errores))); ?>
+                            });
+                        };
+                    </script>
+                <?php endif; ?>
             </section>
             <!-- Panel lateral que contiene el carrusel visual -->
         </main>
     </div>
-    <!-- Script que gestiona el comportamiento del formulario de registro -->
-    <script src="../../Login/JavaScript/registro.js"></script>
     <!-- Script que muestra u oculta campos según el tipo de usuario seleccionado -->
-    <script src="../../Login/JavaScript/mostrarCampos.js"></script>
+    <script src="../../Login/JS/mostrarCampos.js"></script>
 </body>
 </html>
-
-// Este es el código de form.php de la parte PHP, se movió a esta pagina para el metodo post y las alertas.
-
-<?php
-
-// llamado a la conexion con la base de datos
-// require es una funcion que incluye y evalua el archivo especificado
-require_once("../../PHP/conexion.php");
-
-// conexion con la base de datos
-$con = conectar_bd();
-
-// Procesar el formulario cuando se envíe
-// $_SERVER["REQUEST_METHOD"] es una variable superglobal que contiene el método de solicitud utilizado para acceder a la página
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $correo = $_POST["correo"];
-    $cedula = $_POST["cedula"];
-    $contrasenia = $_POST["password"];
-    $confirmaPassword = $_POST["confirmaPassword"];
-    $horario = $_POST["horario"];
-    $tipo_usuario = $_POST["tipo_usuario"];
-
-    // Validaciones backend
-    $errores = array();
-    if (mb_strlen(preg_replace('/[^a-zA-Z]/', '', $nombre)) < 3) {
-        $errores[] = 'El nombre debe tener al menos 3 letras.';
-    }
-    if (empty($tipo_usuario)) {
-        $errores[] = 'Debes seleccionar un tipo de usuario.';
-    }
-    if ($contrasenia !== $confirmaPassword) {
-        $errores[] = 'Las contraseñas no coinciden.';
-    }
-    if (!(strlen($contrasenia) >= 6 && preg_match('/[A-Z]/', $contrasenia) && preg_match('/[a-z]/', $contrasenia) && preg_match('/[0-9]/', $contrasenia))) {
-        $errores[] = 'La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula y un número.';
-    }
-    if (!empty($errores)) {
-        echo '<script>';
-        echo 'Swal.fire({';
-        echo 'icon: "error",';
-        echo 'title: "Error de registro",';
-        echo 'html: "' . implode('<br>', array_map('htmlspecialchars', $errores)) . '",';
-        echo '});';
-        echo '</script>';
-        exit();
-    }
-
-    // Verificar si el usuario ya existe
-    // consultar_existe_usr es una funcion que verifica si el usuario ya existe en la base de datos
-    $existe_usr = consultar_existe_usr($con, $correo, $cedula);
-
-    // insertar_datos es una funcion que inserta los datos en la base de datos 
-    insertar_datos($con, $nombre, $apellido, $correo, $cedula, $contrasenia, $horario, $tipo_usuario, $existe_usr);
-}
-
-// funcion consultar si el usuario ya existe en la base de datos
-function consultar_existe_usr($con, $correo, $cedula) {
-    // proteger contra inyeccion SQL
-    // mysqli_real_escape_string es una funcion que escapa caracteres especiales en una cadena para usarla en una consulta SQL
-    $correo = mysqli_real_escape_string($con, $correo);
-
-    // verificar si el usuario ya existe en la base de datos
-    // mysqli_real_escape_string es una funcion que escapa caracteres especiales en una cadena para usar
-    $cedula = mysqli_real_escape_string($con, $cedula);
-
-    // consulta SQL para verificar si el usuario ya existe
-    // mysqli_query es una funcion que ejecuta la consulta SQL
-    $consulta = "SELECT id_usuario FROM usuario WHERE correo = '$correo' OR cedula = '$cedula'";
-
-    // ejecutar la consulta SQL
-    // mysqli_query es una funcion que ejecuta la consulta SQL
-    $resultado = mysqli_query($con, $consulta);
-
-    // retornar true si el usuario ya existe, false si no existe
-    //mysqli_num_rows es una funcion que obtiene el numero de filas de un resultado de una consulta SQL
-    return mysqli_num_rows($resultado) > 0;
-}
-
-// funcion insertar los datos en la base de datos
-function insertar_datos($con, $nombre, $apellido, $correo, $cedula, $contrasenia, $horario, $tipo_usuario, $existe_usr) {
-    // si el usuario no existe, insertar los datos en la base de datos
-    if (!$existe_usr) {
-        // proteger contra inyeccion SQL
-        // mysqli_real_escape_string es una funcion que escapa caracteres especiales en una cadena para usarla en una consulta SQL
-        $correo = mysqli_real_escape_string($con, $correo);
-        $cedula = mysqli_real_escape_string($con, $cedula);
-
-        // hashear la contraseña
-        // password_hash es una funcion que crea un hash de la contraseña
-        $contrasenia = password_hash($contrasenia, PASSWORD_DEFAULT);
-        
-        // proteger contra inyeccion SQL
-        $horario = mysqli_real_escape_string($con, $horario);
-        $tipo_usuario = mysqli_real_escape_string($con, $tipo_usuario);
-
-        // consulta SQL para insertar los datos en la base de datos
-        // mysqli_query es una funcion que ejecuta la consulta SQL
-        $consulta_insertar = "INSERT INTO usuario (nombre, apellido, correo, cedula, contrasenia, horario, tipo_usuario, estado_usuario) VALUES ('$nombre', '$apellido', '$correo', '$cedula', '$contrasenia', '$horario', '$tipo_usuario', 'activo')";
-
-        // ejecutar la consulta SQL y verificar si se insertaron los datos correctamente
-        // mysqli_query es una funcion que ejecuta la consulta SQL
-        if (mysqli_query($con, $consulta_insertar)) {
-    echo '<script>';
-   echo ' Swal.fire({';
- echo 'title: "Se registró exitosamente!",';
- echo 'icon: "success",';
-  echo'draggable: true';
-echo '});';
-    echo '</script>';
-        } else {
-            echo "Error: " . $consulta_insertar . "<br>" . mysqli_error($con);
-        }
-    } else {
-            echo '<script>';
-   echo ' Swal.fire({';
- echo 'title: "Su usuario ya está registrado",';
- echo 'icon: "error",';
-  echo'draggable: true';
-echo '});';
-    echo '</script>';
-    }
-
-
-}
-
-// Cerrar la conexión a la base de datos
-if (isset($con) && $con instanceof mysqli) {
-    if (@$con->ping()) {
-
-    }
-}
-
-
-?>
 

@@ -1,14 +1,19 @@
 // Espera a que todo el contenido HTML se haya cargado completamente
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Obtiene el formulario por su ID
-  const form = document.getElementById("formulario");
+  // Obtiene el formulario por su ID (ajustado al HTML)
+  const form = document.getElementById("formulario-registro") || document.querySelector('form');
 
-  // Obtiene el contenedor donde se mostrarán los mensajes de alerta
-  const contenedor = document.getElementById("alertaContenedor");
+  // Obtiene el contenedor donde se mostrarán los mensajes de alerta (opcional)
+  const contenedor = document.getElementById("alertaContenedor") || null;
 
   // Función que crea y muestra un mensaje de alerta visual en pantalla
   function mostrarMensaje(texto) {
+    if (!contenedor) {
+      // Si no hay contenedor, usamos SweetAlert como fallback
+      Swal.fire({ icon: 'error', title: 'Error', text: texto });
+      return;
+    }
     const alerta = document.createElement("p");
     alerta.textContent = texto;
     alerta.style.background = "#E3C39D";       // Color de fondo del mensaje
@@ -21,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Elimina el mensaje automáticamente después de 5 segundos
     setTimeout(function () {
-      contenedor.removeChild(alerta);
+      if (contenedor.contains(alerta)) contenedor.removeChild(alerta);
     }, 5000);
   }
 
@@ -48,13 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Función que obtiene y limpia los valores ingresados en el formulario
   function obtenerValoresFormulario() {
     return {
-      nombre: document.getElementById("nombre").value.trim(),
-      apellido: document.getElementById("apellido").value.trim(),
-      cedula: document.getElementById("cedula").value.trim(),
-      password: document.getElementById("password").value,
-      confirmar: document.getElementById("confirmaPassword").value,
-      fecha_nacimiento: document.getElementById("fecha_nacimiento").value,
-      tipoUsuario: document.getElementById("tipoUsuario").value
+      nombre: (document.getElementById("nombre") || {}).value ? document.getElementById("nombre").value.trim() : '',
+      apellido: (document.getElementById("apellido") || {}).value ? document.getElementById("apellido").value.trim() : '',
+      cedula: (document.getElementById("cedula") || {}).value ? document.getElementById("cedula").value.trim() : '',
+      password: (document.getElementById("password") || {}).value || '',
+      confirmar: (document.getElementById("confirmaPassword") || {}).value || '',
+      fecha_nacimiento: (document.getElementById("fecha_nacimiento") || {}).value || '',
+      tipoUsuario: (document.getElementById("tipo_usuario") || {}).value || ''
     };
   }
 
@@ -78,10 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
-  // Función que valida que la cédula tenga exactamente 8 dígitos numéricos
+  // Función que valida que la cédula tenga entre 7 y 8 dígitos numéricos
   function validarCedula(cedula) {
-    if (cedula.length !== 8 || isNaN(cedula)) {
-      mostrarMensaje("La cédula debe contener exactamente 8 números");
+    if (!/^[0-9]{7,8}$/.test(cedula)) {
+      mostrarMensaje("La cédula debe contener solo números y tener entre 7 y 8 dígitos");
       return false;
     }
     return true;
@@ -137,6 +142,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     return true;
   }
+
+  // Si no hay formulario, salir
+  if (!form) return;
 
   // Evento que se ejecuta al enviar el formulario
   form.addEventListener("submit", function (e) {

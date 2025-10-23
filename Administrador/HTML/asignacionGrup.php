@@ -8,7 +8,7 @@ require_once("../../PHP/conexion.php");
     <h1 class="sugarads-title">Ingreso de grupos</h1>
   </section>
   <section class="sugarads-grid">
-    <div class="sugarads-col-left">
+    <div class="sugarads-col-left sugar-card">
       <!-- Formulario de ingreso de grupo -->
       <form id="sugarads-form-grupo" class="formasig" autocomplete="off" onsubmit="return false;" style="max-width: 400px; margin: 0 auto;">
         <div class="sugarads-field">
@@ -21,23 +21,23 @@ require_once("../../PHP/conexion.php");
         </div>
         <div class="sugarads-field">
           <label for="grupo-nombre" class="sugarads-label">Nombre</label>
-          <input type="text" id="grupo-nombre" name="nombre" class="inputasig1" required placeholder="Ejemplo: MC">
+         <input type="text" id="grupo-nombre" name="nombre" class="inputasig1" required placeholder="Ejemplo: MC" maxlength="3" pattern="[A-Za-z]{1,3}">
         </div>
         <div class="sugarads-field">
           <label for="grupo-anio" class="sugarads-label">Año</label>
-          <input type="number" id="grupo-anio" name="anio" class="inputasig1" min="1" max="6" required placeholder="Ejemplo: 3">
+         <input type="number" id="grupo-anio" name="anio" class="inputasig1" min="1" max="6" required placeholder="Ejemplo: 3">
         </div>
         <div class="sugarads-field">
           <label for="grupo-horas" class="sugarads-label">Horas semanales</label>
-          <input type="number" id="grupo-horas" name="horas_semanales" class="inputasig1" min="1" max="50" required placeholder="Ejemplo: 36">
+         <input type="number" id="grupo-horas" name="horas_semanales" class="inputasig1" min="1" max="40" required placeholder="Ejemplo: 36">
         </div>
         <div class="sugarads-field" style="text-align:center;">
-          <button id="sugarads-guardar-grupo" class="regasigboton" type="button">Guardar</button>
-          <button id="sugarads-cancelar-grupo" class="botoneliminar" type="button">Cancelar</button>
+          <button id="sugarads-guardar-grupo" class="btn-primario" type="button">Guardar</button>
+          <button id="sugarads-cancelar-grupo" class="btn-secundario" type="button">Cancelar</button>
         </div>
       </form>
     </div>
-    <article class="sugarads-col-right">
+    <article class="sugarads-col-right sugar-card">
       <div class="formasig1" role="region" aria-live="polite" aria-label="Confirmación de grupo">
         <p class="sugarads-confirm-text">
           Se ingresará el grupo
@@ -48,8 +48,8 @@ require_once("../../PHP/conexion.php");
           <br>¿Desea realizar esta acción?
         </p>
         <div class="sugarads-confirm-actions" role="group" aria-label="Acciones de confirmación">
-          <button id="sugarads-confirmar-grupo" class="sugarads-btn sugarads-btn-guardar" type="button">Confirmar</button>
-          <button id="sugarads-cancelar-confirmacion-grupo" class="sugarads-btn sugarads-btn-cancelar" type="button">Cancelar</button>
+          <button id="sugarads-confirmar-grupo" class="btn-primario" type="button">Confirmar</button>
+          <button id="sugarads-cancelar-confirmacion-grupo" class="btn-secundario" type="button">Cancelar</button>
         </div>
       </div>
       <section class="sugarads-resultado" aria-label="Resultado de ingreso de grupo">

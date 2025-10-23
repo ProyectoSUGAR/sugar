@@ -51,7 +51,7 @@ if (!empty($_SESSION['avatar_url'])) {
         <div class="datos-usuario">
             <strong>Administrador</strong>
             <br>
-            <a class="p1" href="../PHP/editarPerfil.php">Editar perfil</a>
+            <a class="p1" href="../../PHP/editarPerfil.php">Editar perfil</a>
             <br>
             <a class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
         </div>
@@ -72,7 +72,10 @@ if (!empty($_SESSION['avatar_url'])) {
             <a class="link-item" href="../../Administrador/HTML/asignacionAsig.php">Registro de Asignaturas</a>
             <a class="link-item" href="../../Administrador/HTML/asignacionGrup.php">Registrar grupos</a>
             <a class="link-item" href="../../Administrador/HTML/gestionUsr.php">Gestionar usuarios</a>
-            <a class="link-item" href="../../Administrador/HTML/registroDatos.php">Registro de Datos</a>
+            <a class="link-item" href="../../Administrador/HTML/historialActividad.php">Historial de actividad</a>
+            <a class="link-item" href="../../Administrador/HTML/gestionUsr.php">Gestion de usuario</a>
+                        <a class="link-item" href="../../Administrador/HTML/registroDatos.php">Registro de Datos</a>
+
             <!-- Alerta -->
            <div class="alerta">
         <H2 class="h2alerta">Comunicado oficial</H2>

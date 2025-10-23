@@ -49,11 +49,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Confirmar y enviar datos
   confirmarBtn.addEventListener('click', function () {
+    // Validaciones cliente: nombre 1-3 letras, anio 1-6, horas 1-40
+    const nombreVal = nombre.value.trim();
+    const anioVal = parseInt(anio.value, 10);
+    const horasVal = parseInt(horas.value, 10);
+    if (!/^[A-Za-z]{1,3}$/.test(nombreVal)) {
+      resultadoCanvas.textContent = 'Nombre inválido: solo letras (1-3).';
+      return;
+    }
+    if (!(anioVal >= 1 && anioVal <= 6)) {
+      resultadoCanvas.textContent = 'Año inválido: debe estar entre 1 y 6.';
+      return;
+    }
+    if (!(horasVal >= 1 && horasVal <= 40)) {
+      resultadoCanvas.textContent = 'Horas inválidas: debe ser entre 1 y 40.';
+      return;
+    }
+
     const datos = {
       tipo: tipo.value,
-      nombre: nombre.value,
-      anio: anio.value,
-      horas_semanales: horas.value
+      nombre: nombreVal,
+      anio: anioVal,
+      horas_semanales: horasVal
     };
   fetch('../../Adscripta/PHP/ingresoGrupo.php', {
       method: 'POST',

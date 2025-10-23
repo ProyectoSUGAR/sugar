@@ -67,14 +67,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Actualizar foto de perfil
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
-        $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+        // Permitir extensiones comunes y modernas
+        $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif'];
         $filename = $_FILES['imagen']['name'];
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        
-        if (in_array($ext, $allowed)) {
+
+        // Limitar tamaño a 2MB
+        $maxBytes = 2 * 1024 * 1024;
+
+        if (!in_array($ext, $allowed)) {
+            $error = true;
+            $mensaje .= "Error: Tipo de archivo no permitido. ";
+        } elseif ($_FILES['imagen']['size'] > $maxBytes) {
+            $error = true;
+            $mensaje .= "Error: El archivo es demasiado grande (máx 2MB). ";
+        } else {
             // Determinar carpeta física del proyecto (un nivel arriba de PHP)
             $projectRoot = dirname(__DIR__);
-            $upload_dir = $projectRoot . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'perfiles' . DIRECTORY_SEPARATOR;
+            // Usar la carpeta existente 'Images' (mayúscula I) en el repositorio
+            $upload_dir = $projectRoot . DIRECTORY_SEPARATOR . 'Images' . DIRECTORY_SEPARATOR . 'perfiles' . DIRECTORY_SEPARATOR;
             if (!file_exists($upload_dir)) {
                 mkdir($upload_dir, 0777, true);
             }
@@ -86,51 +97,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Asegurar permisos
                 @chmod($physical_dest, 0644);
 
-                // Guardar ruta relativa para ser consistente
-                $url_web_rel = 'images/perfiles/' . $nuevo_nombre;
-                // Guardar en sesión para actualización inmediata (ruta relativa)
-                $_SESSION['avatar_url'] = '../' . $url_web_rel;
+                // Guardar ruta web relativa (usar Images/ con mayúscula)
+                $url_web_rel = 'Images/perfiles/' . $nuevo_nombre;
+                $_SESSION['avatar_url'] = '/' . $url_web_rel . '?v=' . time();
 
-                // Verificar si el id_recurso existe en la tabla recurso
-                $stmt_check = $conn->prepare("SELECT COUNT(*) FROM recurso WHERE id_recurso = ?");
-                $stmt_check->bind_param("i", $id_usuario);
-                $stmt_check->execute();
-                $stmt_check->bind_result($exists);
-                $stmt_check->fetch();
-                $stmt_check->close();
+                // Insertar registro de imagen (si la tabla existe) y registrar actividad
+                $stmt = $conn->prepare("INSERT INTO imagen (id_recurso, tipo, url) VALUES (?, 'perfil', ?)");
+                $url_db = '/' . $url_web_rel;
+                $stmt->bind_param("is", $id_usuario, $url_db);
+                if ($stmt->execute()) {
+                    $mensaje = "Éxito: Foto de perfil actualizada exitosamente.";
+                    // Registrar actividad
+                    $detalle = "Usuario actualizó su foto de perfil";
+                    $stmt_act = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
+                    $stmt_act->bind_param("is", $id_usuario, $detalle);
+                    $stmt_act->execute();
 
-                if ($exists === 0) {
-                    // Manejar el caso donde el id_recurso no existe
-                    $mensaje = "Error: El recurso asociado no existe. Por favor, verifique.";
+                    // Actualizar la variable para mostrar la nueva imagen de inmediato
+                    $foto_perfil = '/' . $url_web_rel . '?v=' . time();
                 } else {
-                    // Guardar URL relativa en la DB
-                    $stmt = $conn->prepare("INSERT INTO imagen (id_recurso, tipo, url) 
-                                      VALUES (?, 'perfil', ?)");
-                    $url_db = '../' . $url_web_rel;
-                    $stmt->bind_param("is", $id_usuario, $url_db);
-                    if ($stmt->execute()) {
-                        $mensaje = "Éxito: Foto de perfil actualizada exitosamente.";
-                        // Registrar actividad
-                        $detalle = "Usuario actualizó su foto de perfil";
-                        $stmt = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
-                        $stmt->bind_param("is", $id_usuario, $detalle);
-                        $stmt->execute();
-
-                        // Actualizar la variable para mostrar la nueva imagen de inmediato (usar la URL relativa con cache-bust)
-                        $foto_perfil = $url_web_rel;
-                        // Guardar en sesión para que los headers muestren la nueva imagen inmediatamente (con cache-bust y prefijo de proyecto)
-                        $_SESSION['avatar_url'] = '/sugar-main' . $url_web_rel . '?v=' . time();
-                    } else {
-                        $mensaje = "Error: No se pudo actualizar la foto de perfil.";
-                    }
+                    $mensaje = "Error: No se pudo actualizar la foto de perfil.";
                 }
             } else {
                 $error = true;
                 $mensaje .= "Error: Al subir la imagen. ";
             }
-        } else {
-            $error = true;
-            $mensaje .= "Error: Tipo de archivo no permitido. ";
         }
     }
 
@@ -193,8 +184,8 @@ include $header_file;
                 <img src="../images/flechatriple.png" alt="" class="imagenflecha">
                 <input type="file" name="imagen" id="imagenInput" class="imga" accept="image/*">
             </div>
-            <input type="email" name="correo" class="inputuser" placeholder="ejemplo@gmail.com" value="<?php echo htmlspecialchars($usuario['correo']); ?>">
-            <input type="password" name="contrasenia" class="inputuser1" placeholder="Insertar nueva contraseña">
+            <input type="email" name="correo" class="inputuser" placeholder="ejemplo@gmail.com" maxlength="100" value="<?php echo htmlspecialchars($usuario['correo']); ?>">
+            <input type="password" name="contrasenia" class="inputuser1" placeholder="Insertar nueva contraseña" maxlength="64">
             <input type="submit" class="botoneditaru" name="guardardatosu" value="Guardar">
         </div>
     </form>

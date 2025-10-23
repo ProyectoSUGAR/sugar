@@ -9,6 +9,22 @@ $nombre = isset($data['nombre']) ? trim($data['nombre']) : null;
 $anio = isset($data['anio']) ? intval($data['anio']) : null;
 $horas = isset($data['horas_semanales']) ? intval($data['horas_semanales']) : null;
 
+// Validaciones servidor
+if ($nombre !== null) {
+    if (!preg_match('/^[A-Za-z]{1,3}$/', $nombre)) {
+        echo json_encode(["status"=>"error","message"=>"Nombre inválido (solo letras 1-3)."]);
+        exit;
+    }
+}
+if ($anio !== null && ($anio < 1 || $anio > 6)) {
+    echo json_encode(["status"=>"error","message"=>"Año inválido (1-6)."]);
+    exit;
+}
+if ($horas !== null && ($horas < 1 || $horas > 40)) {
+    echo json_encode(["status"=>"error","message"=>"Horas inválidas (1-40)."]);
+    exit;
+}
+
 if ($tipo && $nombre && $anio && $horas) {
     $stmt = mysqli_prepare($conn, "INSERT INTO grupo (tipo, nombre, anio, horas_semanales) VALUES (?, ?, ?, ?)");
     if (!$stmt) {

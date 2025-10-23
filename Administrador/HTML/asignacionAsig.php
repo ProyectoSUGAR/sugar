@@ -71,7 +71,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
     <main class="sugarads-main">
         <h1 class="sugarads-title">Gestión de asignaturas</h1>
         <div class="sugarads-grid registro-datos">
-            <section class="sugarads-col-left">
+            <section class="sugarads-col-left sugar-card">
                 <!-- Formulario para crear o editar asignaturas -->
                 <form class="formasig" method="post" action="../../Administrador/HTML/asignacionAsig.php">
                     <h2 class="h2asiges"><?= $editar ? "Editar asignatura" : "Nueva asignatura" ?></h2>
@@ -82,14 +82,14 @@ while ($fila = mysqli_fetch_assoc($res)) {
                         <input type="hidden" name="id_asignatura" value="<?= $id_editar ?>">
                         <input type="hidden" name="accion" value="editar">
                         <div class="sugarads-field">
-                            <button type="submit" class="sugarads-btn sugarads-btn-guardar">Guardar Cambios</button>
-                            <a href="asignacionAsig.php" class="sugarads-btn sugarads-btn-cancelar">Cancelar</a>
+                            <button type="submit" class="btn-primario">Guardar Cambios</button>
+                            <a href="asignacionAsig.php" class="btn-secundario" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:8px 12px;">Cancelar</a>
                         </div>
                     <?php else: ?>
                         <input type="hidden" name="accion" value="crear">
                         <div class="sugarads-field">
-                            <button type="submit" class="regasigboton">Registrar</button>
-                            <button type="reset" class="botoneliminar">Cancelar</button>
+                            <button type="submit" class="btn-primario">Registrar</button>
+                            <button type="reset" class="btn-secundario">Cancelar</button>
                         </div>
                     <?php endif; ?>
                 </form>
@@ -102,11 +102,11 @@ while ($fila = mysqli_fetch_assoc($res)) {
                        <?php foreach ($asignaturas as $a): ?>
                             <li class="pruebads">
                                 <?= htmlspecialchars($a['nombre']) ?>
-                                <a href="../../Administrador/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="sugarads-btn sugarads-btn-editar">Editar</a>
+                                <a href="../../Administrador/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="btn-secundario" style="text-decoration:none; padding:6px 8px;">Editar</a>
                                 <form method="post" action="" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta asignatura?');">
                                     <input type="hidden" name="id_asignatura" value="<?= $a['id_asignatura'] ?>">
                                     <input type="hidden" name="accion" value="eliminar">
-                                    <button type="submit" class="botoneliminar">Eliminar</button>
+                                    <button type="submit" class="btn-secundario">Eliminar</button>
                                 </form>
                             </li>
                         <?php endforeach; ?>

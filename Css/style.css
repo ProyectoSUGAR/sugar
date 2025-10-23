@@ -1079,7 +1079,7 @@ html, body {
   .panel-formulario,
   .panel-carrusel {
     width: 100vw;
-    max-width: 320px;
+    max-width: 320px; 
     min-width: unset;
     padding: 1rem 0.2rem;
   }
@@ -1178,6 +1178,7 @@ html, body {
     width: 100%;
     max-width: 320px;
     padding: 1rem;
+    height: auto;
   }
   .grupo-tarjetas {
     grid-template-columns: 1fr;
@@ -1205,6 +1206,7 @@ html, body {
   .panel-carrusel {
     width: 60%;
     max-width: 400px;
+    height: auto;
   }
   .grupo-tarjetas {
     grid-template-columns: repeat(2, 1fr);
@@ -1232,6 +1234,7 @@ html, body {
   .panel-carrusel {
     width: 60%;
     max-width: 400px;
+    height: auto;
   }
   .grupo-tarjetas {
     grid-template-columns: repeat(3, 1fr);
@@ -1259,6 +1262,7 @@ html, body {
   .panel-carrusel {
     width: 60%;
     max-width: 400px;
+    height: auto;
   }
   .grupo-tarjetas {
     grid-template-columns: repeat(3, 1fr);
@@ -2118,123 +2122,61 @@ right: 45.5%;
   color: #fff;
 }
 
-/* Responsive para gestión de usuarios */
-@media (max-width: 768px) {
-  .panel-formulario-gestion {
-    padding: 1rem;
-  }
+.contenedor-historial-actividad {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
 
-  .panel-formulario-gestion .titulo-panel {
-    font-size: 1.5rem;
-  }
+        .titulo-panel {
+            color: #333;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+        }
 
-  .panel-formulario-gestion .grupo-doble-campo {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+        .tabla-historial-actividad {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #fff;
+        }
 
-  .tabla-usuarios th,
-  .tabla-usuarios td {
-    padding: 0.5rem 0.4rem;
-    font-size: 0.9rem;
-  }
+        .tabla-historial-actividad th {
+            background: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
 
-  .tabla-usuarios .btn-accion {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
-}
+        .tabla-historial-actividad td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #ddd;
+        }
 
-.contenedor-reporte-usuarios{
-  max-width:1100px;
-  margin:32px auto;
-  padding:20px;
-  background:rgba(0,0,0,0.35);
-  border-radius:8px;
-}
-.titulo-panel{
-  color:#fff;
-  margin-bottom:12px;
-}
-.form-rol{ 
-  display:flex; 
-  align-items:center; 
-  gap:12px; 
-  margin-bottom:16px; }
-.form-rol label{ 
-  color:#fff; }
-.form-rol select{ 
-  padding:6px 8px; 
-  border-radius:4px; }
-.btn-export{ 
-  margin-left:auto; 
-  background:#0a6bff; 
-  color:#fff; 
-  padding:6px 10px; 
-  border-radius:4px; 
-  text-decoration:none; 
-}
-.tabla-reporte-usuarios, .tabla-usuarios{ 
-  width:100%; 
-  border-collapse:collapse; 
-  margin-top:12px; 
-  background:#fff; 
-  color:#071739; 
-}
-.tabla-reporte-usuarios th, .tabla-reporte-usuarios td, .tabla-usuarios th, .tabla-usuarios td{ 
-  padding:8px 10px; 
-  border:1px solid #ddd; 
-  text-align:left; 
-}
-.tabla-reporte-usuarios tbody tr.resaltado{ 
-  font-weight:700; 
-  background:#e3c39d; 
-  color:#071739; 
-}
-.tabla-usuarios thead{ 
-  background:#f3f3f3; 
-}
-.tabla-usuarios tbody tr:nth-child(even){ 
-  background:#fafafa; 
-}
-.tabla-usuarios .btn-accion{ 
-  background:transparent; 
-  border:none; 
-  cursor:pointer; 
-}
-.paginacion{ 
-  display:flex; 
-  gap:12px; 
-  align-items:center; 
-  justify-content:center; 
-  margin-top:12px; 
-}
-.paginacion .page{ 
-  padding:6px 10px; 
-  background:#0a6bff; 
-  color:#fff; 
-  border-radius:4px; 
-  text-decoration:none; 
-}
-.mensaje{ 
-  color:#fff; 
-  padding:12px; 
-}
-.volver, .btn-ver-detalle{ 
-  margin-top:12px; 
-  background:#0a6bff; 
-  color:#fff; 
-  padding:8px 12px; 
-  border-radius:6px; 
-  border:none; }
-@media (max-width:800px){
-  .contenedor-reporte-usuarios{ 
-    padding:12px; 
-  }
+        .tabla-historial-actividad tr:hover {
+            background-color: #f5f5f5;
+        }
 
-  .form-rol{ 
-    flex-direction:column; 
-    align-items:stretch; 
-  }
-}
-    gap: 2rem;
+        .btn-volver-reporte {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-volver-reporte:hover {
+            background-color: #0056b3;
+        }
+
+        .fa-arrow-left {
+            margin-right: 0.5rem;
+        }
