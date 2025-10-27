@@ -33,7 +33,7 @@ require_once("../../PHP/conexion.php");
         </div>
         <div class="sugarads-field" style="text-align:center;">
           <button id="sugarads-guardar-grupo" class="btn-primario" type="button">Guardar</button>
-          <button id="sugarads-cancelar-grupo" class="btn-secundario" type="button">Cancelar</button>
+          <button id="sugarads-cancelar-grupo" class="botoneliminar" type="button">Cancelar</button>
         </div>
       </form>
     </div>
@@ -49,7 +49,7 @@ require_once("../../PHP/conexion.php");
         </p>
         <div class="sugarads-confirm-actions" role="group" aria-label="Acciones de confirmación">
           <button id="sugarads-confirmar-grupo" class="btn-primario" type="button">Confirmar</button>
-          <button id="sugarads-cancelar-confirmacion-grupo" class="btn-secundario" type="button">Cancelar</button>
+          <button id="sugarads-cancelar-confirmacion-grupo" class="botoneliminar" type="button">Cancelar</button>
         </div>
       </div>
       <section class="sugarads-resultado" aria-label="Resultado de ingreso de grupo">

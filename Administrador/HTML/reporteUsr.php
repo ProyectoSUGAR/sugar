@@ -150,7 +150,7 @@ if ($export === 'csv' && $rol_seleccionado !== '') {
         </section>
         <form method="get" action="gestionUsr.php" style="margin-top:16px;text-align:center;">
             <input type="hidden" name="tipo" value="<?= htmlspecialchars($rol_seleccionado) ?>">
-            <button type="submit" class="btn-ver-detalle">Ir a Gestión de usuarios</button>
+            <button type="submit" class="botongestion">Ir a Gestión de usuarios</button>
         </form>
         <?php endif; ?>
     </div>
