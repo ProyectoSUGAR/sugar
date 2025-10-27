@@ -2,11 +2,9 @@
 include '../../HEADERS/headerD.php';
 require_once("../../PHP/conexion.php");
 $conn = conectar_bd();
-
 $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
 $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
-
 $consulta = "SELECT id_usuario, nombre, apellido, correo, tipo_usuario, estado_usuario FROM usuario WHERE 1";
 if ($busqueda) {
     $consulta .= " AND (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%')";
@@ -20,7 +18,6 @@ if ($tipo) {
 $consulta .= " ORDER BY nombre, apellido";
 $resultado_usuarios = mysqli_query($conn, $consulta);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,7 +33,6 @@ $resultado_usuarios = mysqli_query($conn, $consulta);
         <h2 class="titulo-panel">Gestión de Usuarios</h2>
         <main class="pruebads1">
             <section class="panel-formulario-gestion">
-
                 <form method="get" class="grupo-doble-campo">
                     <input type="text" name="busqueda" placeholder="Buscar por nombre, apellido o correo" value="<?= htmlspecialchars($busqueda) ?>">
                     <select name="estado">
@@ -116,10 +112,8 @@ $resultado_usuarios = mysqli_query($conn, $consulta);
 </body>
 </html>
 <?php
-// Cierre de la conexión
 if (isset($conn) && $conn instanceof mysqli) {
     if (@$conn->ping()) {
-
     }
 }
 ?>

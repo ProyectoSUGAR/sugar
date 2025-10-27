@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Agregar estilos para los mensajes de error
     const style = document.createElement('style');
     style.textContent = `
         .error-container {
@@ -33,28 +32,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
-
-    // --- DATOS PRECARGADOS ---
     const diasSemana = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
     const bloques = [1,2,3,4,5,6,7,8];
-    // Nombres de espacios sin tildes, igual que en la base de datos
     const salonesPorPiso = {
         0: ['Aula 1', 'Laboratorio de Robotica', 'Laboratorio de Quimica', 'Laboratorio de Electronica', 'Zoom', 'Taller'],
         1: ['Aula 2', 'Salon 1', 'Salon 2', 'Laboratorio de Fisica'],
         2: ['Aula 3', 'salon 3', 'salon 4', 'salon 5']
     };
-
-    // --- ELEMENTOS DEL DOM ---
     const selectorDia = document.getElementById('selector-dia');
     const botonesPiso = document.querySelectorAll('.btn-piso');
     const contenedorTablas = document.getElementById('contenedor-tablas-horarios');
     const imagenPlano = document.getElementById('imagen-plano');
-
     let pisoActual = '0';
     let diaActual = 'lunes';
-
-    // Normaliza nombres de espacios para coincidir con las claves del JSON
-    // Normaliza nombres quitando tildes y caracteres especiales
     function normalizarNombre(nombre) {
         return nombre
             .toLowerCase()
@@ -68,8 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .replace(/\s+/g, ' ')
             .trim();
     }
-
-    // Genera el grid de horarios para un turno
     function crearGridTurno(titulo, salones) {
         let html = '<div class="grid-header grid-salon">Espacio</div>';
         bloques.forEach(b => html += `<div class="grid-header grid-bloque">${b}</div>`);
@@ -81,8 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         return `<div class="tabla-horario"><h3>${titulo.charAt(0).toUpperCase()+titulo.slice(1)}</h3><div class="grid-horarios">${html}</div></div>`;
     }
-
-    // Renderiza la estructura de los tres turnos
     function renderizarEstructuraHorarios(piso) {
         const salones = salonesPorPiso[parseInt(piso)];
         contenedorTablas.innerHTML =
@@ -90,12 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
             crearGridTurno('tarde', salones) +
             crearGridTurno('noche', salones);
     }
-
-    // Llama al endpoint y llena las celdas
     function cargarHorarios(dia, piso) {
         console.log(`Cargando horarios para día: ${dia}, piso: ${piso}`);
         renderizarEstructuraHorarios(piso);
-        
         fetch(`../../PHP/planosHorarios.php?dia=${dia}`)
             .then(res => {
                 if (!res.ok) {
@@ -105,29 +88,20 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 console.log('Datos recibidos del backend:', data);
-                
-                // Verificar si hay datos válidos
                 if (!data) {
                     throw new Error('No se recibieron datos del servidor');
                 }
-                
                 if (!data[piso]) {
                     console.warn(`No hay datos para el piso ${piso}`);
                     return;
                 }
-                
-                // Limpiar celdas existentes
                 document.querySelectorAll('.horario-celda').forEach(cell => cell.innerHTML = '');
-                
-                // Procesar datos por turno
                 ['manana','tarde','noche'].forEach(turno => {
                     const datosTurno = data[piso][turno] || {};
-                    
                     Object.entries(datosTurno).forEach(([salon, bloques]) => {
                         Object.entries(bloques).forEach(([bloque, asignaturas]) => {
                             const selector = `.horario-celda[data-turno="${turno}"][data-salon="${salon}"][data-bloque="${bloque}"]`;
                             const celda = document.querySelector(selector);
-                            
                             if (celda) {
                                 const contenidoCelda = asignaturas.map(a => {
                                     const grupo = a.grupo ? `<div class="grupo">${a.grupo}</div>` : '';
@@ -157,8 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>`;
             });
     }
-
-    // Cambia la imagen del plano según el piso
     function actualizarPlano(piso) {
         const planos = {
             '0': '../../Images/PlantaBaja.jpeg',
@@ -170,8 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
             imagenPlano.alt = `Plano del piso ${piso}`;
         }
     }
-
-    // Eventos
     selectorDia.addEventListener('change', function(e) {
         diaActual = e.target.value;
         cargarHorarios(diaActual, pisoActual);
@@ -185,8 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
             cargarHorarios(diaActual, pisoActual);
         });
     });
-
-    // Inicialización
     actualizarPlano(pisoActual);
     cargarHorarios(diaActual, pisoActual);
 });

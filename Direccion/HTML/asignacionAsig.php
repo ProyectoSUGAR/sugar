@@ -1,13 +1,9 @@
 <?php
 require_once("../../PHP/conexion.php");
 $con = conectar_bd();
-
-// Inicializar variables
 $editar = false;
 $nombre_editar = '';
 $id_editar = '';
-
-// Procesar acciones del formulario
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
     $accion = $_POST['accion'];
     if ($accion === 'crear' && !empty($_POST['nombre'])) {
@@ -37,8 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
         exit;
     }
 }
-
-// Si se va a editar, cargar los datos
 if (isset($_GET['editar'])) {
     $editar = true;
     $id_editar = intval($_GET['editar']);
@@ -47,8 +41,6 @@ if (isset($_GET['editar'])) {
         $nombre_editar = $fila['nombre'];
     }
 }
-
-// Cargar todas las asignaturas
 $asignaturas = [];
 $res = mysqli_query($con, "SELECT * FROM asignatura ORDER BY nombre ASC");
 while ($fila = mysqli_fetch_assoc($res)) {
@@ -73,7 +65,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
         <div class="sugarads-grid registro-datos">
             <section class="sugarads-col-left">
                 <!-- Formulario para crear o editar asignaturas -->
-                <form class="formasig" method="post" action="../../Secretaria/HTML/asignacionAsig.php">
+                <form class="formasig" method="post" action="../../Direccion/PHP/asignaturaFunciones.php">
                     <h2 class="h2asiges"><?= $editar ? "Editar asignatura" : "Nueva asignatura" ?></h2>
                     <div class="sugarads-field">
                         <input type="text" id="nombre" name="nombre" class="inputasig" required placeholder="Ejemplo: Matemática" value="<?= htmlspecialchars($nombre_editar) ?>">
@@ -83,7 +75,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
                         <input type="hidden" name="accion" value="editar">
                         <div class="sugarads-field">
                             <button type="submit" class="sugarads-btn sugarads-btn-guardar">Guardar Cambios</button>
-                            <a href="asignacionAsig.php" class="sugarads-btn sugarads-btn-cancelar">Cancelar</a>
+                            <a href="../../Direccion/HTML/asignacionAsig.php" class="sugarads-btn sugarads-btn-cancelar">Cancelar</a>
                         </div>
                     <?php else: ?>
                         <input type="hidden" name="accion" value="crear">
@@ -102,7 +94,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
                        <?php foreach ($asignaturas as $a): ?>
                             <li class="pruebads">
                                 <?= htmlspecialchars($a['nombre']) ?>
-                                <a href="../../Adscripta/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="sugarads-btn sugarads-btn-editar">Editar</a>
+                                <a href="../../Direccion/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="sugarads-btn sugarads-btn-editar">Editar</a>
                                 <form method="post" action="" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta asignatura?');">
                                     <input type="hidden" name="id_asignatura" value="<?= $a['id_asignatura'] ?>">
                                     <input type="hidden" name="accion" value="eliminar">

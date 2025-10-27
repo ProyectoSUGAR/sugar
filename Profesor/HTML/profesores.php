@@ -2,7 +2,6 @@
 require_once(__DIR__ . '/../PHP/funcProfes.php');
 $profesores = obtenerProfesores();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

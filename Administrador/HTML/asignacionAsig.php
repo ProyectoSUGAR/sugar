@@ -1,13 +1,9 @@
 <?php
 require_once("../../PHP/conexion.php");
 $con = conectar_bd();
-
-// Inicializar variables
 $editar = false;
 $nombre_editar = '';
 $id_editar = '';
-
-// Procesar acciones del formulario
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
     $accion = $_POST['accion'];
     if ($accion === 'crear' && !empty($_POST['nombre'])) {
@@ -37,8 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
         exit;
     }
 }
-
-// Si se va a editar, cargar los datos
 if (isset($_GET['editar'])) {
     $editar = true;
     $id_editar = intval($_GET['editar']);
@@ -47,8 +41,6 @@ if (isset($_GET['editar'])) {
         $nombre_editar = $fila['nombre'];
     }
 }
-
-// Cargar todas las asignaturas
 $asignaturas = [];
 $res = mysqli_query($con, "SELECT * FROM asignatura ORDER BY nombre ASC");
 while ($fila = mysqli_fetch_assoc($res)) {

@@ -1,12 +1,7 @@
 <?php
-// Inclusión del encabezado común que contiene configuraciones compartidas
 include '../../PHP/header1.php';
-
-// llamado a la conexion con la base de datos
 require_once("../../PHP/conexion.php");
 $con = conectar_bd();
-
-// Inicializar variables para persistencia de formulario
 $valores = [
     'nombre' => '',
     'apellido' => '',
@@ -14,11 +9,8 @@ $valores = [
     'cedula' => '',
     'tipo_usuario' => ''
 ];
-
 $errores = [];
-
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    // Recoger y sanear entradas
     $valores['nombre'] = isset($_POST['nombre']) ? trim($_POST['nombre']) : '';
     $valores['apellido'] = isset($_POST['apellido']) ? trim($_POST['apellido']) : '';
     $valores['correo'] = isset($_POST['correo']) ? trim($_POST['correo']) : '';
@@ -26,8 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $contrasenia = isset($_POST['password']) ? $_POST['password'] : '';
     $confirmaPassword = isset($_POST['confirmaPassword']) ? $_POST['confirmaPassword'] : '';
     $valores['tipo_usuario'] = isset($_POST['tipo_usuario']) ? $_POST['tipo_usuario'] : '';
-
-    // Validaciones backend
     if (mb_strlen(preg_replace('/[^a-zA-Z]/u', '', $valores['nombre'])) < 3) {
         $errores[] = 'El nombre debe tener al menos 3 letras.';
     }
@@ -40,14 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     if (!(strlen($contrasenia) >= 6 && preg_match('/[A-Z]/', $contrasenia) && preg_match('/[a-z]/', $contrasenia) && preg_match('/[0-9]/', $contrasenia))) {
         $errores[] = 'La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula y un número.';
     }
-    // Validar cédula: solo dígitos y longitud entre 7 y 8
     if (!preg_match('/^[0-9]{7,8}$/', $valores['cedula'])) {
         $errores[] = 'La cédula debe contener solo números y tener entre 7 y 8 dígitos.';
     }
-
-    // Si errores, se mostrarán más abajo en JS SweetAlert y el formulario mantendrá valores
     if (empty($errores)) {
-        // Verificar si el usuario ya existe
         $correo_db = mysqli_real_escape_string($con, $valores['correo']);
         $cedula_db = mysqli_real_escape_string($con, $valores['cedula']);
         $consulta = "SELECT id_usuario FROM usuario WHERE correo = '$correo_db' OR cedula = '$cedula_db'";
@@ -55,16 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         if (mysqli_num_rows($resultado) > 0) {
             $errores[] = 'El usuario ya está registrado.';
         } else {
-            // Insertar
             $nombre_db = mysqli_real_escape_string($con, $valores['nombre']);
             $apellido_db = mysqli_real_escape_string($con, $valores['apellido']);
             $hash = password_hash($contrasenia, PASSWORD_DEFAULT);
             $tipo_db = mysqli_real_escape_string($con, $valores['tipo_usuario']);
             $insertar = "INSERT INTO usuario (nombre, apellido, correo, cedula, contrasenia, horario, tipo_usuario, estado_usuario) VALUES ('$nombre_db', '$apellido_db', '$correo_db', '$cedula_db', '$hash', '', '$tipo_db', 'activo')";
             if (mysqli_query($con, $insertar)) {
-                // Éxito: redirigir o mostrar alerta success
                 echo '<script>window.onload = function(){ Swal.fire({icon: "success", title: "Se registró exitosamente!", timer: 1600, showConfirmButton:false}).then(()=>{ window.location.href="../../Login/HTML/ingreso.php"; }); }</script>';
-                // Evitar reenvío posterior
                 $valores = ['nombre'=>'','apellido'=>'','correo'=>'','cedula'=>'','tipo_usuario'=>''];
             } else {
                 $errores[] = 'Error al registrar usuario: ' . mysqli_error($con);
@@ -72,9 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         }
     }
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -170,4 +151,3 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     <script src="../../Login/JS/mostrarCampos.js"></script>
 </body>
 </html>
-

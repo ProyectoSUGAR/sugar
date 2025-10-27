@@ -1,13 +1,7 @@
 <?php
-
-// Incluir el header y la conexión a la base de datos
 include '../../HEADERS/headerD.php';
 require_once("../../PHP/conexion.php");
-
-// Conectar a la base de datos
 $conn = conectar_bd();
-
-// Función para obtener opciones de un query
 function getOpciones($query, $conn) {
     $result = mysqli_query($conn, $query);
     $opciones = '';
@@ -16,13 +10,11 @@ function getOpciones($query, $conn) {
     }
     return $opciones;
 }
-
 $listaGrupos = getOpciones("SELECT id_grupo as id, CONCAT(nombre, ' (Año ', anio, ')') as nombre FROM grupo", $conn);
 $listaAsignaturas = getOpciones("SELECT id_asignatura as id, nombre FROM asignatura", $conn);
 $listaProfesores = getOpciones("SELECT id_usuario as id, CONCAT(nombre, ' ', apellido) as nombre FROM usuario WHERE tipo_usuario = 'profesor'", $conn);
 if (isset($conn) && $conn instanceof mysqli) {
   if (@$conn->ping()) {
-
   }
 }
 ?>
@@ -41,8 +33,7 @@ if (isset($conn) && $conn instanceof mysqli) {
       <section class="formasig">
         <h1 class="titulo-estadisticas">Asignación de clases</h1>
         <div class="division-asignacion"></div>
-        <form id="formulario-asignacion" class="pruebads" method="post" action="/Adscripta/PHP/asignacionProf.php">
-        <form id="formulario-asignacion" class="pruebads" method="post" action="../../Adscripta/PHP/asignacionProf.php">
+        <form id="formulario-asignacion" class="pruebads" method="post" action="../../Direccion/PHP/asignacionProf.php">
           <div class="campo-asignacion">
             <label for="campo-grupo" class="sugarads-label">Grupo</label>
             <br>
@@ -67,14 +58,12 @@ if (isset($conn) && $conn instanceof mysqli) {
               <?php echo $listaProfesores ?: '<option value="">No hay profesores</option>'; ?>
             </select>
           </div>
-
           <div class="campo-asignacion" style="grid-column:1/3;display:flex;gap:1.2rem;justify-content:center;">
             <button id="boton-guardar" class="btn-primario" type="submit">Guardar</button>
             <button id="boton-cancelar" class="btn-primario" type="reset">Cancelar</button>
           </div>
         </form>
         <?php 
-        // Mostrar mensajes de resultado o error
         if (isset($_GET['resultado'])): 
         ?>
           <div class="sugarads-canvas sugarads-success">

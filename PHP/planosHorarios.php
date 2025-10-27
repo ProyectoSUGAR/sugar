@@ -1,18 +1,8 @@
 <?php
-
-// Indica al navegador que la respuesta será JSON
 header('Content-Type: application/json');
-
-// Importa la función conectar_pdo() desde conexion.php
 require_once 'conexion.php';
-
-// Objeto PDO para consultas a la base de datos
 $pdo = conectar_pdo();
-
-// Solo estos días se permiten en la consulta
 $dias_validos = ['lunes','martes','miercoles','jueves','viernes'];
-
-// Mapeo de bloques horarios a números de bloque según su turno y franja horaria
 $mapa_horarios_bloques = [
     '07:00 - 07:45' => 1, '07:50 - 08:35' => 2, '08:40 - 09:25' => 3, '09:30 - 10:15' => 4,
     '10:20 - 11:05' => 5, '11:10 - 11:55' => 6, '12:00 - 12:45' => 7, '12:50 - 13:35' => 8,
@@ -21,15 +11,10 @@ $mapa_horarios_bloques = [
     '19:00 - 19:45' => 2, '19:50 - 20:35' => 3, '20:40 - 21:25' => 4, '21:30 - 22:15' => 5,
     '22:20 - 23:05' => 6, '23:10 - 23:11' => 7
 ];
-
-// Inicializa la estructura del resultado para todos los pisos y turnos
 $resultado = inicializar_resultado();
-
-// Normaliza nombres de espacios y turnos
 function normalizar($nombre) {
     return strtolower(trim(preg_replace('/\s+/', ' ', $nombre)));
 }
-
 function inicializar_resultado() {
     return [
         "0" => ["manana" => [], "tarde" => [], "noche" => []],
@@ -37,7 +22,6 @@ function inicializar_resultado() {
         "2" => ["manana" => [], "tarde" => [], "noche" => []]
     ];
 }
-
 function obtener_dia($dias_validos) {
     $dia = isset($_GET['dia']) ? strtolower($_GET['dia']) : '';
     if (!in_array($dia, $dias_validos)) {
@@ -47,7 +31,6 @@ function obtener_dia($dias_validos) {
     }
     return $dia;
 }
-
 function obtener_horarios($pdo, $dia) {
     $sql = "SELECT a.turno, a.horario, a.dia_semana, a.id_asignatura, a.id_profesor, a.id_grupo,
         e.nombre AS espacio, e.ubicacion, asig.nombre AS materia,
@@ -63,7 +46,6 @@ function obtener_horarios($pdo, $dia) {
     $stmt->execute(['dia' => $dia]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 function procesar_resultados($rows, $mapa_horarios_bloques, &$resultado) {
     foreach ($rows as $row) {
         $piso = null;
@@ -71,22 +53,17 @@ function procesar_resultados($rows, $mapa_horarios_bloques, &$resultado) {
         elseif ($row['ubicacion'] === 'piso 1') $piso = "1";
         elseif ($row['ubicacion'] === 'piso 2') $piso = "2";
         if ($piso === null) continue;
-
         $turno = normalizar($row['turno']);
         $espacio = normalizar($row['espacio']);
-
         $bloque = isset($mapa_horarios_bloques[$row['horario']]) ? $mapa_horarios_bloques[$row['horario']] : '_sin_bloque';
-
         if (!isset($resultado[$piso][$turno][$espacio])) $resultado[$piso][$turno][$espacio] = [];
         if (!isset($resultado[$piso][$turno][$espacio][$bloque])) $resultado[$piso][$turno][$espacio][$bloque] = [];
-
         $resultado[$piso][$turno][$espacio][$bloque][] = [
             'materia' => $row['materia'],
             'profesor' => $row['nombre_profesor'] . ' ' . $row['apellido_profesor']
         ];
     }
 }
-
 function asegurar_turnos(&$resultado) {
     foreach (["0","1","2"] as $piso) {
         foreach (["manana","tarde","noche"] as $turno) {
@@ -94,13 +71,10 @@ function asegurar_turnos(&$resultado) {
         }
     }
 }
-
 function devolver_json($resultado) {
     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
 }
-
 $dia = obtener_dia($dias_validos);
-// DEBUG: Si hay error en la consulta, mostrarlo y terminar
 try {
     $rows = obtener_horarios($pdo, $dia);
 } catch (Exception $e) {
@@ -111,33 +85,3 @@ try {
 procesar_resultados($rows, $mapa_horarios_bloques, $resultado);
 asegurar_turnos($resultado);
 devolver_json($resultado);
-
-/*
-<?php // Consulta de entradas (prueba deshabilitada, solo para desarrollo)
-$resultado = mysqli_query($con, "SELECT * FROM entrada"); // Obtener todas las entradas
-while($entradas = mysqli_fetch_object($resultado)) { // Recorrer cada entrada
-    ?>
-    <b>(<?php echo($entradas->fecha); ?> ) </b> <!-- Fecha de la entrada -->
-    <b> Anónimo dijo:</b> <br> <!-- Etiqueta de autor -->
-    <b> <?php echo ($entradas->titulo); ?> </b> <br> <!-- Título de la entrada -->
-    <?php echo ($entradas->mensaje); ?> <!-- Mensaje de la entrada -->
-    <hr> <!-- Separador -->
-<?php }
-?>
-*/
-/*
-<?php // Prueba de consulta sobre la tabla 'asocia' (deshabilitada)
-$resultado = mysqli_query($con, "SELECT * FROM asocia"); // Obtener todas las asociaciones de horarios
-while($asocia = mysqli_fetch_object($resultado)) { // Recorrer cada asociación
-    ?>
-    <b>(<?php echo($asocia->horario); ?>)</b> <!-- Horario asignado -->
-    <b> Turno:</b> <?php echo($asocia->turno); ?> <br> <!-- Turno de la clase -->
-    <b> Día:</b> <?php echo($asocia->dia_semana); ?> <br> <!-- Día de la semana -->
-    <b> ID Asignatura:</b> <?php echo($asocia->id_asignatura); ?> <br> <!-- ID de la asignatura -->
-    <b> ID Espacio:</b> <?php echo($asocia->id_espacio); ?> <br> <!-- ID del espacio -->
-    <b> ID Profesor:</b> <?php echo($asocia->id_profesor); ?> <br> <!-- ID del profesor -->
-    <hr>
-<?php }
-?>
-*/
-// Este bloque fue usado para pruebas rápidas de visualización y quedó deshabilitado por falta de funcionalidad real.

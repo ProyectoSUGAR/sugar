@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="../../Css/style.css" />
   </head>
   <?php include '../../Adscripta/HTML/bienvenida.php'; ?>
-
   <?php include '../../PHP/dashboard.php'; ?>
-
 </body>
 </html>

@@ -7,14 +7,14 @@ if ($_SERVER["REQUIEST_METHOD"] === "POST") {
     $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : '';
     $hora_inicio = isset($_POST['hora_inicio']) ? $_POST['hora_inicio'] : '';
     $hora_fin = isset($_POST['hora_fin']) ? $_POST['hora_fin'] : '';
-
     if ($id_usuario > 0 && $id_salon > 0 && !empty($fecha) && !empty($hora_inicio) && !empty($hora_fin)) {
         $stmt = mysqli_prepare($conn, "INSERT INTO reservas (id_usuario, id_salon, fecha, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?)");
         mysqli_stmt_bind_param($stmt, "iisss", $id_usuario, $id_salon, $fecha, $hora_inicio, $hora_fin);
         if (mysqli_stmt_execute($stmt)) {
             echo "<script>alert('Reserva realizada con éxito.'); window.location.href='../../Profesor/HTML/profesorReservas.php';</script>";
         } else {
-            echo "<script>alert('Error al realizar la reserva.'); window.location.href='../../Profesor/HTML/profesorReservas.php';</script>";
+            include("../../PHP/errores.php");
+            alerta_error_y_redirigir("reserva_fallida", "../../Profesor/HTML/profesorReservas.php");
         }
         mysqli_stmt_close($stmt);
     } else {

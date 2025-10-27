@@ -16,7 +16,6 @@ function crearAsignatura($conn, $nombre) {
         echo "<script>alert('El nombre de la asignatura es obligatorio.');</script>";
     }
 }
-
 function editarAsignatura($conn, $id, $nombre) {
     $id = intval($id);
     $nombre = trim($nombre);
@@ -35,28 +34,20 @@ function editarAsignatura($conn, $id, $nombre) {
         echo "<script>alert('El nombre de la asignatura es obligatorio.');</script>";
     }
 }
-
 function eliminarAsignatura($conn, $id) {
     $id = intval($id);
-
-    // Elimina relaciones en asocia
     $stmt_rel1 = mysqli_prepare($conn, "DELETE FROM asocia WHERE id_asignatura=?");
     mysqli_stmt_bind_param($stmt_rel1, "i", $id);
     mysqli_stmt_execute($stmt_rel1);
     mysqli_stmt_close($stmt_rel1);
-
-    // Elimina relaciones en tiene
     $stmt_rel2 = mysqli_prepare($conn, "DELETE FROM tiene WHERE id_asignatura=?");
     mysqli_stmt_bind_param($stmt_rel2, "i", $id);
     mysqli_stmt_execute($stmt_rel2);
     mysqli_stmt_close($stmt_rel2);
-
-    // Ahora elimina la asignatura
     $stmt = mysqli_prepare($conn, "DELETE FROM asignatura WHERE id_asignatura=?");
     mysqli_stmt_bind_param($stmt, "i", $id);
     $ok = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-
     if ($ok) {
     echo "<script>alert('Asignatura eliminada correctamente.'); window.location.href='../HTML/asignacionAsig.php';</script>";
         exit;
@@ -65,7 +56,6 @@ function eliminarAsignatura($conn, $id) {
         exit;
     }
 }
-
 function obtenerAsignaturas($conn) {
     $asignaturas = [];
     $result = mysqli_query($conn, "SELECT id_asignatura, nombre FROM asignatura ORDER BY nombre ASC");

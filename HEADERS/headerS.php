@@ -2,12 +2,9 @@
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 $avatar_url = '../../Images/perfiles/perfilpordefecto.jpg';
 require_once(__DIR__ . '/../PHP/conexion.php');
-
 if (!empty($_SESSION['id_usuario'])) {
     $db = function_exists('conectar_bd') ? conectar_bd() : null;
     $uid = (int) $_SESSION['id_usuario'];
-
-    // Si hay URL en sesión, la usamos tal cual (incluye cache-bust)
     if (!empty($_SESSION['avatar_url'])) {
         $avatar_url = $_SESSION['avatar_url'];
     } elseif ($db) {
@@ -22,26 +19,19 @@ if (!empty($_SESSION['id_usuario'])) {
             }
         }
     }
-
-    //funcion para normalizar  la ruta del avatar
     if (!empty($avatar_url) && strpos($avatar_url, '//') === false) {
-        
         $avatar_url = preg_replace('#^\.\./+#', '/', $avatar_url);
         if ($avatar_url[0] !== '/') $avatar_url = '/' . ltrim($avatar_url, '/');
         $avatar_url = preg_replace('#/sugar-main(/sugar-main)+#', '/sugar-main', $avatar_url);
     }
 }
 ?>
-
 <link rel="stylesheet" href="../../Css/style.css" />
-
-
 <header class="cabecera-institucional">
     <img src="../../Images/Logo22-removebg-preview.png" alt="Logo" class="logo-app" />
     <div class="caja-usuario">
             <div class="avatar-usuario" aria-hidden="false">
                 <?php
-                // normalizar la ruta del avatar
                 $avatarSrc = '../../images/perfiles/perfilpordefecto.jpg';
                 if (!empty($_SESSION['avatar_url'])) {
                     $candidate = $_SESSION['avatar_url'];
@@ -73,21 +63,17 @@ if (!empty($_SESSION['id_usuario'])) {
             <a  class="p1" href="../../Secretaria/HTML/editarPerfil.php">Editar perfil</a>
             <br>
             <a  class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
-            
         </div>
     </div>
-
     <button class="boton-menu" id="btnHamburguesa" aria-label="Abrir menú principal">
         <span></span>
         <span></span>
         <span></span>
     </button>
-
      <nav id="nav" class="main-nav">
             <div class="nav-links">
                 <a class="link-item" href="../../Secretaria/HTML/asignarRec.php">Asignar recursos</a>
                 <a class="link-item" href="../../Secretaria/HTML/dashboardS.php">Inicio</a>
-                
            <div class="alerta">
         <H2 class="h2alerta">Comunicado oficial</H2>
         <div class="textoalerta">
@@ -98,7 +84,6 @@ if (!empty($_SESSION['id_usuario'])) {
         </nav>
     <script src="/JS/menuHamb.js"></script>
 </header>
-
 <script>
 fetch('../../PHP/notificaciones_usuario.php?tipo_usuario=secretaria&id_usuario=<?php echo $uid; ?>')
     .then(response => response.json())

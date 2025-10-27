@@ -41,7 +41,6 @@
                 <!-- Este div parece estar incompleto o innecesario -->
                 <div class="campo-con-icono"></div>
             </section>
-            
         </main>
     </div>
     <!-- Script que gestiona funcionalidades generales de la página -->

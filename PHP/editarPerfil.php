@@ -1,30 +1,21 @@
 <?php
 session_start();
 require_once("conexion.php");
-
-// Verificar si el usuario está logueado
 if (!isset($_SESSION['id_usuario'])) {
     header('Location: ../Login/HTML/ingreso.php');
     exit();
 }
-
 $id_usuario = $_SESSION['id_usuario'];
 $tipo_usuario = $_SESSION['tipo_usuario'] ?? '';
-
-// Obtener datos actuales del usuario
 $conn = conectar_bd();
 $stmt = $conn->prepare("SELECT nombre, apellido, correo FROM usuario WHERE id_usuario = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
 $result = $stmt->get_result();
 $usuario = $result->fetch_assoc();
-
-// Procesar el formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mensaje = '';
     $error = false;
-
-    // Actualizar correo
     if (!empty($_POST['correo']) && $_POST['correo'] !== $usuario['correo']) {
         $nuevo_correo = filter_var($_POST['correo'], FILTER_SANITIZE_EMAIL);
         if (filter_var($nuevo_correo, FILTER_VALIDATE_EMAIL)) {
@@ -32,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_param("si", $nuevo_correo, $id_usuario);
             if ($stmt->execute()) {
                 $mensaje .= "Éxito: Correo actualizado exitosamente. ";
-                // Registrar actividad
                 $detalle = "Usuario actualizó su correo electrónico";
                 $stmt = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
                 $stmt->bind_param("is", $id_usuario, $detalle);
@@ -46,15 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mensaje .= "Error: Formato de correo inválido. ";
         }
     }
-
-    // Actualizar contraseña
     if (!empty($_POST['contrasenia'])) {
         $nueva_contrasenia = password_hash($_POST['contrasenia'], PASSWORD_DEFAULT);
         $stmt = $conn->prepare("UPDATE usuario SET contrasenia = ? WHERE id_usuario = ?");
         $stmt->bind_param("si", $nueva_contrasenia, $id_usuario);
             if ($stmt->execute()) {
             $mensaje .= "Éxito: Contraseña actualizada exitosamente. ";
-            // Registrar actividad
             $detalle = "Usuario actualizó su contraseña";
             $stmt = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
             $stmt->bind_param("is", $id_usuario, $detalle);
@@ -64,17 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mensaje .= "Error: Al actualizar la contraseña. ";
         }
     }
-
-    // Actualizar foto de perfil
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
-        // Permitir extensiones comunes y modernas
         $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif'];
         $filename = $_FILES['imagen']['name'];
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-
-        // Limitar tamaño a 2MB
         $maxBytes = 2 * 1024 * 1024;
-
         if (!in_array($ext, $allowed)) {
             $error = true;
             $mensaje .= "Error: Tipo de archivo no permitido. ";
@@ -82,38 +63,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = true;
             $mensaje .= "Error: El archivo es demasiado grande (máx 2MB). ";
         } else {
-            // Determinar carpeta física del proyecto (un nivel arriba de PHP)
             $projectRoot = dirname(__DIR__);
-            // Usar la carpeta existente 'Images' (mayúscula I) en el repositorio
             $upload_dir = $projectRoot . DIRECTORY_SEPARATOR . 'Images' . DIRECTORY_SEPARATOR . 'perfiles' . DIRECTORY_SEPARATOR;
             if (!file_exists($upload_dir)) {
                 mkdir($upload_dir, 0777, true);
             }
-
             $nuevo_nombre = "perfil_" . $id_usuario . "_" . time() . "." . $ext;
             $physical_dest = $upload_dir . $nuevo_nombre;
-
             if (move_uploaded_file($_FILES['imagen']['tmp_name'], $physical_dest)) {
-                // Asegurar permisos
                 @chmod($physical_dest, 0644);
-
-                // Guardar ruta web relativa (usar Images/ con mayúscula)
                 $url_web_rel = 'Images/perfiles/' . $nuevo_nombre;
                 $_SESSION['avatar_url'] = '/' . $url_web_rel . '?v=' . time();
-
-                // Insertar registro de imagen (si la tabla existe) y registrar actividad
                 $stmt = $conn->prepare("INSERT INTO imagen (id_recurso, tipo, url) VALUES (?, 'perfil', ?)");
                 $url_db = '/' . $url_web_rel;
                 $stmt->bind_param("is", $id_usuario, $url_db);
                 if ($stmt->execute()) {
                     $mensaje = "Éxito: Foto de perfil actualizada exitosamente.";
-                    // Registrar actividad
                     $detalle = "Usuario actualizó su foto de perfil";
                     $stmt_act = $conn->prepare("INSERT INTO actividad (id_usuario, accion, detalle) VALUES (?, 'actualizacion_perfil', ?)");
                     $stmt_act->bind_param("is", $id_usuario, $detalle);
                     $stmt_act->execute();
-
-                    // Actualizar la variable para mostrar la nueva imagen de inmediato
                     $foto_perfil = '/' . $url_web_rel . '?v=' . time();
                 } else {
                     $mensaje = "Error: No se pudo actualizar la foto de perfil.";
@@ -124,8 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
-
-    // Guardar mensaje para mostrarlo después (evitar usar Swal antes de que se cargue la librería)
     if (!empty($mensaje)) {
         $flash_message = [
             'text' => $mensaje,
@@ -133,21 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ];
     }
 }
-
-// Obtener la foto de perfil actual
 $stmt = $conn->prepare("SELECT url FROM imagen WHERE id_recurso = ? AND tipo = 'perfil' ORDER BY id_imagen DESC LIMIT 1");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
 $result = $stmt->get_result();
 $imagen = $result->fetch_assoc();
 $foto_perfil = $imagen ? $imagen['url'] : '../images/perfiles/perfilpordefecto.jpg';
-
-// Asegurar que la ruta sea accesible desde el navegador
-
-
-// No normalizar a URL absoluta, dejar la ruta relativa para el HTML
-
-// Incluir el header correspondiente según el tipo de usuario
 $header_file = match($tipo_usuario) {
     'administrador' => '../HEADERS/headerAA.php',
     'adscripta' => '../HEADERS/headerA.php',
@@ -189,9 +147,7 @@ include $header_file;
             <input type="submit" class="botoneditaru" name="guardardatosu" value="Guardar">
         </div>
     </form>
-
     <script>
-    // Preview de imagen antes de subir
     const input = document.getElementById('imagenInput');
     const preview = document.getElementById('previewAvatar');
     if (input && preview) {

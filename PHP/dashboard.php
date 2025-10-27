@@ -1,7 +1,6 @@
 <!-- Cuerpo principal de la página con clase específica para el perfil de estudiante -->
 <body class="body-estudiante">
     <main>
-    
 <html lang="es">
 <head>
     <meta charset="UTF-8" />

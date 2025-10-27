@@ -1,17 +1,14 @@
 <?php
 include '../../HEADERS/headerAA.php';
 require_once("../PHP/funcHistorial.php");
-
 $actividades = obtenerHistorialActividad();
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Historial de Actividad</title>
     <link rel="stylesheet" href="../../Css/style.css">
-
 </head>
 <body class="body-login">
     <div class="contenedor-historial-actividad">

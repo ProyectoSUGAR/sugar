@@ -2,12 +2,9 @@
 include '../../HEADERS/headerAA.php';
 require_once("../../PHP/conexion.php");
 $conexion = conectar_bd();
-
-// Filtros
 $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
 $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
-
 $consulta = "SELECT id_usuario, nombre, apellido, correo, tipo_usuario, estado_usuario FROM usuario WHERE 1";
 if ($busqueda) {
     $consulta .= " AND (nombre LIKE '%$busqueda%' OR apellido LIKE '%$busqueda%' OR correo LIKE '%$busqueda%')";
@@ -21,7 +18,6 @@ if ($tipo) {
 $consulta .= " ORDER BY nombre, apellido";
 $resultado_usuarios = mysqli_query($conexion, $consulta);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,7 +34,6 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
             <main class="contenido-principal">
                 <section class="panel-formulario-gestion">
                     <h2 class="titulo-panel">Gestión de Usuarios</h2>
-
                 <form method="get" class="grupo-doble-campo">
                     <input type="text" name="busqueda" placeholder="Buscar por nombre, apellido o correo" value="<?= htmlspecialchars($busqueda) ?>">
                     <select name="estado">
@@ -121,7 +116,6 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
 <?php
 if (isset($conexion) && $conexion instanceof mysqli) {
     if (@$conexion->ping()) {
-
     }
 }
 ?>

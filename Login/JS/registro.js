@@ -1,16 +1,9 @@
-// Espera a que todo el contenido HTML se haya cargado completamente
+
 document.addEventListener("DOMContentLoaded", () => {
-
-  // Obtiene el formulario por su ID (ajustado al HTML)
   const form = document.getElementById("formulario-registro") || document.querySelector('form');
-
-  // Obtiene el contenedor donde se mostrarán los mensajes de alerta (opcional)
   const contenedor = document.getElementById("alertaContenedor") || null;
-
-  // Función que crea y muestra un mensaje de alerta visual en pantalla
   function mostrarMensaje(texto) {
     if (!contenedor) {
-      // Si no hay contenedor, usamos SweetAlert como fallback
       Swal.fire({ icon: 'error', title: 'Error', text: texto });
       return;
     }
@@ -23,14 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     alerta.style.marginTop = "10px";           // Separación superior
     alerta.style.fontWeight = "bold";          // Texto en negrita
     contenedor.appendChild(alerta);            // Agrega el mensaje al contenedor
-
-    // Elimina el mensaje automáticamente después de 5 segundos
     setTimeout(function () {
       if (contenedor.contains(alerta)) contenedor.removeChild(alerta);
     }, 5000);
   }
-
-  // Función que cuenta la cantidad de vocales en el nombre ingresado
   function contarVocales(nombre) {
     let cantL = 0;
     for (let i = 0; i < nombre.length; i++) {
@@ -40,8 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return cantL;
   }
-
-  // Función que valida si la contraseña cumple con los requisitos mínimos de seguridad
   function validarPassword(pass) {
     if (!(pass.length >= 6 && /[A-Z]/.test(pass) && /[a-z]/.test(pass) && /[0-9]/.test(pass))) {
       mostrarMensaje("La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula y un número");
@@ -49,8 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return true;
   }
-
-  // Función que obtiene y limpia los valores ingresados en el formulario
   function obtenerValoresFormulario() {
     return {
       nombre: (document.getElementById("nombre") || {}).value ? document.getElementById("nombre").value.trim() : '',
@@ -62,8 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tipoUsuario: (document.getElementById("tipo_usuario") || {}).value || ''
     };
   }
-
-  // Función que valida que el nombre tenga al menos 3 letras
   function validarNombre(nombre) {
     let letras = nombre.match(/[a-zA-Z]/g);
     if (!letras || letras.length < 3) {
@@ -72,8 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return true;
   }
-
-  // Función que valida que el apellido tenga al menos 3 letras
   function validarApellido(apellido) {
     let letrasApellido = apellido.match(/[a-zA-Z]/g);
     if (!letrasApellido || letrasApellido.length < 3) {
@@ -82,8 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return true;
   }
-
-  // Función que valida que la cédula tenga entre 7 y 8 dígitos numéricos
   function validarCedula(cedula) {
     if (!/^[0-9]{7,8}$/.test(cedula)) {
       mostrarMensaje("La cédula debe contener solo números y tener entre 7 y 8 dígitos");
@@ -91,8 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return true;
   }
-
-  // Función que valida que la edad sea mayor a 15 años
   function validarEdad(edad) {
     if (edad === "" || Number(edad) <= 15) {
       mostrarMensaje("La edad debe ser mayor que 15");
@@ -100,8 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return true;
   }
-
-  // Función que valida que se haya seleccionado un tipo de usuario
   function validarTipoUsuario(tipoUsuario) {
     if (tipoUsuario === "") {
       mostrarMensaje("Debes seleccionar un tipo de usuario");
@@ -109,8 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return true;
   }
-
-  // Función que valida que las contraseñas ingresadas coincidan
   function validarConfirmarPassword(password, confirmar) {
     if (password !== confirmar) {
       mostrarMensaje("Las contraseñas son diferentes");
@@ -118,8 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return true;
   }
-
-  // Función que muestra un mensaje de éxito utilizando SweetAlert
   function mostrarExito() {
     Swal.fire({
       icon: "success",
@@ -129,8 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
       showConfirmButton: false
     });
   }
-
-  // Función principal que valida todos los campos del formulario
   function validarFormulario(datos) {
     if (!validarNombre(datos.nombre)) return false;
     if (!validarApellido(datos.apellido)) return false;
@@ -139,19 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!validarConfirmarPassword(datos.password, datos.confirmar)) return false;
     if (!validarEdad(datos.edad)) return false;
     if (!validarTipoUsuario(datos.tipoUsuario)) return false;
-
     return true;
   }
-
-  // Si no hay formulario, salir
   if (!form) return;
-
-  // Evento que se ejecuta al enviar el formulario
   form.addEventListener("submit", function (e) {
-    // Obtiene los valores del formulario
     const datos = obtenerValoresFormulario();
-
-    // Valida todos los campos antes de enviar
     if (!validarFormulario(datos)) {
       e.preventDefault(); // Bloquea el envío si hay errores
     } else {

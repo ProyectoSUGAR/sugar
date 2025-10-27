@@ -1,5 +1,4 @@
 <?php 
-// Inclusión del encabezado común para la interfaz de la secretaria
 include '../../HEADERS/headerS.php'; 
 ?>
 <!DOCTYPE html>
@@ -13,7 +12,6 @@ include '../../HEADERS/headerS.php';
     <main>
         <!-- Inclusión del bloque de bienvenida personalizado para la secretaria -->
         <?php include '../../Secretaria/HTML/bienvenida.php'; ?>
-
         <!-- Sección principal que muestra las estadísticas del sistema -->
         <section class="bloque-estadisticas">
             <!-- Título de la sección de estadísticas -->
@@ -58,7 +56,6 @@ include '../../HEADERS/headerS.php';
                 </p>
             </div>
         </section>
-
         <!-- Fin del bloque de estadísticas -->
         <!-- Sección de bloques de horarios (planos) -->
         <!-- SOLO UNA INSTANCIA, REPARADO -->

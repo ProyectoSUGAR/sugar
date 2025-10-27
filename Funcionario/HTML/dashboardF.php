@@ -10,6 +10,5 @@
   <body>
   <script src="../../Direccion/JS/estadisticas.js"></script>
   <?php include '../../PHP/dashboard.php'; ?>
-
 </body>
 </html>

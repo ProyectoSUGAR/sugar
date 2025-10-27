@@ -1,13 +1,10 @@
 <?php
-
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'PHP' . DIRECTORY_SEPARATOR . 'conexion.php';
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_notificacion'])) {
 	$mensaje = trim($_POST['mensaje']);
 	$tipo = $_POST['tipo'];
 	$destinatario_tipo = $_POST['destinatario_tipo'];
 	$fecha = date('Y-m-d H:i:s');
-
 	$conn = conectar_bd();
 	$sql = "INSERT INTO notificacion (mensaje, tipo, fecha, destinatario_tipo) VALUES (?, ?, ?, ?)";
 	$stmt = mysqli_prepare($conn, $sql);

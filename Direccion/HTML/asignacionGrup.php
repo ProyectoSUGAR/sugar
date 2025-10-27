@@ -21,19 +21,15 @@ require_once("../../PHP/conexion.php");
         </div>
         <div class="sugarads-field">
           <label for="grupo-nombre" class="sugarads-label">Nombre</label>
-          <input type="text" id="grupo-nombre" name="nombre" class="inputasig1" required placeholder="Ejemplo: MC">
+          <input type="text" id="grupo-nombre" name="nombre" class="inputasig1" required placeholder="Ejemplo: MC" maxlength="3" pattern="[A-Za-z]{1,3}">
         </div>
         <div class="sugarads-field">
           <label for="grupo-anio" class="sugarads-label">Año</label>
           <input type="number" id="grupo-anio" name="anio" class="inputasig1" min="1" max="6" required placeholder="Ejemplo: 3">
         </div>
         <div class="sugarads-field">
-          <label for="grupo-grupo" class="sugarads-label">Grupo</label>
-          <input type="text" id="grupo-grupo" name="grupo" class="inputasig1" required placeholder="Ejemplo: 3MC">
-        </div>
-        <div class="sugarads-field">
           <label for="grupo-horas" class="sugarads-label">Horas semanales</label>
-          <input type="number" id="grupo-horas" name="horas_semanales" class="inputasig1" min="1" max="50" required placeholder="Ejemplo: 36">
+          <input type="number" id="grupo-horas" name="horas_semanales" class="inputasig1" min="1" max="40" required placeholder="Ejemplo: 36">
         </div>
         <div class="sugarads-field" style="text-align:center;">
           <button id="sugarads-guardar-grupo" class="regasigboton" type="button">Guardar</button>
@@ -48,7 +44,6 @@ require_once("../../PHP/conexion.php");
           <strong class="sugarads-var sugarads-var-nombre">(<span aria-hidden="true">…</span>)</strong>
           de tipo <strong class="sugarads-var sugarads-var-tipo">(<span aria-hidden="true">…</span>)</strong>,
           año <strong class="sugarads-var sugarads-var-anio">(<span aria-hidden="true">…</span>)</strong>,
-          grupo <strong class="sugarads-var sugarads-var-grupo">(<span aria-hidden="true">…</span>)</strong>,
           con <strong class="sugarads-var sugarads-var-horas">(<span aria-hidden="true">…</span>)</strong> horas semanales.
           <br>¿Desea realizar esta acción?
         </p>
@@ -64,5 +59,5 @@ require_once("../../PHP/conexion.php");
     </article>
   </section>
 </main>
-<script src="../../Adscripta/JS/ingresoGrupo.js" defer></script>
+<script src="../../Direccion/JS/ingresoGrupo.js" defer></script>
  </body>

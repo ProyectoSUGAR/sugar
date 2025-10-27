@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__ . '/../../PHP/conexion.php');
-
 function obtenerProfesores() {
     $pdo = conectar_pdo();
     $sql = "SELECT u.id_usuario, u.nombre, u.apellido, COALESCE(GROUP_CONCAT(a.nombre SEPARATOR ', '), 'Sin asignaturas') AS asignaturas

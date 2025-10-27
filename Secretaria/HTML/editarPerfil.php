@@ -1,5 +1,4 @@
 <?php 
-// Inclusión del encabezado común para la interfaz de editar perfíl
 include '../../HEADERS/headerS.php'; 
 ?>
 <!DOCTYPE html>
@@ -26,33 +25,21 @@ include '../../HEADERS/headerS.php';
 <input type="text" class="inputuser" placeholder="ejemplo@gmail.com">
 <input type="text" class="inputuser1" placeholder="Insertar nueva contraseña">
 <input type="submit" class="botoneditaru" name="guardardatosu" value="Guardar">
-
     </div>
     </form>
 </body>
 </html>
-
 <?php
 require_once("../../PHP/conexion.php");
-
-
 $conn = conectar_bd();
-
-
 if (isset($_FILES['imagen'])) {
     $tipo = $_FILES['imagen']['name'];
     $tmp = $_FILES['imagen']['tmp_name'];
-
-    // Carpeta donde se guardarán las imágenes
     $carpeta = "../../images/";
-
-    //si la carpeta no existe se crea con permismos recursivos, o sea tambien a todos los archivos dentro de esta
     if (!file_exists($carpeta)) {
         mkdir($carpeta, 0777, true);
     }
-
     $url = $carpeta . basename($tipo);
-
     if (move_uploaded_file($tmp, $url)) {
         $sql = "INSERT INTO imagen (tipo, url) VALUES ('$tipo', '$url')";
         $conn->query($sql);
@@ -64,11 +51,8 @@ if (isset($_FILES['imagen'])) {
 echo '});';
     echo '</script>';
     } else {
-        echo "Error al subir la imagen.";
+        include("../../PHP/errores.php");
+        mostrar_error("subida_imagen_fallida");
     }
 }
-
-
-
-
 ?>

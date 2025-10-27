@@ -1,16 +1,13 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 require_once(__DIR__ . '/../PHP/conexion.php');
-
 if (!isset($_SESSION['id_usuario'])) {
     header('Location: ../../Login/HTML/ingreso.php');
     exit();
 }
-
 $db = conectar_bd();
 $uid = (int)$_SESSION['id_usuario'];
 $avatar_url = '../../Images/perfiles/perfilpordefecto.jpg';
-
 if ($db && $uid > 0) {
     $q = $db->prepare("SELECT url FROM imagen WHERE id_recurso = ? AND tipo = 'perfil' ORDER BY id_imagen DESC LIMIT 1");
     if ($q && $q->bind_param('i', $uid) && $q->execute()) {
@@ -42,7 +39,6 @@ if ($db && $uid > 0) {
             <a class="p1" href="../../Login/HTML/ingreso.php">Cerrar sesión</a>
         </div>
     </div>
-
     <!-- Botón de menú tipo hamburguesa ubicado a la derecha -->
     <button class="boton-menu" id="btnHamburguesa" aria-label="Abrir menú principal">
         <!-- Líneas del ícono de hamburguesa -->
@@ -50,7 +46,6 @@ if ($db && $uid > 0) {
         <span></span>
         <span></span>
     </button>
-
     <!-- Lista de opciones del menú hamburguesa (oculta por defecto) -->
     <nav id="nav" class="main-nav">
         <div class="nav-links">
@@ -58,7 +53,6 @@ if ($db && $uid > 0) {
             <a class="link-item" href="../../Adscripta/HTML/asignacionAsig.php">Registro de asignaturas</a>
             <a class="link-item" href="../../Adscripta/HTML/asignacionGrup.php">Registrar grupos</a>
             <a class="link-item" href="../../Adscripta/HTML/registroDatos.php">Registro de datos</a>
-
            <div class="alerta">
         <H2 class="h2alerta">Comunicado oficial</H2>
         <div class="textoalerta">
@@ -69,7 +63,6 @@ if ($db && $uid > 0) {
     </nav>
     <script src="/JS/menuHamb.js"></script>
 </header>
-
 <script>
 fetch('../../PHP/notificaciones_usuario.php?tipo_usuario=adscripta&id_usuario=<?php echo $uid; ?>')
     .then(response => response.json())

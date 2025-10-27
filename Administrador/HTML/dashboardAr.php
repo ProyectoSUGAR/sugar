@@ -1,8 +1,6 @@
 <?php 
-// Inclusión del encabezado común que contiene configuraciones compartidas
 include '../../HEADERS/headerAA.php'; 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -58,7 +56,6 @@ include '../../HEADERS/headerAA.php';
                 </p>
             </div>
         </section>
-
         <!-- Fin sección bloques de horarios -->
     </main>
     <!-- Inclusión del panel de navegación y funcionalidades del dashboard -->

@@ -1,14 +1,9 @@
 <?php
 require_once("../../PHP/conexion.php");
 $con = conectar_bd();
-
-// Debug para ver los datos POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Debug - Imprimir los datos recibidos
     error_log("Procesando datos del formulario:");
     error_log(print_r($_POST, true));
-    
-    // Obtener y validar los datos del formulario
     $id_profesor = isset($_POST['id_profesor']) ? intval($_POST['id_profesor']) : null;
     $dia = isset($_POST['dia']) ? $_POST['dia'] : null;
     $turno = isset($_POST['turno']) ? $_POST['turno'] : null;
@@ -16,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_asignatura = isset($_POST['id_asignatura']) ? intval($_POST['id_asignatura']) : null;
     $id_espacio = isset($_POST['id_espacio']) ? intval($_POST['id_espacio']) : null;
     $id_asocia = isset($_POST['id_asocia']) ? intval($_POST['id_asocia']) : null;
-    
     error_log("Datos procesados:");
     error_log("Profesor: $id_profesor");
     error_log("Día: $dia");
@@ -25,16 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     error_log("Asignatura: $id_asignatura");
     error_log("Espacio: $id_espacio");
 }
-
-// Eliminar horario si se recibe por GET
 if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
     $id = intval($_GET['eliminar']);
     mysqli_query($con, "DELETE FROM asocia WHERE id_asocia = $id");
     header("Location: registroDatos.php");
     exit;
 }
-
-// Si se va a editar, obtener los datos
 $horarioEditar = null;
 if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
     $id = intval($_GET['editar']);
@@ -65,7 +55,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                     </div>
                     <?php endif; ?>
                     <h2 class="sugarads-section-title">Crear Horario</h2>
-                    
                     <!-- profesor -->
                     <div class="sugarads-field">
                         <label for="hor-profesor" class="sugarads-label">Profesor</label>
@@ -117,7 +106,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             <?php
                             $grupos = mysqli_query($con, "SELECT id_grupo, nombre, grupo, anio FROM grupo ORDER BY anio, nombre, grupo");
                             while ($g = mysqli_fetch_assoc($grupos)) {
-                                // Mostrar solo año y nombre del grupo (ej: "2025 - 3A")
                                 $label = trim(($g['anio'] ? $g['anio'].' - ' : '') . $g['nombre']);
                                 echo '<option value="' . $g['id_grupo'] . '">' . htmlspecialchars($label) . '</option>';
                             }
@@ -163,13 +151,11 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                         <button type="reset" class="btn-secundario">Cancelar</button>
                     </div>
                 </form>
-
                 <!-- editar el horario -->
                 <?php if ($horarioEditar): ?>
                 <form id="form-editar" class="sugarads-form" method="post" action="../../PHP/registrarHorario.php" style="margin-top:2.5rem; border-top:2px solid #2d89ef; padding-top:1.5rem;">
                     <h2 class="sugarads-section-title">Editar Horario</h2>
                     <input type="hidden" name="id_asocia" value="<?= htmlspecialchars($horarioEditar['id_asocia']) ?>">
-                    
                     <!-- perofesor -->
                     <div class="sugarads-field">
                         <label for="hor-profesor-editar" class="sugarads-label">Profesor</label>
@@ -258,7 +244,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                     </div>
                 </form>
                 <?php endif; ?>
-
                 <!-- eliminar horaio -->
                 <?php if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])): ?>
                 <form id="form-eliminar" class="sugarads-form" method="get" action="registroDatos.php" style="margin-top:2.5rem; border-top:2px solid #e53935; padding-top:1.5rem;">

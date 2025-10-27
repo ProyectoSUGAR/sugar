@@ -1,16 +1,12 @@
 <?php
-//notificaciones de usuario (copia en Administrador/ALL)
 function mostrarNotificacionesUsuario($tipo_usuario) {
     require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'PHP' . DIRECTORY_SEPARATOR . 'conexion.php';
     $conn = conectar_bd();
-
-    // consulta para obtener las notificaciones relevantes
     $sql = "SELECT mensaje, tipo, fecha FROM notificacion WHERE destinatario_tipo = ? OR destinatario_tipo = 'todos' ORDER BY fecha DESC LIMIT 5";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 's', $tipo_usuario);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
-
     if (mysqli_num_rows($result) > 0) {
         echo '<div class="notificaciones-usuario">';
         echo '<h3>Notificaciones Recientes</h3>';
@@ -27,9 +23,7 @@ function mostrarNotificacionesUsuario($tipo_usuario) {
     } else {
         echo '<p>No hay notificaciones recientes.</p>';
     }
-
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }
-
 ?>

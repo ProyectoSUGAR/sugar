@@ -1,19 +1,14 @@
 <?php
 require_once("../../PHP/conexion.php");
 $conexion = conectar_bd();
-
-// obtener conteo por rol
 $consulta = "SELECT tipo_usuario, COUNT(*) as cantidad FROM usuario GROUP BY tipo_usuario";
 $resultado = mysqli_query($conexion, $consulta);
-
 $lista_roles = [];
 if ($resultado) {
     foreach (mysqli_fetch_all($resultado, MYSQLI_ASSOC) as $fila_rol) {
         $lista_roles[] = $fila_rol;
     }
 }
-
-// selección de rol (sanitize)
 $rol_seleccionado = '';
 if (isset($_GET['tipo']) && is_string($_GET['tipo'])) {
     $rol_seleccionado = trim($_GET['tipo']);
@@ -21,15 +16,9 @@ if (isset($_GET['tipo']) && is_string($_GET['tipo'])) {
 if ($rol_seleccionado === '' && !empty($lista_roles)) {
     $rol_seleccionado = $lista_roles[0]['tipo_usuario'];
 }
-
-// export CSV
 $export = isset($_GET['export']) ? $_GET['export'] : '';
-
-// pagination params
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $perPage = 20;
-
-// prepare list of users for selected role
 $usuarios = [];
 $total = 0;
 if ($rol_seleccionado !== '') {
@@ -41,7 +30,6 @@ if ($rol_seleccionado !== '') {
         $totalRow = mysqli_fetch_assoc($rCount);
         $total = (int)$totalRow['total'];
     }
-
     $queryUsuarios = "SELECT id_usuario, nombre, apellido, correo, tipo_usuario, estado_usuario FROM usuario WHERE tipo_usuario='" . $safe_rol . "' ORDER BY nombre, apellido LIMIT $perPage OFFSET $offset";
     $rUsuarios = mysqli_query($conexion, $queryUsuarios);
     if ($rUsuarios) {
@@ -50,8 +38,6 @@ if ($rol_seleccionado !== '') {
         }
     }
 }
-
-// CSV export (stream all users for role)
 if ($export === 'csv' && $rol_seleccionado !== '') {
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename=usuarios_' . preg_replace('/[^a-z0-9_-]/i', '', $rol_seleccionado) . '.csv');
@@ -67,11 +53,8 @@ if ($export === 'csv' && $rol_seleccionado !== '') {
     fclose($out);
     exit;
 }
-
 ?>
-
 <?php include '../../HEADERS/headerAA.php'; ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -84,11 +67,9 @@ if ($export === 'csv' && $rol_seleccionado !== '') {
 <body class="body-login">
     <div class="contenedor-reporte-usuarios">
         <h2 class="titulo-panel">Usuarios por Rol</h2>
-
         <?php if (empty($lista_roles)): ?>
             <p class="mensaje">No se encontraron roles o no hay usuarios registrados.</p>
         <?php else: ?>
-
         <form method="get" id="formRol" class="form-rol">
             <label for="tipo">Selecciona un rol:</label>
             <select name="tipo" id="tipo">
@@ -100,7 +81,6 @@ if ($export === 'csv' && $rol_seleccionado !== '') {
             </select>
             <a class="btn-export" href="?tipo=<?= urlencode($rol_seleccionado) ?>&export=csv"><i class="fa fa-file-csv"></i> Exportar CSV</a>
         </form>
-
         <table class="tabla-reporte-usuarios">
             <thead>
                 <tr>
@@ -117,10 +97,8 @@ if ($export === 'csv' && $rol_seleccionado !== '') {
                 <?php endforeach; ?>
             </tbody>
         </table>
-
         <section class="listado-usuarios">
             <h3>Detalle: <?= htmlspecialchars(ucfirst($rol_seleccionado)) ?> (<?= $total ?>)</h3>
-
             <?php if ($total === 0): ?>
                 <p class="mensaje">No hay usuarios para este rol.</p>
             <?php else: ?>
@@ -156,7 +134,6 @@ if ($export === 'csv' && $rol_seleccionado !== '') {
                         </tbody>
                     </table>
                 </div>
-
                 <?php $pages = (int)ceil($total / $perPage); ?>
                 <?php if ($pages > 1): ?>
                     <div class="paginacion">
@@ -171,28 +148,22 @@ if ($export === 'csv' && $rol_seleccionado !== '') {
                 <?php endif; ?>
             <?php endif; ?>
         </section>
-
         <form method="get" action="gestionUsr.php" style="margin-top:16px;text-align:center;">
             <input type="hidden" name="tipo" value="<?= htmlspecialchars($rol_seleccionado) ?>">
             <button type="submit" class="btn-ver-detalle">Ir a Gestión de usuarios</button>
         </form>
-
         <?php endif; ?>
     </div>
-
     <script>
-        // Cambia el rol seleccionado y recarga la tabla
         document.getElementById('tipo')?.addEventListener('change', function() {
             document.getElementById('formRol').submit();
         });
     </script>
 </body>
 </html>
-
 <?php
 if (isset($conexion) && $conexion instanceof mysqli) {
     if (@$conexion->ping()) {
-
     }
 }
 ?>

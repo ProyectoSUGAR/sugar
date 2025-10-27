@@ -1,10 +1,8 @@
 <?php
 require_once("../../PHP/conexion.php");
 $con = conectar_bd();
-
 session_start();
 $id_usuario_admin = $_SESSION['id_usuario'] ?? 0;
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['cambiar_estado'])) {
         $id_usuario = intval($_POST['id_usuario']);
@@ -53,10 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
     }
 }
-
 if (isset($con) && $con instanceof mysqli) {
     if (@$con->ping()) {
-
     }
 }
 ?>
