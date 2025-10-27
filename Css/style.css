@@ -373,9 +373,9 @@ html, body {
 .campo-con-icono input[type="date"] {
     position: relative;
 }
-.btn-primario {
+.btn-primario, .botoneliminar {
     width: 100%;
-    background-color: #071739;
+    
     color: #fff;
     font-size: 1.1rem;
     font-weight: 600;
@@ -388,9 +388,17 @@ html, body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.09);
     margin-top: 1.5rem;
 }
+.btn-primario {
+  background-color: #071739;
+}
+
 .btn-primario:hover {
     background-color: #a4b5c4;
     color: #071739;
+}
+.botoneliminar:hover {
+  background-color: rgb(184, 179, 250) ;
+  color: #071739;
 }
 .recuperar-password {
     display: flex;
@@ -1299,7 +1307,7 @@ text-align: center;
 text-align: center;
       font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
-.sugarads-btn, .botoneliminar, .regasigboton {
+.sugarads-btn, .regasigboton {
     width: 150px;
 text-decoration: none;
     margin-bottom: 0.5rem;
@@ -1406,7 +1414,7 @@ margin-top: 1rem;
   margin-bottom: 1rem;
 }
 .botoneliminar {
-    background-color: #202738;
+    background-color: #707d9b;
 }
 .volereporte {
   text-decoration: none;
@@ -1649,7 +1657,7 @@ right: 45.5%;
   color: #071739;
   right: 0.8rem;
 }
-.panel-formulario-gestion .btn-accion {
+.panel-formulario-gestion .btn-accion, .botoneditar, .botoneliminar1 {
   background: #071739;
   color: #fff;
   border: none;
@@ -1664,7 +1672,7 @@ right: 45.5%;
   gap: 0.5rem;
   font-family: "Nunito Sans", sans-serif;
 }
-.panel-formulario-gestion .btn-accion:hover {
+.panel-formulario-gestion .btn-accion:hover, .botoneditar:hover {
   background: #4b6382;
   transform: translateY(-1px);
 }
@@ -1720,7 +1728,7 @@ right: 45.5%;
   background: #e53935;
   color: #fff;
 }
-.panel-formulario-gestion .volvereporte {
+.panel-formulario-gestion .volvereporte, .botongestion {
   color: #071739;
   text-decoration: none;
   font-weight: 600;
@@ -1733,7 +1741,7 @@ right: 45.5%;
   margin: 1rem 0.5rem;
   font-family: "Nunito Sans", sans-serif;
 }
-.panel-formulario-gestion .volvereporte:hover {
+.panel-formulario-gestion .volvereporte:hover, .botongestion:hover {
   background: #071739;
   color: #fff;
 }
@@ -1786,4 +1794,16 @@ right: 45.5%;
         }
         .fa-arrow-left {
             margin-right: 0.5rem;
+        }
+      
+        .botoneliminar1 {
+          background-color: red;
+          width: 80px;
+          height: 35px;
+       padding: 0.6rem;
+       
+        }
+        .botoneliminar1:hover {
+          background-color: rgb(243, 56, 56);
+          transform: translateY(-1px)
         }
