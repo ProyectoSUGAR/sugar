@@ -80,7 +80,7 @@ while ($fila = mysqli_fetch_assoc($res)) {
                     <?php else: ?>
                         <input type="hidden" name="accion" value="crear">
                         <div class="sugarads-field">
-                            <button type="submit" class="regasigboton">Registrar</button>
+                            <button type="submit" class="btn-primario">Registrar</button>
                             <button type="reset" class="botoneliminar">Cancelar</button>
                         </div>
                     <?php endif; ?>
@@ -94,11 +94,11 @@ while ($fila = mysqli_fetch_assoc($res)) {
                        <?php foreach ($asignaturas as $a): ?>
                             <li class="pruebads">
                                 <?= htmlspecialchars($a['nombre']) ?>
-                                <a href="../../Adscripta/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="sugarads-btn sugarads-btn-editar">Editar</a>
+                                <a href="../../Adscripta/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="botoneditar" style="text-decoration:none; padding:6px 8px; margin-left: 1rem;">Editar</a>
                                 <form method="post" action="" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta asignatura?');">
                                     <input type="hidden" name="id_asignatura" value="<?= $a['id_asignatura'] ?>">
                                     <input type="hidden" name="accion" value="eliminar">
-                                    <button type="submit" class="botoneliminar">Eliminar</button>
+                                    <button type="submit" class="botoneliminar1">Eliminar</button>
                                 </form>
                             </li>
                         <?php endforeach; ?>

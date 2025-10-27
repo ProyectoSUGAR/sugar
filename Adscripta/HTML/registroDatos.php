@@ -147,7 +147,7 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                     </div>
                     <div class="sugarads-field">
                         <br>
-                        <button type="submit" class="regasigboton">Guardar</button>
+                        <button type="submit" class="btn-primario">Guardar</button>
                         <button type="reset" class="botoneliminar">Cancelar</button>
                     </div>
                 </form>
