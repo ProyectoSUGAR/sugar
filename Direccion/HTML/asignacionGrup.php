@@ -32,7 +32,7 @@ require_once("../../PHP/conexion.php");
           <input type="number" id="grupo-horas" name="horas_semanales" class="inputasig1" min="1" max="40" required placeholder="Ejemplo: 36">
         </div>
         <div class="sugarads-field" style="text-align:center;">
-          <button id="sugarads-guardar-grupo" class="regasigboton" type="button">Guardar</button>
+          <button id="sugarads-guardar-grupo" class="btn-primario" type="button">Guardar</button>
           <button id="sugarads-cancelar-grupo" class="botoneliminar" type="button">Cancelar</button>
         </div>
       </form>
@@ -48,8 +48,8 @@ require_once("../../PHP/conexion.php");
           <br>¿Desea realizar esta acción?
         </p>
         <div class="sugarads-confirm-actions" role="group" aria-label="Acciones de confirmación">
-          <button id="sugarads-confirmar-grupo" class="sugarads-btn sugarads-btn-guardar" type="button">Confirmar</button>
-          <button id="sugarads-cancelar-confirmacion-grupo" class="sugarads-btn sugarads-btn-cancelar" type="button">Cancelar</button>
+          <button id="sugarads-confirmar-grupo" class="btn-primario" type="button">Confirmar</button>
+          <button id="sugarads-cancelar-confirmacion-grupo" class="botoneliminar" type="button">Cancelar</button>
         </div>
       </div>
       <section class="sugarads-resultado" aria-label="Resultado de ingreso de grupo">
