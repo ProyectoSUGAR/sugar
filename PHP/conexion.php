@@ -1,8 +1,8 @@
 <?php
 $DB_SERVIDOR = "localhost";
-$DB_NOMBRE = "sugar";
-$DB_USUARIO = "root";
-$DB_PASS = "";
+$DB_NOMBRE = "db_sugar";
+$DB_USUARIO = "sugar";
+$DB_PASS = "sugar";
 function conectar_pdo() {
     global $DB_SERVIDOR, $DB_USUARIO, $DB_PASS, $DB_NOMBRE;
     $dsn = "mysql:host=$DB_SERVIDOR;dbname=$DB_NOMBRE;charset=utf8";
@@ -16,7 +16,7 @@ function conectar_pdo() {
     }
 }
 function conectar_bd() {
-    $conn = mysqli_connect("localhost", "root", "", "sugar");
+    $conn = mysqli_connect("localhost", "db_sugar", "sugar", "sugar");
     if (!$conn) {
         die("Error de conexión: " . mysqli_connect_error());
     }
