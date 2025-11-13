@@ -2,7 +2,8 @@
 require_once("../../PHP/conexion.php");
 $con = conectar_bd();
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    die("Método no permitido");
+    header("Location: registroDatos.php?error=method");
+    exit;
 }
 error_log("Datos POST recibidos en procesarHorario.php:");
 error_log(print_r($_POST, true));
@@ -95,7 +96,9 @@ try {
     exit;
 } catch (Exception $e) {
     mysqli_rollback($con);
-    die("Error: " . $e->getMessage());
+    $msg = urlencode($e->getMessage());
+    header("Location: registroDatos.php?error_msg={$msg}");
+    exit;
 } finally {
     if (isset($con)) {
         mysqli_close($con);

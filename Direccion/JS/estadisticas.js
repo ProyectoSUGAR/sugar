@@ -5,20 +5,31 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error('AnyChart no está cargado. Por favor, verifica las dependencias.');
         return;
     }
-    fetch('../PHP/datosEstadisticos.php')
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json();
-        })
-        .then(data => {
-            console.log('Datos recibidos del servidor:', data);
-            document.querySelector('.estadistica-numero[data-tipo="alumnos"]').textContent = data.alumnos || '0';
-            document.querySelector('.estadistica-numero[data-tipo="profesores"]').textContent = data.profesores || '0';
-            document.querySelector('.estadistica-numero[data-tipo="grupos"]').textContent = data.grupos || '0';
-            document.querySelector('.estadistica-numero[data-tipo="secretarios"]').textContent = data.secretarios || '0';
-            document.querySelector('.estadistica-numero[data-tipo="salones_libres"]').textContent = data.salones_libres || '0';
+    // Prefer server-embedded data (avoids fetch issues); otherwise fetch centralized API
+    var dataPromise = null;
+    if (window.__ESTADISTICAS) {
+        dataPromise = Promise.resolve(window.__ESTADISTICAS);
+    } else {
+        dataPromise = fetch('/sugar/PHP/datosEstadisticos_api.php?_=' + Date.now())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            });
+    }
+
+    dataPromise.then(data => {
+        console.log('Datos recibidos del servidor:', data);
+        document.querySelector('.estadistica-numero[data-tipo="alumnos"]').textContent = data.alumnos || '0';
+        document.querySelector('.estadistica-numero[data-tipo="profesores"]').textContent = data.profesores || '0';
+        document.querySelector('.estadistica-numero[data-tipo="grupos"]').textContent = data.grupos || '0';
+        document.querySelector('.estadistica-numero[data-tipo="secretarios"]').textContent = data.secretarios || '0';
+        // Dirección no tiene reservas_pendientes, así que ignorar si no existe
+        if (data.reservas_pendientes !== undefined) {
+            const elem = document.querySelector('.estadistica-numero[data-tipo="reservas_pendientes"]');
+            if (elem) elem.textContent = data.reservas_pendientes || '0';
+        }
             try {
                 var chart = anychart.column();
                 var datosManana = [];

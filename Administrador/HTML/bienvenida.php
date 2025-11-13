@@ -5,29 +5,22 @@ if (session_status() === PHP_SESSION_NONE) {
 $usuario = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Usuario";
 $saludo = "Bienvenido/a";
 ?>
-<!-- Sección visual que muestra el saludo personalizado al usuario -->
 <section class="seccion-saludo">
     <div class="fondo-saludo">
-        <!-- Muestra el saludo seguido del nombre del usuario, escapado para evitar inyecciones -->
         <h1><?php echo $saludo; ?> <span class="resaltado"><?php echo htmlspecialchars($usuario); ?></span>!</h1>
     </div>
 </section>
-<!-- Barra descriptiva que presenta el nombre completo del sistema -->
 <div class="barra-descriptiva">
     <p>Sistema Unificado de Gestión de Aulas y Recursos</p>
 </div>
-<!-- Sección principal del tablero con accesos rápidos a funcionalidades clave -->
 <section class="tablero-principal">
     <div class="grupo-tarjetas">
-        <!-- Tarjeta que redirige a la sección de horarios y clases -->
         <a class="tarjeta-opcion" href="#contenedor-tablas-horarios">
             <span>Horarios y<br />clases</span>
         </a>
-        <!-- Tarjeta que redirige a la sección de anuncios -->
         <a class="tarjeta-opcion" href="../../Administrador/HTML/anuncios.php">
             <span>Anuncios</span>
         </a>
-        <!-- Tarjeta que redirige a la sección de profesores -->
         <a class="tarjeta-opcion" href="#">
             <span>Profesores</span>
         </a>

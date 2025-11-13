@@ -39,27 +39,47 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Datos</title>
     <link rel="stylesheet" href="../../Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <script src="../JS/bloquesHorarios.js"></script>
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bodyregidat">
     <?php include '../../HEADERS/headerAA.php'; ?>
+        <?php if (isset($_GET['error_msg'])): ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function(){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        html: <?= json_encode(urldecode($_GET['error_msg'])) ?>,
+                        confirmButtonText: 'Aceptar'
+                    });
+                });
+            </script>
+        <?php endif; ?>
     <main class="sugarads-main">
+        <?php if (isset($_GET['error']) && $_GET['error'] === 'method'): ?>
+            <div class="error-message-inline">
+                <i class="fas fa-exclamation-circle"></i>
+                Por favor, utiliza el formulario para registrar los horarios.
+            </div>
+        <?php endif; ?>
         <h1 class="sugarads-title">Registro de Horarios</h1>
         <div class="sugarads-grid">
-            <div class="sugarads-col-left sugar-card">
-                <!-- crear horario -->
-                <form id="form-crear" class="formasig" method="post" action="procesarHorario.php" style="border-top:2px solid #c7b299; padding-top:1.5rem; max-width:400px;">
+            <div class="sugarads-col-left">
+                <form id="form-crear" method="post" action="../PHP/registrarHorario.php">
                     <?php if (isset($_GET['success'])): ?>
-                    <div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
                         Horario guardado exitosamente
                     </div>
                     <?php endif; ?>
                     <h2 class="sugarads-section-title">Crear Horario</h2>
-                    <!-- profesor -->
-                    <div class="sugarads-field">
-                        <label for="hor-profesor" class="sugarads-label">Profesor</label>
-                        <select id="hor-profesor" class="sasignacion1" name="id_profesor" required>
-                            <option value="">Seleccionar Profesor</option>
+                    <div class="form-group">
+                        <label for="hor-profesor">Seleccionar Profesor Asignado</label>
+                        <select id="hor-profesor" class="form-control form-select" name="id_profesor" required>
+                            <option value="">Elegir un profesor de la lista</option>
                             <?php
                             $profesores = mysqli_query($con, "SELECT u.id_usuario, u.nombre, u.apellido 
                                 FROM usuario u 
@@ -72,11 +92,10 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- asignatura -->
-                    <div class="sugarads-field">
-                        <label for="hor-asignatura" class="sugarads-label">Asignatura</label>
-                        <select id="hor-asignatura" class="sasignacion1" name="id_asignatura" required>
-                            <option value="">Seleccionar Asignatura</option>
+                    <div class="form-group">
+                        <label for="hor-asignatura">Seleccionar Asignatura a Impartir</label>
+                        <select id="hor-asignatura" class="form-control form-select" name="id_asignatura" required>
+                            <option value="">Elegir una asignatura de la lista</option>
                             <?php
                             $asignaturas = mysqli_query($con, "SELECT id_asignatura, nombre FROM asignatura");
                             while ($a = mysqli_fetch_object($asignaturas)) {
@@ -85,11 +104,10 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- espacio -->
                     <div class="sugarads-field">
-                        <label for="hor-espacio" class="sugarads-label">Espacio</label>
+                        <label for="hor-espacio" class="sugarads-label">Seleccionar Espacio Disponible</label>
                         <select id="hor-espacio" class="sasignacion1" name="id_espacio" required>
-                            <option value="">Seleccionar Espacio</option>
+                            <option value="">Elegir un espacio de la lista</option>
                             <?php
                             $espacios = mysqli_query($con, "SELECT id_espacio, nombre FROM espacio");
                             while ($e = mysqli_fetch_object($espacios)) {
@@ -98,11 +116,10 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- grupo -->
                     <div class="sugarads-field">
-                        <label for="hor-grupo" class="sugarads-label">Grupo</label>
+                        <label for="hor-grupo" class="sugarads-label">Seleccionar Grupo Asignado (Opcional)</label>
                         <select id="hor-grupo" class="sasignacion1" name="id_grupo">
-                            <option value="">(Sin grupo)</option>
+                            <option value="">Sin asignar grupo específico</option>
                             <?php
                             $grupos = mysqli_query($con, "SELECT id_grupo, nombre, grupo, anio FROM grupo ORDER BY anio, nombre, grupo");
                             while ($g = mysqli_fetch_assoc($grupos)) {
@@ -112,11 +129,10 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- dia -->
                     <div class="sugarads-field">
-                        <label for="hor-dia" class="sugarads-label">Día</label>
+                        <label for="hor-dia" class="sugarads-label">Seleccionar Día de la Semana</label>
                         <select id="hor-dia" class="sasignacion1" name="dia" required>
-                            <option value="">Seleccionar Día</option>
+                            <option value="">Elegir un día de la semana</option>
                             <?php
                             $dias = ['lunes','martes','miercoles','jueves','viernes'];
                             foreach($dias as $d) {
@@ -125,11 +141,10 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- tuerno -->
                     <div class="sugarads-field">
-                        <label for="hor-turno" class="sugarads-label">Turno</label>
+                        <label for="hor-turno" class="sugarads-label">Seleccionar Turno del Día</label>
                         <select id="hor-turno" class="sasignacion1" name="turno" required>
-                            <option value="">Seleccionar Turno</option>
+                            <option value="">Elegir un turno disponible</option>
                             <?php
                             $turnos = ['manana'=>'Mañana','tarde'=>'Tarde','noche'=>'Noche'];
                             foreach($turnos as $val=>$txt) {
@@ -138,25 +153,22 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- bloque horario -->
                     <div class="sugarads-field">
-                        <label for="hor-hora" class="sugarads-label">Bloque Horario (selecciona uno o varios)</label>
+                        <label for="hor-hora" class="sugarads-label">Seleccionar Bloques Horarios Disponibles</label>
                         <select id="hor-hora" name="hora[]" class="sasignacion1" multiple required>
                             <option value="">Selecciona primero el turno para ver los bloques</option>
                         </select>
                     </div>
                     <div class="sugarads-field">
                         <br>
-                        <button type="submit" class="btn-primario">Guardar</button>
-                        <button type="reset" class="btn-secundario">Cancelar</button>
+                        <button type="submit" class="regasigboton">Guardar</button>
+                        <button type="reset" class="botoneliminar">Cancelar</button>
                     </div>
                 </form>
-                <!-- editar el horario -->
                 <?php if ($horarioEditar): ?>
-                <form id="form-editar" class="sugarads-form" method="post" action="../../PHP/registrarHorario.php" style="margin-top:2.5rem; border-top:2px solid #2d89ef; padding-top:1.5rem;">
+                <form id="form-editar" class="sugarads-form form-editar-inline" method="post" action="../PHP/registrarHorario.php">
                     <h2 class="sugarads-section-title">Editar Horario</h2>
                     <input type="hidden" name="id_asocia" value="<?= htmlspecialchars($horarioEditar['id_asocia']) ?>">
-                    <!-- perofesor -->
                     <div class="sugarads-field">
                         <label for="hor-profesor-editar" class="sugarads-label">Profesor</label>
                         <select id="hor-profesor-editar" name="id_profesor" required>
@@ -175,7 +187,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- asignatura -->
                     <div class="sugarads-field">
                         <label for="hor-asignatura-editar" class="sugarads-label">Asignatura</label>
                         <select id="hor-asignatura-editar" name="id_asignatura" required>
@@ -189,7 +200,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- espacio -->
                     <div class="sugarads-field">
                         <label for="hor-espacio-editar" class="sugarads-label">Espacio</label>
                         <select id="hor-espacio-editar" name="id_espacio" required>
@@ -203,7 +213,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- dia -->
                     <div class="sugarads-field">
                         <label for="hor-dia-editar" class="sugarads-label">Día</label>
                         <select id="hor-dia-editar" name="dia" required>
@@ -217,7 +226,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- turno -->
                     <div class="sugarads-field">
                         <label for="hor-turno-editar" class="sugarads-label">Turno</label>
                         <select id="hor-turno-editar" name="turno" required>
@@ -231,7 +239,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                             ?>
                         </select>
                     </div>
-                    <!-- bloque horario (checkboxes renderizados por JS) -->
                     <div class="sugarads-field">
                         <label class="sugarads-label">Bloque Horario (selecciona uno o varios)</label>
                         <div id="hor-hora-editar-container" class="horarios-container" aria-live="polite">
@@ -239,22 +246,21 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                         </div>
                     </div>
                     <div class="sugarads-field">
-                        <button type="submit" class="btn-primario">Actualizar</button>
-                        <a href="registroDatos.php" class="btn-secundario" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:8px 12px;">Cancelar</a>
+                        <button type="submit" class="sugarads-btn sugarads-btn-guardar">Actualizar</button>
+                        <a href="../../Administrador/HTML/registroDatos.php" class="sugarads-btn sugarads-btn-cancelar">Cancelar</a>
                     </div>
                 </form>
                 <?php endif; ?>
-                <!-- eliminar horaio -->
                 <?php if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])): ?>
-                <form id="form-eliminar" class="sugarads-form" method="get" action="registroDatos.php" style="margin-top:2.5rem; border-top:2px solid #e53935; padding-top:1.5rem;">
-                    <h2 class="sugarads-section-title" style="color:#e53935;">Eliminar Horario</h2>
+                <form id="form-eliminar" class="sugarads-form form-eliminar-inline" method="get" action="registroDatos.php">
+                    <h2 class="sugarads-section-title section-title-error">Eliminar Horario</h2>
                     <input type="hidden" name="eliminar" value="<?= intval($_GET['eliminar']) ?>">
                     <div class="sugarads-field">
                         <span>¿Estás seguro que deseas eliminar este horario?</span>
                     </div>
                     <div class="sugarads-field">
-                        <button type="submit" class="btn-secundario" style="background:#e53935;color:#fff;">Eliminar</button>
-                        <a href="registroDatos.php" class="btn-primario" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; padding:8px 12px;">Cancelar</a>
+                        <button type="submit" class="btn-cancelar-error">Eliminar</button>
+                        <a href="registroDatos.php" class="sugarads-btn sugarads-btn-guardar">Cancelar</a>
                     </div>
                 </form>
                 <?php endif; ?>
@@ -309,6 +315,6 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
             </div>
         </div>
     </main>
-    <script src="../JS/bloquesHorarios.js"></script>
+    <script src="../../Administrador/JS/bloquesHorarios.js"></script>
 </body>
 </html>

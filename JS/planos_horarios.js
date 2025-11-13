@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.warn(`No hay datos para el piso ${piso}`);
                     return;
                 }
+                // Limpiar todas las celdas antes de actualizar
                 document.querySelectorAll('.horario-celda').forEach(cell => cell.innerHTML = '');
                 ['manana','tarde','noche'].forEach(turno => {
                     const datosTurno = data[piso][turno] || {};
@@ -107,8 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                     const grupo = a.grupo ? `<div class="grupo">${a.grupo}</div>` : '';
                                     return `<div class='asignatura'>
                                         <strong>${a.materia || 'Sin materia'}</strong><br>
-                                        ${a.profesor || 'Sin profesor'}
-                                        ${grupo}
+                                        ${a.profesor || 'Sin profesor'}<br>
+                                        ${a.grupo || 'Sin grupo'}
                                      </div>`;
                                 }).join('');
                                 celda.innerHTML = contenidoCelda;

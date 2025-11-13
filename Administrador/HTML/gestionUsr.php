@@ -1,7 +1,7 @@
 <?php
 include '../../HEADERS/headerAA.php';
 require_once("../../PHP/conexion.php");
-$conexion = conectar_bd();
+$conn = conectar_bd();
 $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
 $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
 $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
@@ -16,7 +16,7 @@ if ($tipo) {
     $consulta .= " AND tipo_usuario='$tipo'";
 }
 $consulta .= " ORDER BY nombre, apellido";
-$resultado_usuarios = mysqli_query($conexion, $consulta);
+$resultado_usuarios = mysqli_query($conn, $consulta);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,8 +24,10 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
     <meta charset="UTF-8">
     <title>Gestión de Usuarios</title>
     <link rel="stylesheet" href="../../Css/style.css">
-    <link rel="stylesheet" href="../../Css/gestionUsr.css">
+    <!-- Estilos movidos a Css/style.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
 </head>
 <body class="body-login">
     <br>
@@ -82,11 +84,12 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
                                     </form>
                                     <form method="post" action="../../Administrador/PHP/funcionGestion.php" class="accion-form eliminar-form" style="display:inline;">
                                         <input type="hidden" name="id_usuario" value="<?= $usuario['id_usuario'] ?>">
-                                        <button type="submit" name="eliminar_usuario" class="btn-accion btn-eliminar" title="Eliminar">
+                                        <input type="hidden" name="eliminar_usuario" value="1">
+                                        <button type="submit" class="btn-accion btn-eliminar" title="Eliminar">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
-                                    <form method="get" action="../..Administrador/HTML/editarUsr.php" style="display:inline;">
+                                    <form method="get" action="../../Administrador/HTML/editarUsr.php" style="display:inline;">
                                         <input type="hidden" name="id_usuario" value="<?= $usuario['id_usuario'] ?>">
                                         <button type="submit" class="btn-accion" title="Editar">
                                             <i class="fa fa-edit"></i>
@@ -98,11 +101,11 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
                         </tbody>
                     </table>
                 </div>
-                    <div style="text-align:center; margin-top:24px;">
+                    <div class="volver-centrado">
                         <a href="reporteUsr.php" class="volvereporte">
                             <i class="fa fa-arrow-left"></i> Volver al reporte
                         </a>
-                        <a href="historialActividad.php" class="volvereporte" style="margin-left:16px;">
+                        <a href="historialActividad.php" class="volvereporte volver-margin-left">
                             <i class="fa fa-clock-rotate-left"></i> Ver historial de cambios
                         </a>
                     </div>
@@ -110,12 +113,12 @@ $resultado_usuarios = mysqli_query($conexion, $consulta);
             </main>
         </div>
     </div>
-    <script src="../../JS/gestionUsr.js"></script>
+    <script src="../JS/gestionUsr.js"></script>
 </body>
 </html>
 <?php
-if (isset($conexion) && $conexion instanceof mysqli) {
-    if (@$conexion->ping()) {
+if (isset($conn) && $conn instanceof mysqli) {
+    if (@$conn->ping()) {
     }
 }
 ?>

@@ -95,7 +95,9 @@ try {
     exit;
 } catch (Exception $e) {
     mysqli_rollback($con);
-    die("Error: " . $e->getMessage());
+    $msg = urlencode($e->getMessage());
+    header("Location: ../../Direccion/HTML/registroDatos.php?error_msg={$msg}");
+    exit;
 } finally {
     if (isset($con)) {
         mysqli_close($con);

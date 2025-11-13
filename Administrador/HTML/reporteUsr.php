@@ -1,169 +1,163 @@
 <?php
+include '../../HEADERS/headerAA.php';
 require_once("../../PHP/conexion.php");
-$conexion = conectar_bd();
-$consulta = "SELECT tipo_usuario, COUNT(*) as cantidad FROM usuario GROUP BY tipo_usuario";
-$resultado = mysqli_query($conexion, $consulta);
-$lista_roles = [];
-if ($resultado) {
-    foreach (mysqli_fetch_all($resultado, MYSQLI_ASSOC) as $fila_rol) {
-        $lista_roles[] = $fila_rol;
-    }
+$conn = conectar_bd();
+$tipo_usuario = isset($_GET['tipo_usuario']) ? $_GET['tipo_usuario'] : '';
+$estado_usuario = isset($_GET['estado_usuario']) ? $_GET['estado_usuario'] : '';
+$query = "SELECT id_usuario, nombre, apellido, correo, tipo_usuario, estado_usuario, fecha_registro FROM usuario WHERE 1";
+if ($tipo_usuario) {
+    $query .= " AND tipo_usuario = '$tipo_usuario'";
 }
-$rol_seleccionado = '';
-if (isset($_GET['tipo']) && is_string($_GET['tipo'])) {
-    $rol_seleccionado = trim($_GET['tipo']);
+if ($estado_usuario) {
+    $query .= " AND estado_usuario = '$estado_usuario'";
 }
-if ($rol_seleccionado === '' && !empty($lista_roles)) {
-    $rol_seleccionado = $lista_roles[0]['tipo_usuario'];
-}
-$export = isset($_GET['export']) ? $_GET['export'] : '';
-$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-$perPage = 20;
+$query .= " ORDER BY fecha_registro DESC";
+$resultado = mysqli_query($conn, $query);
 $usuarios = [];
-$total = 0;
-if ($rol_seleccionado !== '') {
-    $safe_rol = mysqli_real_escape_string($conexion, $rol_seleccionado);
-    $offset = ($page - 1) * $perPage;
-    $countQuery = "SELECT COUNT(*) as total FROM usuario WHERE tipo_usuario='" . $safe_rol . "'";
-    $rCount = mysqli_query($conexion, $countQuery);
-    if ($rCount) {
-        $totalRow = mysqli_fetch_assoc($rCount);
-        $total = (int)$totalRow['total'];
-    }
-    $queryUsuarios = "SELECT id_usuario, nombre, apellido, correo, tipo_usuario, estado_usuario FROM usuario WHERE tipo_usuario='" . $safe_rol . "' ORDER BY nombre, apellido LIMIT $perPage OFFSET $offset";
-    $rUsuarios = mysqli_query($conexion, $queryUsuarios);
-    if ($rUsuarios) {
-        while ($row = mysqli_fetch_assoc($rUsuarios)) {
-            $usuarios[] = $row;
-        }
-    }
+while ($fila = mysqli_fetch_assoc($resultado)) {
+    $usuarios[] = $fila;
 }
-if ($export === 'csv' && $rol_seleccionado !== '') {
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=usuarios_' . preg_replace('/[^a-z0-9_-]/i', '', $rol_seleccionado) . '.csv');
-    $out = fopen('php://output', 'w');
-    fputcsv($out, ['ID', 'Nombre', 'Apellido', 'Correo', 'Tipo', 'Estado']);
-    $safe_rol = mysqli_real_escape_string($conexion, $rol_seleccionado);
-    $r = mysqli_query($conexion, "SELECT id_usuario, nombre, apellido, correo, tipo_usuario, estado_usuario FROM usuario WHERE tipo_usuario='" . $safe_rol . "' ORDER BY nombre, apellido");
-    if ($r) {
-        while ($row = mysqli_fetch_assoc($r)) {
-            fputcsv($out, [$row['id_usuario'], $row['nombre'], $row['apellido'], $row['correo'], $row['tipo_usuario'], $row['estado_usuario']]);
-        }
+$total_usuarios = count($usuarios);
+$activos = array_filter($usuarios, function($u) { return $u['estado_usuario'] == 'activo'; });
+$inactivos = array_filter($usuarios, function($u) { return $u['estado_usuario'] == 'inactivo'; });
+$por_tipo = [];
+foreach ($usuarios as $u) {
+    $tipo = $u['tipo_usuario'];
+    if (!isset($por_tipo[$tipo])) {
+        $por_tipo[$tipo] = 0;
     }
-    fclose($out);
-    exit;
+    $por_tipo[$tipo]++;
 }
 ?>
-<?php include '../../HEADERS/headerAA.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reporte de Usuarios por Rol</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Usuarios</title>
     <link rel="stylesheet" href="../../Css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="body-login">
-    <div class="contenedor-reporte-usuarios">
-        <h2 class="titulo-panel">Usuarios por Rol</h2>
-        <?php if (empty($lista_roles)): ?>
-            <p class="mensaje">No se encontraron roles o no hay usuarios registrados.</p>
-        <?php else: ?>
-        <form method="get" id="formRol" class="form-rol">
-            <label for="tipo">Selecciona un rol:</label>
-            <select name="tipo" id="tipo">
-                <?php foreach ($lista_roles as $rol): ?>
-                    <option value="<?= htmlspecialchars($rol['tipo_usuario']) ?>" <?= $rol['tipo_usuario'] == $rol_seleccionado ? 'selected' : '' ?> >
-                        <?= htmlspecialchars(ucfirst($rol['tipo_usuario'])) ?> (<?= (int)$rol['cantidad'] ?>)
-                    </option>
-                <?php endforeach; ?>
-            </select>
-            <a class="btn-export" href="?tipo=<?= urlencode($rol_seleccionado) ?>&export=csv"><i class="fa fa-file-csv"></i> Exportar CSV</a>
+    <div class="contenedor-reporte">
+        <h1 class="titulo-reporte">Reporte de Usuarios</h1>
+        <form method="get" class="filtros-reporte">
+            <div class="filtro-grupo">
+                <label for="tipo_usuario">Tipo de Usuario:</label>
+                <select name="tipo_usuario" id="tipo_usuario">
+                    <option value="">Todos</option>
+                    <option value="alumno" <?= $tipo_usuario == 'alumno' ? 'selected' : '' ?>>Alumno</option>
+                    <option value="profesor" <?= $tipo_usuario == 'profesor' ? 'selected' : '' ?>>Profesor</option>
+                    <option value="adscripta" <?= $tipo_usuario == 'adscripta' ? 'selected' : '' ?>>Adscripta</option>
+                    <option value="direccion" <?= $tipo_usuario == 'direccion' ? 'selected' : '' ?>>Dirección</option>
+                    <option value="secretaria" <?= $tipo_usuario == 'secretaria' ? 'selected' : '' ?>>Secretaría</option>
+                </select>
+            </div>
+            <div class="filtro-grupo">
+                <label for="estado_usuario">Estado:</label>
+                <select name="estado_usuario" id="estado_usuario">
+                    <option value="">Todos</option>
+                    <option value="activo" <?= $estado_usuario == 'activo' ? 'selected' : '' ?>>Activo</option>
+                    <option value="inactivo" <?= $estado_usuario == 'inactivo' ? 'selected' : '' ?>>Inactivo</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-filtrar"><i class="fas fa-filter"></i> Filtrar</button>
+            <a href="reporteUsr.php" class="btn-limpiar"><i class="fas fa-times"></i> Limpiar</a>
         </form>
-        <table class="tabla-reporte-usuarios">
-            <thead>
-                <tr>
-                    <th>Rol</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($lista_roles as $rol): ?>
-                <tr <?= $rol['tipo_usuario'] == $rol_seleccionado ? 'class="resaltado"' : '' ?> >
-                    <td><?= htmlspecialchars(ucfirst($rol['tipo_usuario'])) ?></td>
-                    <td><?= (int)$rol['cantidad'] ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <section class="listado-usuarios">
-            <h3>Detalle: <?= htmlspecialchars(ucfirst($rol_seleccionado)) ?> (<?= $total ?>)</h3>
-            <?php if ($total === 0): ?>
-                <p class="mensaje">No hay usuarios para este rol.</p>
-            <?php else: ?>
-                <div class="tabla-usuarios-wrapper">
-                    <table class="tabla-usuarios">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Correo</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($usuarios as $u): ?>
-                            <tr>
-                                <td><?= (int)$u['id_usuario'] ?></td>
-                                <td><?= htmlspecialchars($u['nombre']) ?></td>
-                                <td><?= htmlspecialchars($u['apellido']) ?></td>
-                                <td><?= htmlspecialchars($u['correo']) ?></td>
-                                <td><?= htmlspecialchars($u['estado_usuario']) ?></td>
-                                <td>
-                                    <form method="get" action="gestionUsr.php" style="display:inline-block;">
-                                        <input type="hidden" name="tipo" value="<?= htmlspecialchars($rol_seleccionado) ?>">
-                                        <input type="hidden" name="busqueda" value="<?= urlencode($u['correo']) ?>">
-                                        <button type="submit" class="btn-accion" title="Ver en gestión"><i class="fa fa-eye"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php $pages = (int)ceil($total / $perPage); ?>
-                <?php if ($pages > 1): ?>
-                    <div class="paginacion">
-                        <?php if ($page > 1): ?>
-                            <a href="?tipo=<?= urlencode($rol_seleccionado) ?>&page=<?= $page-1 ?>" class="page">&laquo; Anterior</a>
-                        <?php endif; ?>
-                        <span>Pagina <?= $page ?> de <?= $pages ?></span>
-                        <?php if ($page < $pages): ?>
-                            <a href="?tipo=<?= urlencode($rol_seleccionado) ?>&page=<?= $page+1 ?>" class="page">Siguiente &raquo;</a>
-                        <?php endif; ?>
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
-        </section>
-        <form method="get" action="gestionUsr.php" style="margin-top:16px;text-align:center;">
-            <input type="hidden" name="tipo" value="<?= htmlspecialchars($rol_seleccionado) ?>">
-            <button type="submit" class="btn-ver-detalle">Ir a Gestión de usuarios</button>
-        </form>
-        <?php endif; ?>
+        <div class="estadisticas-reporte">
+            <div class="estadistica-card">
+                <h3>Total de Usuarios</h3>
+                <p class="numero"><?= $total_usuarios ?></p>
+            </div>
+            <div class="estadistica-card">
+                <h3>Usuarios Activos</h3>
+                <p class="numero"><?= count($activos) ?></p>
+            </div>
+            <div class="estadistica-card">
+                <h3>Usuarios Inactivos</h3>
+                <p class="numero"><?= count($inactivos) ?></p>
+            </div>
+        </div>
+        <div class="grafico-reporte">
+            <h2>Distribución por Tipo de Usuario</h2>
+            <canvas id="chartTipoUsuario"></canvas>
+        </div>
+        <div class="tabla-reporte">
+            <h2>Lista de Usuarios</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Tipo</th>
+                        <th>Estado</th>
+                        <th>Fecha de Registro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($usuarios as $usuario): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($usuario['id_usuario']) ?></td>
+                        <td><?= htmlspecialchars($usuario['nombre']) ?></td>
+                        <td><?= htmlspecialchars($usuario['apellido']) ?></td>
+                        <td><?= htmlspecialchars($usuario['correo']) ?></td>
+                        <td><?= htmlspecialchars($usuario['tipo_usuario']) ?></td>
+                        <td><span class="estado <?= $usuario['estado_usuario'] ?>"><?= htmlspecialchars($usuario['estado_usuario']) ?></span></td>
+                        <td><?= htmlspecialchars($usuario['fecha_registro']) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="acciones-reporte">
+            <a href="gestionUsr.php" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a Gestión de Usuarios</a>
+            <button onclick="window.print()" class="btn-imprimir"><i class="fas fa-print"></i> Imprimir Reporte</button>
+        </div>
     </div>
     <script>
-        document.getElementById('tipo')?.addEventListener('change', function() {
-            document.getElementById('formRol').submit();
-        });
+        const ctx = document.getElementById('chartTipoUsuario').getContext('2d');
+        const data = {
+            labels: <?= json_encode(array_keys($por_tipo)) ?>,
+            datasets: [{
+                label: 'Número de Usuarios',
+                data: <?= json_encode(array_values($por_tipo)) ?>,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 205, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribución por Tipo de Usuario'
+                    }
+                }
+            }
+        };
+        new Chart(ctx, config);
     </script>
 </body>
 </html>
-<?php
-if (isset($conexion) && $conexion instanceof mysqli) {
-    if (@$conexion->ping()) {
-    }
-}
-?>

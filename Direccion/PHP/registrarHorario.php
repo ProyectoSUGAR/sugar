@@ -1,105 +1,185 @@
 <?php
-require_once("../../PHP/conexion.php");
-$con = conectar_bd();
-$conexion_abierta = true;
-if ($_SERVER["REQUEST_METHOD"] === "POST" && $con && $conexion_abierta) {
-    $id_profesor = isset($_POST['id_profesor']) ? intval($_POST['id_profesor']) : null;
-    $dia = isset($_POST['dia']) ? $_POST['dia'] : null;
-    $turno = isset($_POST['turno']) ? $_POST['turno'] : null;
-    $bloque = isset($_POST['hora']) ? $_POST['hora'] : null;
-    $id_asignatura = isset($_POST['id_asignatura']) ? intval($_POST['id_asignatura']) : null;
-    $id_espacio = isset($_POST['id_espacio']) ? intval($_POST['id_espacio']) : null;
-    $id_asocia = isset($_POST['id_asocia']) ? intval($_POST['id_asocia']) : null;
-    if ($id_profesor && $dia && $bloque && $id_asignatura && $id_espacio && $turno) {
-        $dia_semana = $dia;
-        $horario = $bloque;
-        if (empty(trim($horario))) {
-            echo "<script>alert('El bloque horario no puede estar vacío.'); window.history.back();</script>";
+function validar_datos_horario($datos) {
+    $errores = [];
+
+    if (!$datos['id_profesor']) $errores[] = "Profesor no seleccionado.";
+    if (!$datos['dia']) $errores[] = "Día no seleccionado.";
+    if (!$datos['hora']) $errores[] = "Bloque horario no seleccionado.";
+    if (!$datos['id_asignatura']) $errores[] = "Asignatura no seleccionada.";
+    if (!$datos['id_espacio']) $errores[] = "Espacio no seleccionado.";
+    if (!$datos['turno']) $errores[] = "Turno no seleccionado.";
+
+    if (empty(trim($datos['hora']))) {
+        $errores[] = "El bloque horario no puede estar vacío.";
+    }
+
+    return $errores;
+}
+
+function verificar_profesor_existe($id_profesor) {
+    require_once("../../PHP/conexion.php");
+    $conn = conectar_bd();
+    $stmt = mysqli_prepare($conn, "SELECT 1 FROM profesor WHERE id_usuario = ? LIMIT 1");
+    mysqli_stmt_bind_param($stmt, "i", $id_profesor);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    $existe = mysqli_stmt_num_rows($stmt) > 0;
+    mysqli_stmt_close($stmt);
+    return $existe;
+}
+
+function crear_profesor_si_no_existe($id_profesor) {
+    if (!verificar_profesor_existe($id_profesor)) {
+        require_once("../../PHP/conexion.php");
+        $conn = conectar_bd();
+        $stmt = mysqli_prepare($conn, "INSERT INTO profesor (id_usuario) VALUES (?)");
+        mysqli_stmt_bind_param($stmt, "i", $id_profesor);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+}
+
+function verificar_asignacion_profesor_asignatura($id_profesor, $id_asignatura) {
+    require_once("../../PHP/conexion.php");
+    $conn = conectar_bd();
+    $stmt = mysqli_prepare($conn, "SELECT 1 FROM profesor_asignatura WHERE id_profesor = ? AND id_asignatura = ? LIMIT 1");
+    mysqli_stmt_bind_param($stmt, "ii", $id_profesor, $id_asignatura);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    $existe = mysqli_stmt_num_rows($stmt) > 0;
+    mysqli_stmt_close($stmt);
+    return $existe;
+}
+
+function crear_asignacion_profesor_asignatura($id_profesor, $id_asignatura) {
+    if (!verificar_asignacion_profesor_asignatura($id_profesor, $id_asignatura)) {
+        require_once("../../PHP/conexion.php");
+        $conn = conectar_bd();
+        $stmt = mysqli_prepare($conn, "INSERT INTO profesor_asignatura (id_profesor, id_asignatura) VALUES (?, ?)");
+        mysqli_stmt_bind_param($stmt, "ii", $id_profesor, $id_asignatura);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+}
+
+function verificar_duplicado_horario($id_espacio, $turno, $dia_semana, $horario, $id_asignatura, $id_profesor) {
+    require_once("../../PHP/conexion.php");
+    $conn = conectar_bd();
+    $stmt = mysqli_prepare($conn, "SELECT 1 FROM asocia WHERE id_espacio = ? AND turno = ? AND dia_semana = ? AND horario = ? AND id_asignatura = ? AND id_profesor = ? LIMIT 1");
+    mysqli_stmt_bind_param($stmt, "issssi", $id_espacio, $turno, $dia_semana, $horario, $id_asignatura, $id_profesor);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    $existe = mysqli_stmt_num_rows($stmt) > 0;
+    mysqli_stmt_close($stmt);
+    return $existe;
+}
+
+function insertar_horario($id_asignatura, $id_espacio, $horario, $id_profesor, $turno, $dia_semana) {
+    require_once("../../PHP/conexion.php");
+    $conn = conectar_bd();
+    $stmt = mysqli_prepare($conn, "INSERT INTO asocia (id_asignatura, id_espacio, horario, id_profesor, turno, dia_semana) VALUES (?, ?, ?, ?, ?, ?)");
+    mysqli_stmt_bind_param($stmt, "iissss", $id_asignatura, $id_espacio, $horario, $id_profesor, $turno, $dia_semana);
+    $resultado = mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return $resultado;
+}
+
+function actualizar_horario($id_asocia, $id_asignatura, $id_espacio, $horario, $id_profesor, $turno, $dia_semana) {
+    require_once("../../PHP/conexion.php");
+    $conn = conectar_bd();
+    $stmt = mysqli_prepare($conn, "UPDATE asocia SET id_asignatura=?, id_espacio=?, horario=?, id_profesor=?, turno=?, dia_semana=? WHERE id_asocia=?");
+    mysqli_stmt_bind_param($stmt, "iissssi", $id_asignatura, $id_espacio, $horario, $id_profesor, $turno, $dia_semana, $id_asocia);
+    $resultado = mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return $resultado;
+}
+
+function eliminar_horario($id_asocia) {
+    require_once("../../PHP/conexion.php");
+    $conn = conectar_bd();
+    $stmt = mysqli_prepare($conn, "DELETE FROM asocia WHERE id_asocia = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id_asocia);
+    $resultado = mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return $resultado;
+}
+
+function procesar_registro_horario() {
+    require_once("../../PHP/conexion.php");
+    $conn = conectar_bd();
+
+    if (!$conn) {
+        echo "<script>alert('Error de conexión a la base de datos.'); window.history.back();</script>";
+        exit;
+    }
+
+    $datos = [
+        'id_profesor' => isset($_POST['id_profesor']) ? intval($_POST['id_profesor']) : null,
+        'dia' => isset($_POST['dia']) ? $_POST['dia'] : null,
+        'turno' => isset($_POST['turno']) ? $_POST['turno'] : null,
+        'hora' => isset($_POST['hora']) ? $_POST['hora'] : null,
+        'id_asignatura' => isset($_POST['id_asignatura']) ? intval($_POST['id_asignatura']) : null,
+        'id_espacio' => isset($_POST['id_espacio']) ? intval($_POST['id_espacio']) : null,
+        'id_asocia' => isset($_POST['id_asocia']) ? intval($_POST['id_asocia']) : null,
+    ];
+
+    $errores = validar_datos_horario($datos);
+    if (!empty($errores)) {
+        echo "<script>alert('" . implode(' ', $errores) . "'); window.history.back();</script>";
+        exit;
+    }
+
+    $dia_semana = $datos['dia'];
+    $horario = $datos['hora'];
+
+    crear_profesor_si_no_existe($datos['id_profesor']);
+
+    crear_asignacion_profesor_asignatura($datos['id_profesor'], $datos['id_asignatura']);
+
+    if (!$datos['id_asocia']) {
+        if (verificar_duplicado_horario($datos['id_espacio'], $datos['turno'], $dia_semana, $horario, $datos['id_asignatura'], $datos['id_profesor'])) {
+            echo "<script>alert('Ya existe esa materia y profesor en ese espacio, turno, día y bloque horario.'); window.history.back();</script>";
             exit;
         }
-        $sql_prof = "SELECT 1 FROM profesor WHERE id_usuario = ? LIMIT 1";
-        $stmt_prof = mysqli_prepare($con, $sql_prof);
-        mysqli_stmt_bind_param($stmt_prof, "i", $id_profesor);
-        mysqli_stmt_execute($stmt_prof);
-        mysqli_stmt_store_result($stmt_prof);
-        $existe_prof = mysqli_stmt_num_rows($stmt_prof) > 0;
-        mysqli_stmt_close($stmt_prof);
-        if (!$existe_prof) {
-            $sql_insert_prof = "INSERT INTO profesor (id_usuario) VALUES (?)";
-            $stmt_insert_prof = mysqli_prepare($con, $sql_insert_prof);
-            mysqli_stmt_bind_param($stmt_insert_prof, "i", $id_profesor);
-            mysqli_stmt_execute($stmt_insert_prof);
-            mysqli_stmt_close($stmt_insert_prof);
-        }
-        $sql_check = "SELECT 1 FROM profesor_asignatura WHERE id_profesor = ? AND id_asignatura = ? LIMIT 1";
-        $stmt_check = mysqli_prepare($con, $sql_check);
-        mysqli_stmt_bind_param($stmt_check, "ii", $id_profesor, $id_asignatura);
-        mysqli_stmt_execute($stmt_check);
-        mysqli_stmt_store_result($stmt_check);
-        $existe = mysqli_stmt_num_rows($stmt_check) > 0;
-        mysqli_stmt_close($stmt_check);
-        if (!$existe) {
-            $sql_insert_pa = "INSERT INTO profesor_asignatura (id_profesor, id_asignatura) VALUES (?, ?)";
-            $stmt_insert_pa = mysqli_prepare($con, $sql_insert_pa);
-            mysqli_stmt_bind_param($stmt_insert_pa, "ii", $id_profesor, $id_asignatura);
-            mysqli_stmt_execute($stmt_insert_pa);
-            mysqli_stmt_close($stmt_insert_pa);
-        }
-        if (!$id_asocia) {
-            $sql_check_duplicado = "SELECT 1 FROM asocia WHERE id_espacio = ? AND turno = ? AND dia_semana = ? AND horario = ? AND id_asignatura = ? AND id_profesor = ? LIMIT 1";
-            $stmt_check_duplicado = mysqli_prepare($con, $sql_check_duplicado);
-            mysqli_stmt_bind_param($stmt_check_duplicado, "issssi", $id_espacio, $turno, $dia_semana, $horario, $id_asignatura, $id_profesor);
-            mysqli_stmt_execute($stmt_check_duplicado);
-            mysqli_stmt_store_result($stmt_check_duplicado);
-            $existe_duplicado = mysqli_stmt_num_rows($stmt_check_duplicado) > 0;
-            mysqli_stmt_close($stmt_check_duplicado);
-            if ($existe_duplicado) {
-                echo "<script>alert('Ya existe esa materia y profesor en ese espacio, turno, día y bloque horario.'); window.history.back();</script>";
-                exit;
-            } else {
-                $sql = "INSERT INTO asocia (id_asignatura, id_espacio, horario, id_profesor, turno, dia_semana) VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = mysqli_prepare($con, $sql);
-                mysqli_stmt_bind_param($stmt, "iissss", $id_asignatura, $id_espacio, $horario, $id_profesor, $turno, $dia_semana);
-                $ok = mysqli_stmt_execute($stmt);
-                mysqli_stmt_close($stmt);
-                if ($ok) {
-                    echo "<script>alert('Horario registrado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
-                    exit;
-                } else {
-                    $error = mysqli_error($con);
-                    echo "<script>alert('Error al registrar el horario: $error'); window.history.back();</script>";
-                    exit;
-                }
-            }
+
+        if (insertar_horario($datos['id_asignatura'], $datos['id_espacio'], $horario, $datos['id_profesor'], $datos['turno'], $dia_semana)) {
+            echo "<script>alert('Horario registrado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
         } else {
-            $sql = "UPDATE asocia SET id_asignatura=?, id_espacio=?, horario=?, id_profesor=?, turno=?, dia_semana=? WHERE id_asocia=?";
-            $stmt = mysqli_prepare($con, $sql);
-            mysqli_stmt_bind_param($stmt, "iissssi", $id_asignatura, $id_espacio, $horario, $id_profesor, $turno, $dia_semana, $id_asocia);
-            $ok = mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-            if ($ok) {
-                echo "<script>alert('Horario actualizado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
-                exit;
-            } else {
-                $error = mysqli_error($con);
-                echo "<script>alert('Error al actualizar el horario: $error'); window.history.back();</script>";
-                exit;
-            }
+            $error = mysqli_error($conn);
+            echo "<script>alert('Error al registrar el horario: $error'); window.history.back();</script>";
         }
     } else {
-        echo "<script>alert('Datos incompletos.'); window.history.back();</script>";
+        if (actualizar_horario($datos['id_asocia'], $datos['id_asignatura'], $datos['id_espacio'], $horario, $datos['id_profesor'], $datos['turno'], $dia_semana)) {
+            echo "<script>alert('Horario actualizado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
+        } else {
+            $error = mysqli_error($conn);
+            echo "<script>alert('Error al actualizar el horario: $error'); window.history.back();</script>";
+        }
+    }
+}
+
+function procesar_eliminacion_horario() {
+    if (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
+        $id = intval($_GET['eliminar']);
+        if (eliminar_horario($id)) {
+            echo "<script>alert('Horario eliminado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
+        } else {
+            echo "<script>alert('Error al eliminar el horario.'); window.history.back();</script>";
+        }
         exit;
     }
 }
-if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
-    $id = intval($_GET['eliminar']);
-    mysqli_query($con, "DELETE FROM asocia WHERE id_asocia = $id");
-    echo "<script>alert('Horario eliminado correctamente.'); window.location.href='../../HTML/registroDatos.php';</script>";
-    exit;
-}
-if (isset($con) && $con instanceof mysqli) {
-    if (@$con->ping()) {
-        $conexion_abierta = false;
+
+function procesar_registro_horario_principal() {
+    require_once("../../PHP/conexion.php");
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        procesar_registro_horario();
+    } elseif ($_SERVER["REQUEST_METHOD"] === "GET") {
+        procesar_eliminacion_horario();
     }
 }
-?>
+
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+    procesar_registro_horario_principal();
+}

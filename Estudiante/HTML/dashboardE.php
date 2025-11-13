@@ -11,6 +11,5 @@
   <body>
     <?php include '../../Estudiante/HTML/bienvenida.php'; ?>
     <?php include '../../PHP/dashboard.php'; ?>
-    <script src="../../Direccion/JS/estadisticas.js"></script>
   </body>
 </html>

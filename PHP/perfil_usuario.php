@@ -3,6 +3,9 @@ session_start();
 	if (isset($_GET['cerrar_sesion']) && $_GET['cerrar_sesion'] == '1') {
 		session_unset();
 		session_destroy();
+		if (isset($_COOKIE[session_name()])) {
+			setcookie(session_name(), '', time() - 3600, '/');
+		}
 		header('Location: ../../Login/HTML/ingreso.php');
 		exit;
 	}
@@ -39,3 +42,4 @@ function obtenerDatosUsuario() {
 		'imagen' => $img
 	];
 }
+

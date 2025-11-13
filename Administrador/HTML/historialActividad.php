@@ -33,7 +33,7 @@ $actividades = obtenerHistorialActividad();
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div style="text-align:center; margin-top:24px;">
+        <div class="volver-centrado">
             <a href="gestionUsr.php" class="btn-volver-reporte">
                 <i class="fa fa-arrow-left"></i> Volver a gestión de usuarios
             </a>

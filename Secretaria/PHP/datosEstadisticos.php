@@ -3,21 +3,22 @@ header('Content-Type: application/json');
 require_once('../../PHP/conexion.php');
 $con = conectar_bd();
 $qAlumnos = mysqli_query($con, "SELECT COUNT(*) AS total FROM alumno");
-$alumnos = mysqli_fetch_assoc($qAlumnos)['total'];
+$alumnos_result = mysqli_fetch_assoc($qAlumnos);
+$alumnos = (int)($alumnos_result['total'] ?? 0);
+if ($alumnos == 0) {
+    // Fallback: contar estudiantes desde usuario si la tabla alumno está vacía
+    $qAlt = mysqli_query($con, "SELECT COUNT(*) AS total FROM usuario WHERE tipo_usuario IN ('alumno', 'estudiante')");
+    $alumnosAlt = mysqli_fetch_assoc($qAlt);
+    $alumnos = (int)($alumnosAlt['total'] ?? 0);
+}
 $qProfesores = mysqli_query($con, "SELECT COUNT(*) AS total FROM usuario WHERE tipo_usuario = 'profesor'");
 $profesores = mysqli_fetch_assoc($qProfesores)['total'];
 $qGrupos = mysqli_query($con, "SELECT COUNT(*) AS total FROM grupo");
 $grupos = mysqli_fetch_assoc($qGrupos)['total'];
-$qSecretarios = mysqli_query($con, "SELECT COUNT(*) AS total FROM secretaria");
+$qSecretarios = mysqli_query($con, "SELECT COUNT(*) AS total FROM usuario WHERE tipo_usuario = 'secretaria'");
 $secretarios = mysqli_fetch_assoc($qSecretarios)['total'];
-$qSalonesLibres = mysqli_query($con, "
-    SELECT COUNT(*) AS total FROM espacio 
-    WHERE tipo_espacio='salon' AND id_espacio NOT IN (
-        SELECT id_espacio FROM reserva 
-        WHERE fecha_inicio <= NOW() AND fecha_fin >= NOW() AND estado='aprobada'
-    )
-");
-$salones_libres = mysqli_fetch_assoc($qSalonesLibres)['total'];
+$qReservasPendientes = mysqli_query($con, "SELECT COUNT(*) AS total FROM reserva WHERE estado = 'pendiente'");
+$reservas_pendientes = mysqli_fetch_assoc($qReservasPendientes)['total'];
 $qClasesPorDia = mysqli_query($con, "
     SELECT 
         dia_semana,
@@ -43,7 +44,7 @@ echo json_encode([
     "profesores" => $profesores,
     "grupos" => $grupos,
     "secretarios" => $secretarios,
-    "salones_libres" => $salones_libres,
+    "reservas_pendientes" => $reservas_pendientes,
     "grafico" => $graficoData
 ]);
 ?>

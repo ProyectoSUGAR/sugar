@@ -1,9 +1,11 @@
 <?php
+include '../../HEADERS/headerD.php';
 require_once("../../PHP/conexion.php");
 $con = conectar_bd();
 $editar = false;
 $nombre_editar = '';
 $id_editar = '';
+// Procesar redirecciones y operaciones de base de datos antes de cualquier salida HTML
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
     $accion = $_POST['accion'];
     if ($accion === 'crear' && !empty($_POST['nombre'])) {
@@ -12,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
         mysqli_stmt_bind_param($stmt, "s", $nombre);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        header("Location: ../../Direccion/HTML/asignacionAsig.php");
+        header("Location: ../../Administrador/HTML/asignacionAsig.php");
         exit;
     } elseif ($accion === 'editar' && !empty($_POST['id_asignatura']) && !empty($_POST['nombre'])) {
         $id = intval($_POST['id_asignatura']);
@@ -21,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
         mysqli_stmt_bind_param($stmt, "si", $nombre, $id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        header("Location: ../../Direccion/HTML/asignacionAsig.php");
+        header("Location: ../../Administrador/HTML/asignacionAsig.php");
         exit;
     } elseif ($accion === 'eliminar' && !empty($_POST['id_asignatura'])) {
         $id = intval($_POST['id_asignatura']);
@@ -29,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'])) {
         mysqli_stmt_bind_param($stmt, "i", $id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        header("Location: ../../Direccion/HTML/asignacionAsig.php");
+        header("Location: ../../Administrador/HTML/asignacionAsig.php");
         exit;
     }
 }
@@ -55,17 +57,17 @@ while ($fila = mysqli_fetch_assoc($res)) {
     <title>Gestión de asignaturas</title>
     <link rel="stylesheet" href="../../Css/style.css">
     <!-- Material Icons CDN -->
-     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Styles moved to Css/style.css -->
 </head>
 <body class="bodyregidat">
-<?php include '../../HEADERS/headerD.php'; ?>
     <main class="sugarads-main">
         <h1 class="sugarads-title">Gestión de asignaturas</h1>
-        <div class="sugarads-grid registro-datos">
-            <section class="sugarads-col-left">
-                <!-- Formulario para crear o editar asignaturas -->
-                <form class="formasig" method="post" action="../../Direccion/PHP/asignaturaFunciones.php">
+        <div class="cards-horizontal">
+            <!-- Formulario para crear o editar asignaturas -->
+            <section class="sugar-card">
+                <form class="formasig" method="post" action="../../Administrador/HTML/asignacionAsig.php">
                     <h2 class="h2asiges"><?= $editar ? "Editar asignatura" : "Nueva asignatura" ?></h2>
                     <div class="sugarads-field">
                         <input type="text" id="nombre" name="nombre" class="inputasig" required placeholder="Ejemplo: Matemática" value="<?= htmlspecialchars($nombre_editar) ?>">
@@ -74,32 +76,45 @@ while ($fila = mysqli_fetch_assoc($res)) {
                         <input type="hidden" name="id_asignatura" value="<?= $id_editar ?>">
                         <input type="hidden" name="accion" value="editar">
                         <div class="sugarads-field">
-                            <button type="submit" class="sugarads-btn sugarads-btn-guardar">Guardar Cambios</button>
-                            <a href="../../Direccion/HTML/asignacionAsig.php" class="sugarads-btn sugarads-btn-cancelar">Cancelar</a>
+                            <button type="submit" class="btn-primario">Guardar Cambios</button>
+                            <a href="asignacionAsig.php" class="btn-secundario btn-cancel">Cancelar</a>
                         </div>
                     <?php else: ?>
                         <input type="hidden" name="accion" value="crear">
                         <div class="sugarads-field">
-                            <button type="submit" class="regasigboton">Registrar</button>
-                            <button type="reset" class="botoneliminar">Cancelar</button>
+                            <button type="submit" class="btn-primario">Registrar</button>
+                            <button type="reset" class="btn-secundario">Cancelar</button>
                         </div>
                     <?php endif; ?>
                 </form>
-                <br>
-                <!-- Listado y acciones -->
-                <div class="sugarads-entradas sombra">
+            </section>
+
+            <section class="sugar-card card-half">
+                <div class="sugarads-entradas">
                     <h2 class="h2asiges1">Asignaturas registradas</h2>
                     <?php if ($asignaturas): ?>
                         <ul>
                        <?php foreach ($asignaturas as $a): ?>
                             <li class="pruebads">
-                                <?= htmlspecialchars($a['nombre']) ?>
-                                <a href="../../Direccion/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" class="sugarads-btn sugarads-btn-editar">Editar</a>
-                                <form method="post" action="" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta asignatura?');">
-                                    <input type="hidden" name="id_asignatura" value="<?= $a['id_asignatura'] ?>">
-                                    <input type="hidden" name="accion" value="eliminar">
-                                    <button type="submit" class="botoneliminar">Eliminar</button>
-                                </form>
+                                <span class="asignatura-nombre">
+                                    <?= htmlspecialchars($a['nombre']) ?>
+                                </span>
+                                <div class="action-buttons">
+                                    <a href="../../Administrador/HTML/asignacionAsig.php?editar=<?= $a['id_asignatura'] ?>" 
+                                       class="btn-secundario" 
+                                       class="btn-secundario btn-icon">
+                                        <span class="material-icons icon-sm">edit</span>
+                                        Editar
+                                    </a>
+                                    <form method="post" action="" class="inline" onsubmit="return confirm('¿Seguro que deseas eliminar esta asignatura?');">
+                                        <input type="hidden" name="id_asignatura" value="<?= $a['id_asignatura'] ?>">
+                                        <input type="hidden" name="accion" value="eliminar">
+                                        <button type="submit" class="btn-secundario btn-icon">
+                                            <span class="material-icons icon-sm">delete</span>
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </div>
                             </li>
                         <?php endforeach; ?>
                         </ul>

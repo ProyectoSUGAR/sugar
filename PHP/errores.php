@@ -1,3 +1,7 @@
-<?php 
-echo "Error: No se pudo conectar a la base de datos.";
+<?php
+function die_error($type, $message) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => $type, 'message' => $message]);
+    exit;
+}
 ?>

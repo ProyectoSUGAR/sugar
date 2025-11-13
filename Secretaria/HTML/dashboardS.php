@@ -1,5 +1,15 @@
 <?php 
 include '../../HEADERS/headerS.php'; 
+// Cargar estadísticas desde el servidor para mostrar valores reales
+require_once('../../Administrador/PHP/datosEstadisticos.php');
+require_once('../../PHP/conexion.php');
+$conn = conectar_bd();
+$alumnos = obtener_estadisticas_alumnos($conn);
+$profesores = obtener_estadisticas_profesores($conn);
+$grupos = obtener_estadisticas_grupos($conn);
+$secretarios = obtener_estadisticas_secretarios($conn);
+$reservas_pendientes = obtener_estadisticas_reservas_pendientes($conn);
+$graficoData = obtener_datos_grafico_clases($conn);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,17 +30,17 @@ include '../../HEADERS/headerS.php';
             <div class="estadisticas-grid">
                 <!-- Bloque que muestra el número de alumnos registrados -->
                 <div class="estadistica-item">
-                    <div class="estadistica-numero" data-tipo="alumnos">0</div>
+                    <div class="estadistica-numero" data-tipo="alumnos"><?php echo (int)$alumnos; ?></div>
                     <div class="estadistica-label">alumnos<br>registrados</div>
                 </div>
                 <!-- Bloque que muestra el número de profesores registrados -->
                 <div class="estadistica-item">
-                    <div class="estadistica-numero" data-tipo="profesores">0</div>
+                    <div class="estadistica-numero" data-tipo="profesores"><?php echo (int)$profesores; ?></div>
                     <div class="estadistica-label">Profesores<br>registrados</div>
                 </div>
                 <!-- Bloque que muestra el número de grupos registrados -->
                 <div class="estadistica-item">
-                    <div class="estadistica-numero" data-tipo="grupos">0</div>
+                    <div class="estadistica-numero" data-tipo="grupos"><?php echo (int)$grupos; ?></div>
                     <div class="estadistica-label">Grupos<br>registrados</div>
                 </div>
                 <!-- Bloque gráfico que muestra la distribución de clases -->
@@ -40,13 +50,13 @@ include '../../HEADERS/headerS.php';
                 </div>
                 <!-- Bloque que muestra el número de secretarios registrados -->
                 <div class="estadistica-item">
-                    <div class="estadistica-numero" data-tipo="secretarios">0</div>
+                    <div class="estadistica-numero" data-tipo="secretarios"><?php echo (int)$secretarios; ?></div>
                     <div class="estadistica-label">Secretarios<br>registrados</div>
                 </div>
-                <!-- Bloque que muestra el número de salones libres actualmente -->
+                <!-- Bloque que muestra las reservas pendientes de aprobación -->
                 <div class="estadistica-item">
-                    <div class="estadistica-numero" data-tipo="salones_libres">0</div>
-                    <div class="estadistica-label">Salones libres<br>en este momento</div>
+                    <div class="estadistica-numero" data-tipo="reservas_pendientes"><?php echo (int)$reservas_pendientes; ?></div>
+                    <div class="estadistica-label">Reservas<br>pendientes</div>
                 </div>
             </div>
             <div style="text-align: center; margin: 20px 0;">
@@ -88,6 +98,16 @@ include '../../HEADERS/headerS.php';
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-ui.min.js"></script>
     <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.11.0/css/anychart-ui.min.css">
     <!-- Inclusión del script que actualiza dinámicamente las estadísticas -->
+    <script>
+        window.__ESTADISTICAS = <?php echo json_encode([
+            'alumnos' => (int)$alumnos,
+            'profesores' => (int)$profesores,
+            'grupos' => (int)$grupos,
+            'secretarios' => (int)$secretarios,
+            'reservas_pendientes' => (int)$reservas_pendientes,
+            'grafico' => $graficoData
+        ], JSON_UNESCAPED_UNICODE); ?>;
+    </script>
     <script src="../../Direccion/JS/estadisticas.js"></script>
     <!-- Inclusión del script que muestra los planos de horarios -->
     <script src="../../JS/planos_horarios.js"></script>

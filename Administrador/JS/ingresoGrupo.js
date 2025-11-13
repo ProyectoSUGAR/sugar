@@ -1,23 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
   function $id(id) { return document.getElementById(id); }
-  const tipo = $id('grupo-tipo');
-  const nombre = $id('grupo-nombre');
-  const anio = $id('grupo-anio');
-  const horas = $id('grupo-horas');
-  const guardarBtn = $id('sugarads-guardar-grupo');
-  const confirmarBtn = $id('sugarads-confirmar-grupo');
-  const cancelarBtn = $id('sugarads-cancelar-grupo');
-  const cancelarConfirmacionBtn = $id('sugarads-cancelar-confirmacion-grupo');
-  const form = $id('sugarads-form-grupo');
-  const resultadoCanvas = $id('sugarads-resultado-canvas');
-  const varTipo = document.querySelector('.sugarads-var-tipo');
-  const varNombre = document.querySelector('.sugarads-var-nombre');
-  const varAnio = document.querySelector('.sugarads-var-anio');
-  const varHoras = document.querySelector('.sugarads-var-horas');
-  const confirmCard = document.querySelector('.formasig1');
-  if (confirmCard) {
-    confirmCard.classList.add('sugarads-confirm-card');
-  }
+  const tipo = $id('agp-grupo-tipo');
+  const nombre = $id('agp-grupo-nombre');
+  const anio = $id('agp-grupo-anio');
+  const horas = $id('agp-grupo-horas');
+  const guardarBtn = $id('agp-guardar-grupo');
+  const confirmarBtn = $id('agp-confirmar-grupo');
+  const cancelarBtn = $id('agp-cancelar-grupo');
+  const cancelarConfirmacionBtn = $id('agp-cancelar-confirmacion-grupo');
+  const form = $id('agp-form-grupo');
+  const resultadoCanvas = $id('agp-resultado-canvas');
+  const varTipo = document.querySelector('.agp-var-tipo');
+  const varNombre = document.querySelector('.agp-var-nombre');
+  const varAnio = document.querySelector('.agp-var-anio');
+  const varHoras = document.querySelector('.agp-var-horas');
+  const confirmCard = document.querySelector('.agp-confirm-card');
   function actualizarConfirmacion() {
     varTipo.textContent = tipo.value || '—';
     varNombre.textContent = nombre.value || '—';
@@ -29,10 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   guardarBtn.addEventListener('click', function () {
     actualizarConfirmacion();
-    document.querySelector('.sugarads-confirm-card').style.display = 'block';
+    if (confirmCard) confirmCard.style.display = 'block';
   });
   cancelarConfirmacionBtn.addEventListener('click', function () {
-    document.querySelector('.sugarads-confirm-card').style.display = 'none';
+    if (confirmCard) confirmCard.style.display = 'none';
   });
   confirmarBtn.addEventListener('click', function () {
     const nombreVal = nombre.value.trim();
@@ -65,12 +62,12 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
       resultadoCanvas.textContent = data.message;
       if (data.status === 'success') form.reset();
-      document.querySelector('.sugarads-confirm-card').style.display = 'none';
+      if (confirmCard) confirmCard.style.display = 'none';
       actualizarConfirmacion();
     })
     .catch(() => {
       resultadoCanvas.textContent = 'Error al guardar el grupo.';
-      document.querySelector('.sugarads-confirm-card').style.display = 'none';
+      if (confirmCard) confirmCard.style.display = 'none';
     });
   });
   cancelarBtn.addEventListener('click', function () {
@@ -79,5 +76,5 @@ document.addEventListener('DOMContentLoaded', function () {
     resultadoCanvas.textContent = '';
   });
   actualizarConfirmacion();
-  document.querySelector('.sugarads-confirm-card').style.display = 'none';
+  if (confirmCard) confirmCard.style.display = 'none';
 });

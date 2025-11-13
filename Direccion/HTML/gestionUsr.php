@@ -97,11 +97,11 @@ $resultado_usuarios = mysqli_query($conn, $consulta);
                         </tbody>
                     </table>
                 </div>
-                <div style="text-align:center; margin-top:24px;">
+                <div class="volver-centrado">
                     <a href="reporteUsr.php" class="volvereporte">
                         <i class="fa fa-arrow-left"></i> Volver al reporte
                     </a>
-                    <a href="historialActividad.php" class="volvereporte" style="margin-left:16px;">
+                    <a href="historialActividad.php" class="volvereporte volver-margin-left">
                         <i class="fa fa-clock-rotate-left"></i> Ver historial de cambios
                     </a>
                 </div>

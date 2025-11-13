@@ -1,4 +1,4 @@
-<?php include '../../HEADERS/headerAA.php'; ?>
+<?php include '../../HEADERS/headerA.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notificaciones</title>
     <link rel="stylesheet" href="../../Css/style.css">
+    <!-- Estilos movidos a Css/style.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
-<body>
+<body class="body-login">
     <main class="sugarads-main">
         <div class="sugarads-section titulo">
             <h2>Gestión de Notificaciones</h2>
-            <form id="formNoti" method="POST" action="../../Adscripta/PHP/funcNotifi.php">
+            <form id="formNoti" method="POST" action="../PHP/funcNotifi.php">
                 <label for="mensaje">Mensaje:</label><br>
                 <textarea name="mensaje" id="mensaje" required></textarea><br>
                 <label for="tipo">Tipo:</label>
@@ -34,8 +36,8 @@
             </form>
             <hr>
             <h3>Historial de Notificaciones</h3>
-            <div id="tabla-notificaciones">
-                <?php include '../../Adscripta/PHP/funcNotifi.php'; ?>
+                <div id="tabla-notificaciones">
+                <?php include '../PHP/funcNotifi.php'; ?>
             </div>
         </div>
     </main>

@@ -1,5 +1,5 @@
 <?php
-include '../../HEADERS/headerS.php';
+include '../../HEADERS/headerD.php';
 require_once("../../PHP/conexion.php");
 ?>
 <!DOCTYPE html>

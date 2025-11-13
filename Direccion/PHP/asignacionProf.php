@@ -1,36 +1,59 @@
 <?php
-require_once("../../PHP/conexion.php");
-$con = conectar_bd();
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $idGrupo      = isset($_POST['grupo']) ? intval($_POST['grupo']) : null;
-    $idAsignatura = isset($_POST['asignatura']) ? intval($_POST['asignatura']) : null;
-    $idProfesor   = isset($_POST['profesor']) ? intval($_POST['profesor']) : null;
+// Función para validar datos de asignación profesor-asignatura-grupo
+function validar_datos_asignacion($idGrupo, $idAsignatura, $idProfesor) {
     $errores = [];
-    if (!$idGrupo)      $errores[] = "El grupo es obligatorio.";
+    if (!$idGrupo) $errores[] = "El grupo es obligatorio.";
     if (!$idAsignatura) $errores[] = "La asignatura es obligatoria.";
-    if (!$idProfesor)   $errores[] = "El profesor es obligatorio.";
-    if ($errores) {
-        $mensajeError = implode(" ", $errores);
-        header("Location: ../..//HTML/asignacion.php?error=" . urlencode($mensajeError));
+    if (!$idProfesor) $errores[] = "El profesor es obligatorio.";
+    return $errores;
+}
+
+// Función para asignar profesor a asignatura
+function asignar_profesor_asignatura($conn, $idProfesor, $idAsignatura) {
+    $sql = "INSERT IGNORE INTO profesor_asignatura (id_profesor, id_asignatura) VALUES (?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ii", $idProfesor, $idAsignatura);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+// Función para asignar asignatura a grupo
+function asignar_asignatura_grupo($conn, $idAsignatura, $idGrupo) {
+    $sql = "INSERT IGNORE INTO tiene (id_asignatura, id_grupo) VALUES (?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ii", $idAsignatura, $idGrupo);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+// Función para procesar asignación profesor-asignatura-grupo
+function procesar_asignacion_profesor() {
+    require_once("../../PHP/conexion.php");
+    $conn = conectar_bd();
+
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+        header("Location: ../../HTML/asignacion.php?error=" . urlencode("Método no permitido."));
         exit;
     }
-    $sql1 = "INSERT IGNORE INTO profesor_asignatura (id_profesor, id_asignatura) VALUES (?, ?)";
-    $stmt1 = mysqli_prepare($con, $sql1);
-    mysqli_stmt_bind_param($stmt1, "ii", $idProfesor, $idAsignatura);
-    mysqli_stmt_execute($stmt1);
-    mysqli_stmt_close($stmt1);
-    $sql2 = "INSERT IGNORE INTO tiene (id_asignatura, id_grupo) VALUES (?, ?)";
-    $stmt2 = mysqli_prepare($con, $sql2);
-    mysqli_stmt_bind_param($stmt2, "ii", $idAsignatura, $idGrupo);
-    mysqli_stmt_execute($stmt2);
-    mysqli_stmt_close($stmt2);
-if (isset($conn) && $conn instanceof mysqli) {
-    if (@$conn->ping()) {
+
+    $idGrupo = isset($_POST['grupo']) ? intval($_POST['grupo']) : null;
+    $idAsignatura = isset($_POST['asignatura']) ? intval($_POST['asignatura']) : null;
+    $idProfesor = isset($_POST['profesor']) ? intval($_POST['profesor']) : null;
+
+    $errores = validar_datos_asignacion($idGrupo, $idAsignatura, $idProfesor);
+    if ($errores) {
+        $mensajeError = implode(" ", $errores);
+        header("Location: ../../HTML/asignacion.php?error=" . urlencode($mensajeError));
+        exit;
     }
-}
+
+    asignar_profesor_asignatura($conn, $idProfesor, $idAsignatura);
+    asignar_asignatura_grupo($conn, $idAsignatura, $idGrupo);
+
     header("Location: ../../HTML/asignacion.php?resultado=" . urlencode("Asignación realizada correctamente."));
     exit;
 }
-header("Location: ../../HTML/asignacion.php?error=" . urlencode("Método no permitido."));
-exit;
-?>
+
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+    procesar_asignacion_profesor();
+}

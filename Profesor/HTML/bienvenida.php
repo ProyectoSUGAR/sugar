@@ -4,8 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 $usuario = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Usuario";
 $saludo = "Bienvenido/a";
-include '../../Adscripta/PHP/notificaciones_usuario.php';
-mostrarNotificacionesUsuario('profesores');
+// Las notificaciones se cargan dinámicamente en el dropdown mediante JS
+// Evitamos imprimir la lista aquí para que no aparezca suelta bajo el header
 ?>
 <!-- Sección visual que muestra el saludo personalizado al usuario -->
 <section class="seccion-saludo">
@@ -25,8 +25,7 @@ mostrarNotificacionesUsuario('profesores');
         <a class="tarjeta-opcion" href="#contenedor-tablas-horarios">
             <span>Horarios y<br />clases</span>
         </a>
-        <!-- Tarjeta que redirige a la sección de anuncios -->
-    <a class="tarjeta-opcion" href="../../Profesor/HTML/anuncios.php">
+    <a class="tarjeta-opcion" href="../../Profesor/HTML/reservaEspacio.php">
             <span>Anuncios</span>
         </a>
         <!-- Tarjeta que redirige a la sección de profesores -->

@@ -9,7 +9,6 @@ include '../../HEADERS/headerP.php';
     <!-- Enlace al archivo de estilos CSS principal del sistema -->
     <link rel="stylesheet" href="/Css/style.css" />
   </head>
-  <link rel="stylesheet" href="../Css/menuHamburguesa.css" />
     <!-- Material Icons CDN -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Inclusión del bloque de bienvenida personalizado para el usuario profesor -->
@@ -19,10 +18,10 @@ include '../../HEADERS/headerP.php';
     <?php include '../../PHP/dashboard.php'; ?>
     <!-- El header y menú hamburguesa ya están incluidos por header_profesor.php -->
     <!-- El bloque de planos y horarios ya está incluido por dashboard.php, así que el selector de día y la grilla funcionarán igual para el profesor -->
-    <script src="/JS/menuHamb.js"></script>
+    
     <!-- Aseguramos que el script de planos_horarios se cargue correctamente para el dashboard de profesor -->
-    <script src="/JS/planos_horarios.js"></script>
+}
     <!-- Inclusión del script de estadísticas unificadas para el profesor -->
-    <script src="../../Direccion/JS/estadisticas.js"></script>
+    
   </body>
 </html>

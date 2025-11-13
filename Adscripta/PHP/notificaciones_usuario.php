@@ -1,6 +1,6 @@
 <?php
 function mostrarNotificacionesUsuario($tipo_usuario) {
-    require_once __DIR__ . '../../PHP/conexion.php';
+    require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'PHP' . DIRECTORY_SEPARATOR . 'conexion.php';
     $conn = conectar_bd();
     $sql = "SELECT mensaje, tipo, fecha FROM notificacion WHERE destinatario_tipo = ? OR destinatario_tipo = 'todos' ORDER BY fecha DESC LIMIT 5";
     $stmt = mysqli_prepare($conn, $sql);

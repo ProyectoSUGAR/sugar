@@ -11,17 +11,16 @@ function conectar_pdo() {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     } catch (PDOException $e) {
-        include("../../PHP/errores.php");
+        require_once("errores.php");
         die_error("db_connection_pdo", $e->getMessage());
     }
 }
 function conectar_bd() {
-    global $DB_SERVIDOR, $DB_USUARIO, $DB_PASS, $DB_NOMBRE;
-    $conn = mysqli_connect($DB_SERVIDOR, $DB_USUARIO, $DB_PASS, $DB_NOMBRE);
+    $conn = mysqli_connect("localhost", "root", "", "sugar");
     if (!$conn) {
-        include("../../PHP/errores.php");
-        die_error("db_connection", mysqli_connect_error());
+        die("Error de conexión: " . mysqli_connect_error());
     }
+    mysqli_set_charset($conn, "utf8");
     return $conn;
 }
 ?>

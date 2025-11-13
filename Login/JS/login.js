@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const usuario = form.querySelector('[name="usuario"]').value;
         const password = form.querySelector('[name="password"]').value;
-    fetch('../../Login/PHP/login.php', {
+    fetch('../../Login/PHP/ingreso.php', {
             method: 'POST', // Método de envío
             headers: { 'Content-Type': 'application/json' }, // Tipo de contenido enviado
             body: JSON.stringify({ usuario, password }) // Convierte los datos a formato JSON

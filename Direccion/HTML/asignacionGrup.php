@@ -2,62 +2,63 @@
 include '../../HEADERS/headerD.php';
 require_once("../../PHP/conexion.php");
 ?>
- <body class="bodyregidat">
-<main class="sugarads-main">
-  <section class="sugarads-section titulo">
-    <h1 class="sugarads-title">Ingreso de grupos</h1>
+ <body class="agp-body">
+<!-- Styles moved to Css/style.css -->
+<main class="agp-main">
+  <section class="agp-section agp-titulo">
+    <h1 class="agp-title">Ingreso de grupos</h1>
   </section>
-  <section class="sugarads-grid">
-    <div class="sugarads-col-left">
+  <section class="agp-grid">
+    <div class="agp-col-left agp-card">
       <!-- Formulario de ingreso de grupo -->
-      <form id="sugarads-form-grupo" class="formasig" autocomplete="off" onsubmit="return false;" style="max-width: 400px; margin: 0 auto;">
-        <div class="sugarads-field">
-          <label for="grupo-tipo" class="sugarads-label">Tipo</label>
-          <select id="grupo-tipo" name="tipo" class="sasignacion1" required>
+      <form id="agp-form-grupo" class="agp-form form-constrain" autocomplete="off" onsubmit="return false;">
+        <div class="agp-field">
+          <label for="agp-grupo-tipo" class="agp-label">Tipo</label>
+          <select id="agp-grupo-tipo" name="tipo" class="agp-select" required>
             <option value="">Selecciona un tipo</option>
             <option value="Bachillerato">Bachillerato</option>
             <option value="Terciario">Terciario</option>
           </select>
         </div>
-        <div class="sugarads-field">
-          <label for="grupo-nombre" class="sugarads-label">Nombre</label>
-          <input type="text" id="grupo-nombre" name="nombre" class="inputasig1" required placeholder="Ejemplo: MC" maxlength="3" pattern="[A-Za-z]{1,3}">
+        <div class="agp-field">
+          <label for="agp-grupo-nombre" class="agp-label">Nombre</label>
+         <input type="text" id="agp-grupo-nombre" name="nombre" class="agp-input" required placeholder="Ejemplo: MC" maxlength="3" pattern="[A-Za-z]{1,3}">
         </div>
-        <div class="sugarads-field">
-          <label for="grupo-anio" class="sugarads-label">Año</label>
-          <input type="number" id="grupo-anio" name="anio" class="inputasig1" min="1" max="6" required placeholder="Ejemplo: 3">
+        <div class="agp-field">
+          <label for="agp-grupo-anio" class="agp-label">Año</label>
+         <input type="number" id="agp-grupo-anio" name="anio" class="agp-input" min="1" max="6" required placeholder="Ejemplo: 3">
         </div>
-        <div class="sugarads-field">
-          <label for="grupo-horas" class="sugarads-label">Horas semanales</label>
-          <input type="number" id="grupo-horas" name="horas_semanales" class="inputasig1" min="1" max="40" required placeholder="Ejemplo: 36">
+        <div class="agp-field">
+          <label for="agp-grupo-horas" class="agp-label">Horas semanales</label>
+         <input type="number" id="agp-grupo-horas" name="horas_semanales" class="agp-input" min="1" max="40" required placeholder="Ejemplo: 36">
         </div>
-        <div class="sugarads-field" style="text-align:center;">
-          <button id="sugarads-guardar-grupo" class="regasigboton" type="button">Guardar</button>
-          <button id="sugarads-cancelar-grupo" class="botoneliminar" type="button">Cancelar</button>
+        <div class="agp-actions">
+          <button id="agp-guardar-grupo" class="btn-primario" type="button">Guardar</button>
+          <button id="agp-cancelar-grupo" class="btn-secundario" type="button">Cancelar</button>
         </div>
       </form>
     </div>
-    <article class="sugarads-col-right">
-      <div class="formasig1" role="region" aria-live="polite" aria-label="Confirmación de grupo">
-        <p class="sugarads-confirm-text">
+    <article class="agp-col-right agp-card">
+      <div class="agp-confirm-card" role="region" aria-live="polite" aria-label="Confirmación de grupo">
+        <p class="agp-confirm-text">
           Se ingresará el grupo
-          <strong class="sugarads-var sugarads-var-nombre">(<span aria-hidden="true">…</span>)</strong>
-          de tipo <strong class="sugarads-var sugarads-var-tipo">(<span aria-hidden="true">…</span>)</strong>,
-          año <strong class="sugarads-var sugarads-var-anio">(<span aria-hidden="true">…</span>)</strong>,
-          con <strong class="sugarads-var sugarads-var-horas">(<span aria-hidden="true">…</span>)</strong> horas semanales.
+          <strong class="agp-var agp-var-nombre">(<span aria-hidden="true">…</span>)</strong>
+          de tipo <strong class="agp-var agp-var-tipo">(<span aria-hidden="true">…</span>)</strong>,
+          año <strong class="agp-var agp-var-anio">(<span aria-hidden="true">…</span>)</strong>,
+          con <strong class="agp-var agp-var-horas">(<span aria-hidden="true">…</span>)</strong> horas semanales.
           <br>¿Desea realizar esta acción?
         </p>
-        <div class="sugarads-confirm-actions" role="group" aria-label="Acciones de confirmación">
-          <button id="sugarads-confirmar-grupo" class="sugarads-btn sugarads-btn-guardar" type="button">Confirmar</button>
-          <button id="sugarads-cancelar-confirmacion-grupo" class="sugarads-btn sugarads-btn-cancelar" type="button">Cancelar</button>
+        <div class="agp-confirm-actions" role="group" aria-label="Acciones de confirmación">
+          <button id="agp-confirmar-grupo" class="btn-primario" type="button">Confirmar</button>
+          <button id="agp-cancelar-confirmacion-grupo" class="btn-secundario" type="button">Cancelar</button>
         </div>
       </div>
-      <section class="sugarads-resultado" aria-label="Resultado de ingreso de grupo">
-        <h2 class="h2asiges2">Resultado</h2>
-        <div id="sugarads-resultado-canvas" class="sugarads-canvas" aria-live="polite"></div>
+      <section class="agp-resultado" aria-label="Resultado de ingreso de grupo">
+        <h2 class="agp-result-title">Resultado</h2>
+        <div id="agp-resultado-canvas" class="agp-canvas" aria-live="polite"></div>
       </section>
     </article>
   </section>
 </main>
-<script src="../../Direccion/JS/ingresoGrupo.js" defer></script>
+<script src="../../Administrador/JS/ingresoGrupo.js" defer></script>
  </body>
